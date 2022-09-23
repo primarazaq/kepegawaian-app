@@ -23,6 +23,7 @@
     </head>
     <body>
      @include('components\navbar')
+     halo ges
     </body>
 
 </html>
