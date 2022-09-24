@@ -22,7 +22,18 @@
         @vite('resources/css/app.css')
     </head>
     <body>
-     @include('components\navbar')
+        <div class="flex">
+            <div>@include('components\sidebar')</div>
+            <div>
+                @include('components\navbar')
+                <main>
+                    task
+                </main>
+                  
+            </div>
+            
+        </div>
+     
     </body>
 
 </html>
