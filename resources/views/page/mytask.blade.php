@@ -1,5 +1,5 @@
 @extends('home')
 
 @section('content')
-    profile
+    My Task
 @endsection

@@ -33,11 +33,15 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/home/task', function(){
         return view('/page/task');
-    })->name('task')->middleware(['auth', 'verified']);
+    })->name('task')->middleware(['auth', 'verified', 'checklevel:admin']);
+
+    Route::get('/home/mytask', function(){
+        return view('/page/mytask');
+    })->name('task')->middleware(['auth', 'verified', 'checklevel:employee']);
 
     Route::get('/home/employees', function(){
         return view('/page/employees');
-    })->name('employees')->middleware(['auth', 'verified']);
+    })->name('employees')->middleware(['auth', 'verified', 'checklevel:admin']);
 
     Route::get('/home/profile', function(){
         return view('/page/profile');
@@ -51,4 +55,19 @@ use Illuminate\Support\Facades\Route;
     // Route::group(['middleware' => ['auth', 'verified']], function(){
     //     Route::get('/home', [HomeController::class, 'index']);
     //     // Route::get('/home/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // });
+
+    // Route::group(['middleware' => ['auth', 'checklevel:admin']], function(){
+    //     Route::get('/home', [HomeController::class, 'index']);
+    //     Route::get('/home/dashboard', [HomeController::class, 'dashboard']);
+    //     Route::get('/home/task', [HomeController::class, 'task']);
+    //     Route::get('/home/employees', [HomeController::class, 'employees']);
+    //     Route::get('/home/profile', [HomeController::class, 'profile']);
+    // });
+
+    // Route::group(['middleware' => ['auth', 'checklevel:employee']], function(){
+    //     Route::get('/home', [HomeController::class, 'index']);
+    //     Route::get('/home/dashboard', [HomeController::class, 'dashboard']);
+    //     Route::get('/home/mytask', [HomeController::class, 'mytask']);
+    //     Route::get('/home/profile', [HomeController::class, 'profile']);
     // });

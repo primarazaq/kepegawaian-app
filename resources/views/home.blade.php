@@ -27,7 +27,7 @@
             <div>
                 @include('components\navbar')
                 <main>
-                    dashboard
+                    @yield('content')
                 </main>
                   
             </div>
