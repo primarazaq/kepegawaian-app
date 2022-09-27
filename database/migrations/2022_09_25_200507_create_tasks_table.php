@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_nip');
+            $table->foreignId('user_id'); //utk ambil id pembuat task
+            $table->foreignId('user_nip'); //utk ambil nip penerima task
             $table->string('t_title');
             $table->text('t_body');
             $table->string('t_status');

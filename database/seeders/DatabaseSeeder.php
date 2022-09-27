@@ -47,26 +47,36 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
 
-        // Task::create([
-        //     't_title' => 'membuat dokumen',
-        //     't_body' => 'tolong ikhsan buat dokumen penyalaan listrik',
-        //     't_status' => 'uncompleted',
-        //     't_priority' => 'high',
-        //     't_assigne' => '10119101',
-        //     't_created_by' => '10119124',
-        //     't_due_date' => '2022-10-01',
-        //     'user_id' => '1'
-        // ]);
+        User::create([
+            'nip' => '10119113',
+            'name' => 'Dedeng Rahmat',
+            'level' => 'employee',
+            'tgl_lhr' => '1996-01-13',
+            'password' => bcrypt('password')
+        ]);
 
-        // Task::create([
-        //     't_title' => 'membuat dokumen2',
-        //     't_body' => 'tolong test buat dokumen penyalaan listrik',
-        //     't_status' => 'uncompleted',
-        //     't_priority' => 'high',
-        //     't_assigne' => '10119124',
-        //     't_created_by' => '10119101',
-        //     't_due_date' => '2022-10-01',
-        //     'user_id' => '3'
-        // ]);
+        Task::create([
+            't_title' => 'membuat dokumen',
+            't_body' => 'tolong ikhsan buat dokumen penyalaan listrik',
+            't_status' => 'uncompleted',
+            't_priority' => 'high',
+            't_assigne' => '10119112',
+            't_created_by' => '10119124',
+            't_due_date' => '2022-10-01',
+            'user_id' => '1',
+            'user_nip' => '10119112'
+        ]);
+
+        Task::create([
+            't_title' => 'membuat dokumen2',
+            't_body' => 'tolong test buat dokumen penyalaan listrik',
+            't_status' => 'uncompleted',
+            't_priority' => 'high',
+            't_assigne' => '10119112',
+            't_created_by' => '10119097',
+            't_due_date' => '2022-10-01',
+            'user_id' => '2',
+            'user_nip' => '10119112'
+        ]);
     }
 }
