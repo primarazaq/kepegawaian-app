@@ -1,96 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
-
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
-</head>
-<body>
-
-<h2>Login Form</h2>
-
-<form action="{{ route('postlogin')}}" method="post">
-    {{ csrf_field() }}
-
-  <div class="container">
-    <label for="nip"><b>NIP</b></label>
-    <input type="text" placeholder="Enter NIP" name="nip" required>
-
-    <label for="pw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-        
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="password">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
-
-</body>
+    @include('components.head')
+    <body>
+        <div class="w-full h-screen bg-no-repeat bg-cover"
+            style="background-image: url(/imgs/bg.png)">
+            <div class="bg-mainclr bg-opacity-30">
+                <div class="w-full h-screen bg-no-repeat bg-cover bg-transparent bg-opacity-5"
+                style="background-image: url(/imgs/hiasan.png)">
+                    <div class="absolute top-6 right-7 w-36">
+                        <img src="/imgs/pln.png" alt="">
+                    </div>
+                    <div class="absolute bottom-6 left-7 w-36">
+                        <img src="/imgs/bumn.png" alt="">
+                    </div>
+                    <div class="flex items-center justify-center h-screen">
+                        <p class="text-black absolute top-36 text-3xl font-extrabold">Employee Task Management System</p>
+                        <div class=" bg-white rounded-xl shadow-md p-9" >
+                        <h1 class="text-center font-extrabold text-3xl text-black">LOGIN</h1>
+                            <form action="{{ route('postlogin')}}" method="post" class="mt-6">
+                                @csrf
+                                <div class="pb-4">
+                                    <label for="nip">
+                                        <input
+                                        name="nip"
+                                        type="nip"
+                                        id="nip"
+                                        placeholder="NIP"
+                                        class="px-7 py-2 border shadow rounded-lg w-full block bg-transparent text-black border-mainclr focus:outline-none focus:ring-2 focus:ring-mainclr focus:border-mainclr"/>
+                                    </label>
+                                </div>
+                                <div class="pb-1">
+                                <label for="password">
+                                    <input
+                                    name="password"
+                                    type="password"
+                                    id="password"
+                                    placeholder="Password"
+                                    class="px-7 py-2 border shadow rounded-lg w-80 block bg-transparent text-black border-mainclr focus:outline-none focus:ring-2 focus:ring-mainclr focus:border-mainclr"/>
+                                </label>
+                                </div>
+                                <div class="pt-6">
+                                <button type="submit" class="py-2 rounded-full w-full block font-extrabold text-white bg-mainclr bg-opacity-90 hover:bg-teal-600 shadow-lg">
+                                        Sign In
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
