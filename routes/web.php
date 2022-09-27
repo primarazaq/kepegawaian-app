@@ -39,6 +39,10 @@ use Illuminate\Support\Facades\Route;
         return view('/page/mytask');
     })->name('task')->middleware(['auth', 'verified', 'checklevel:employee']);
 
+    Route::get('/home/taskcompleted', function(){
+        return view('/page/taskcompleted');
+    })->name('task')->middleware(['auth', 'verified', 'checklevel:employee']);
+
     Route::get('/home/employees', function(){
         return view('/page/employees');
     })->name('employees')->middleware(['auth', 'verified', 'checklevel:admin']);
@@ -71,5 +75,3 @@ use Illuminate\Support\Facades\Route;
     //     Route::get('/home/mytask', [HomeController::class, 'mytask']);
     //     Route::get('/home/profile', [HomeController::class, 'profile']);
     // });
-
-    Route::view('/dev', 'dev');

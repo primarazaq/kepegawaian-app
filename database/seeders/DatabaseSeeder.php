@@ -32,18 +32,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'nip' => '10119102',
+            'nip' => '10119097',
             'name' => 'Ikhsan Nurul Rizki',
             'level' => 'pic',
-            'tgl_lhr' => '2001-03-20',
+            'tgl_lhr' => '2001-04-29',
             'password' => bcrypt('password')
         ]);
 
         User::create([
-            'nip' => '10119101',
+            'nip' => '10119112',
             'name' => 'Hilman Ahmad Fathoni',
             'level' => 'employee',
-            'tgl_lhr' => '2000-01-20',
+            'tgl_lhr' => '2000-01-13',
             'password' => bcrypt('password')
         ]);
 
