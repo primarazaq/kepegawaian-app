@@ -71,3 +71,5 @@ use Illuminate\Support\Facades\Route;
     //     Route::get('/home/mytask', [HomeController::class, 'mytask']);
     //     Route::get('/home/profile', [HomeController::class, 'profile']);
     // });
+
+    Route::view('/dev', 'dev');
