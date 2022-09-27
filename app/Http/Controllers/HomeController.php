@@ -11,22 +11,7 @@ class HomeController extends Controller
     //     return view('home', compact('var_nama'));
     // }
 
-    public function index(){
-        return view('home');
-    }
-
-    public function dashboard(){
-        return view('page.dashboard');
-    }
-    public function task(){
-        return view('page.task');
-    }
-    public function mytask(){
-        return view('page.mytask');
-    }
-    public function profile(){
-        return view('page.profile');
-    }
+    
 }
 
 

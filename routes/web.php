@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
@@ -27,32 +30,56 @@ use Illuminate\Support\Facades\Route;
             return view('home');
         })->middleware(['auth', 'verified']);
 
-    Route::get('/home/dashboard', function(){
-            return view('/page/dashboard');
-        })->name('dashboard')->middleware(['auth', 'verified']);
-
-    Route::get('/home/task', function(){
-        return view('/page/task');
-    })->name('task')->middleware(['auth', 'verified', 'checklevel:admin']);
-
-    Route::get('/home/mytask', function(){
-        return view('/page/mytask');
-    })->name('task')->middleware(['auth', 'verified', 'checklevel:employee']);
-
-    Route::get('/home/taskcompleted', function(){
-        return view('/page/taskcompleted');
-    })->name('task')->middleware(['auth', 'verified', 'checklevel:employee']);
-
-    Route::get('/home/employees', function(){
-        return view('/page/employees');
-    })->name('employees')->middleware(['auth', 'verified', 'checklevel:admin']);
-
-    Route::get('/home/profile', function(){
-        return view('/page/profile');
-    })->name('profile')->middleware(['auth', 'verified']);
-
     Route::post('/postlogin', 'App\Http\Controllers\LoginController@postlogin')->name('postlogin');
     Route::get('/logout', 'App\Http\Controllers\LoginController@logout')->name('logout');
+
+    Route::middleware('auth', 'verified')->group(function() {
+
+        Route::middleware('checklevel:admin')->prefix('admin')->group(function() {
+            Route::get('/home', [AdminController::class, 'index']);
+            Route::get('/home/dashboard', [DashboardController::class, 'index']);
+            Route::get('/home/task', [AdminController::class, 'task']);
+            Route::get('/home/employees', [AdminController::class, 'employees']);
+            Route::get('/home/profile', [AdminController::class, 'profile']);
+        });
+        
+        Route::middleware('checklevel:employee')->prefix('employee')->group(function() {
+            Route::get('/home', [EmployeeController::class, 'index']);
+            Route::get('/home/dashboard', [EmployeeController::class, 'dashboard']);
+            Route::get('/home/mytask', [EmployeeController::class, 'mytask']);
+            Route::get('/home/taskcompleted', [EmployeeController::class, 'taskcompleted']);
+            Route::get('/home/profile', [EmployeeController::class, 'profile']);
+        });
+    });
+
+    Route::view('/dev', 'dev');
+
+    //percobaan backup
+     // Route::get('/home/dashboard', function(){
+    //         return view('/page/dashboard');
+    //     })->name('dashboard')->middleware(['auth', 'verified']);
+
+    // Route::get('/home/task', function(){
+    //     return view('/page/task');
+    // })->name('task')->middleware(['auth', 'verified', 'checklevel:admin']);
+
+    // Route::get('/home/mytask', function(){
+    //     return view('/page/mytask');
+    // })->name('task')->middleware(['auth', 'verified', 'checklevel:employee']);
+
+    // Route::get('/home/taskcompleted', function(){
+    //     return view('/page/taskcompleted');
+    // })->name('task')->middleware(['auth', 'verified', 'checklevel:employee']);
+
+    // Route::get('/home/employees', function(){
+    //     return view('/page/employees');
+    // })->name('employees')->middleware(['auth', 'verified', 'checklevel:admin']);
+
+    // Route::get('/home/profile', function(){
+    //     return view('/page/profile');
+    // })->name('profile')->middleware(['auth', 'verified']);
+
+   
     
     // Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified']);
 
@@ -62,18 +89,22 @@ use Illuminate\Support\Facades\Route;
     // });
 
     // Route::group(['middleware' => ['auth', 'checklevel:admin']], function(){
-    //     Route::get('/home', [HomeController::class, 'index']);
-    //     Route::get('/home/dashboard', [HomeController::class, 'dashboard']);
-    //     Route::get('/home/task', [HomeController::class, 'task']);
-    //     Route::get('/home/employees', [HomeController::class, 'employees']);
-    //     Route::get('/home/profile', [HomeController::class, 'profile']);
+    //     Route::get('/home', [AdminController::class, 'index']);
+    //     Route::get('/home/dashboard', [AdminController::class, 'dashboard']);
+    //     Route::get('/home/task', [AdminController::class, 'task']);
+    //     Route::get('/home/employees', [AdminController::class, 'employees']);
+    //     Route::get('/home/profile', [AdminController::class, 'profile']);
+    //     Route::group(['middleware' => ['checklevel:employee']],function(){
+    //         Route::get('/home', [EmployeeController::class, 'index']);
+    //         Route::get('/home/dashboard', [EmployeeController::class, 'dashboard']);
+    //         Route::get('/home/mytask', [EmployeeController::class, 'mytask']);
+    //         Route::get('/home/taskcompleted', [EmployeeController::class, 'taskcompleted']);
+    //         Route::get('/home/profile', [EmployeeController::class, 'profile']);
+    //     });
     // });
 
     // Route::group(['middleware' => ['auth', 'checklevel:employee']], function(){
-    //     Route::get('/home', [HomeController::class, 'index']);
-    //     Route::get('/home/dashboard', [HomeController::class, 'dashboard']);
-    //     Route::get('/home/mytask', [HomeController::class, 'mytask']);
-    //     Route::get('/home/profile', [HomeController::class, 'profile']);
+        
     // });
 
-    Route::view('/dev', 'dev');
+   
