@@ -7,6 +7,7 @@
        </div>
        <div class="border-b-4 mb-4"></div>
        <ul class="space-y-2">
+         {{-- sidebar admin/PIC --}}
          <li>
             <a href="/admin/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
                <img src="imgs/Vector.png" alt="" class="w-5">
@@ -38,8 +39,9 @@
                <span class="flex-1 ml-20 whitespace-nowrap text-center text-white">Logout</span>
             </a>
          </li>
+         {{-- sidebar PIC --}}
 
-
+         {{-- sidebar pegawai --}}
          {{-- <li>
             <a href="/employee/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
                 <img src="imgs/Vector.png" alt="" class="w-5">
@@ -72,6 +74,7 @@
                <span class="flex-1 ml-20 whitespace-nowrap text-center text-white">Logout</span>
             </a>
          </li> --}}
+         {{-- sidebar pegawai --}}
        </ul>
     </div>
  </aside>
