@@ -14,7 +14,7 @@ class TaskPostController extends Controller
      */
     public function index()
     {
-        return view('page.admin.task', [
+        return view('page.pic.task', [
             'tasks' => Task::all()
 
             //utk berdasarkan yg login
