@@ -39,6 +39,14 @@
 @endif
 
 @if (auth()->user()->level=="pic")
+<aside class="w-56 rounded" aria-label="Sidebar">
+   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] rounded-tr-lg rounded-br-lg dark:bg-gray-800 h-screen">
+      <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
+         <img src="imgs/logopln.png" alt="">
+         <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
+      </div>
+      <div class="border-b-4 mb-4"></div>
+      <ul class="space-y-2">
 <li>
    <a href="/pic/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <img src="imgs/Vector.png" alt="" class="w-5">
@@ -64,9 +72,20 @@
       <span class="flex-1 ml-20 whitespace-nowrap text-center text-white">Logout</span>
    </a>
 </li>
+</ul>
+</div>
+</aside>
 @endif
 
 @if (auth()->user()->level=="employee")
+<aside class="w-56 rounded" aria-label="Sidebar">
+   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] rounded-tr-lg rounded-br-lg dark:bg-gray-800 h-screen">
+      <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
+         <img src="imgs/logopln.png" alt="">
+         <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
+      </div>
+      <div class="border-b-4 mb-4"></div>
+      <ul class="space-y-2">
 <li>
    <a href="/employee/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
        <img src="imgs/Vector.png" alt="" class="w-5">
@@ -98,6 +117,9 @@
       <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11">
       <span class="flex-1 ml-20 whitespace-nowrap text-center text-white">Logout</span>
    </a>
+</ul>
+</div>
+</aside>
 @endif
         
       
