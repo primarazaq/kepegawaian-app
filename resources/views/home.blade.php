@@ -7,19 +7,14 @@
             <div class="flex-1">
                 <div>
                     @include('components\navbar')
-                    
-                    <div class="absolute bottom-0">
+                    <main>
+                        @yield('content')
+                    </main>
+                    <div class="pt-24">
                         @include('components\footer')
                     </div>
-                    
                 </div>
-                <main>
-                    @yield('content')
-                </main>
             </div>
-            
         </div>
-     
     </body>
-
 </html>
