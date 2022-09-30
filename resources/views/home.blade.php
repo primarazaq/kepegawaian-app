@@ -3,13 +3,19 @@
     @include('components\head')
     <body>
         <div class="flex">
-            <div>@include('components\sidebar')</div>
-            <div>
-                @include('components\navbar')
+            @include('components\sidebar')
+            <div class="flex-1">
+                <div>
+                    @include('components\navbar')
+                    
+                    <div class="absolute bottom-0">
+                        @include('components\footer')
+                    </div>
+                    
+                </div>
                 <main>
                     @yield('content')
                 </main>
-                  
             </div>
             
         </div>

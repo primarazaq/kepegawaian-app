@@ -1,5 +1,3 @@
-@include('components.head')
-         
 @if (auth()->user()->level=="admin")
 <aside class="w-56 rounded" aria-label="Sidebar">
    <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] rounded-tr-lg rounded-br-lg dark:bg-gray-800 h-screen">
