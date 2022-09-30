@@ -2,8 +2,6 @@
 
 @section('content')
 
-      Dashboard
-
 <div class="flex pt-14 pl-12">
     <div class="flex-1 p-5 mr-7 max-w-sm h-44 bg-mainclr bg-opacity-40 rounded-lg border border-gray-200 shadow-md">
         <div class="flex">
@@ -41,20 +39,114 @@
 </div>
 
 <div class="overflow-y-auto relative shadow-md sm:rounded-lg pt-16 pl-5 pr-5">
+    
+    <div class="flex justify-between items-center pb-4">
+        <div>
+            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                Sort By
+                <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownRadio" class="hidden z-10 w-48 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 290px);">
+                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-1" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-1" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last day</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-2" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7 days</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-3" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-3" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30 days</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-4" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-4" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last month</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-5" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-5" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last year</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                Filter By
+                <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownRadio" class="hidden z-10 w-48 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 290px);">
+                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-1" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-1" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last day</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-2" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7 days</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-3" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-3" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30 days</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-4" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-4" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last month</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-5" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-5" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last year</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <label for="table-search" class="sr-only">Search</label>
+        <div class="relative">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input type="text" id="table-search" class="block p-2 pl-10 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
+        </div>
+    </div>
+
     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-mainclr dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="py-3 px-6">
-                    Nama Pegawai
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Nama Tugas
+                    No
                 </th>
                 <th scope="col" class="py-3 px-6">
                     Deadline
                 </th>
                 <th scope="col" class="py-3 px-6">
                     NIP
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Nama Pegawai
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Nama Tugas
                 </th>
                 <th scope="col" class="py-3 px-6">
                     Tanggal Mulai
@@ -68,88 +160,53 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
-                </th>
-                <td class="py-4 px-6">
-                    Ini judul tugas
-                </td>
-                <td class="py-4 px-6">
-                    10-02-2022
-                </td>
-                <td class="py-4 px-6">
-                    12-2123-123
-                </td>
-                <td class="py-4 px-6">
-                    21-06-2020
-                </td>
-                <td class="py-4 px-6">
-                    <div class="bg-mainclr w-20 h-6 mx-auto rounded-2xl text-white">
-                        <div class="text-center">
-                            <p>Completed</p>
-                        </div>
-                    </div>
-                </td>
-                <td class="py-4 px-6">
-                    <a href="#" class="font-medium text-mainclr dark:text-mainclr hover:underline">Detail</a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
-                </th>
-                <td class="py-4 px-6">
-                    Ini judul tugas
-                </td>
-                <td class="py-4 px-6">
-                    10-02-2022
-                </td>
-                <td class="py-4 px-6">
-                    12-2123-123
-                </td>
-                <td class="py-4 px-6">
-                    21-06-2020
-                </td>
-                <td class="py-4 px-6">
-                    <div class="bg-red-600 w-24 h-6 mx-auto rounded-2xl text-white">
-                        <div class="text-center">
-                            <p>Uncompleted</p>
-                        </div>
-                    </div>
-                </td>
-                <td class="py-4 px-6">
-                    <a href="#" class="font-medium text-mainclr dark:text-mainclr hover:underline">Detail</a>
-                </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
-                </th>
-                <td class="py-4 px-6">
-                    Ini judul tugas
-                </td>
-                <td class="py-4 px-6">
-                    10-02-2022
-                </td>
-                <td class="py-4 px-6">
-                    12-2123-123
-                </td>
-                <td class="py-4 px-6">
-                    21-06-2020
-                </td>
-                <td class="py-4 px-6">
-                    <div class="bg-mainclr w-20 h-6 mx-auto rounded-2xl text-white">
-                        <div class="text-center">
-                            <p>Completed</p>
-                        </div>
-                    </div>
-                </td>
-                <td class="py-4 px-6">
-                    <a href="#" class="font-medium text-mainclr dark:text-mainclr hover:underline">Detail</a>
-                </td>
-            </tr>
-        </tbody>
+            @foreach ($taskList as $data)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    
+                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $loop->iteration }}
+                    </th>
+                    <td class="py-4 px-6">
+                        <?php echo date('H:i',strtotime($data->t_due_date)) ?> WIB  <?php echo date('- d F Y',strtotime($data->t_due_date)) ?>
+                    </td>
+                    <td class="py-4 px-6">
+                        {{ $data->nip }}
+                    </td>
+                    <td class="py-4 px-6">
+                        {{ $data->name }}
+                    </td>
+                    <td class="py-4 px-6">
+                        {{ $data->t_title }}
+                    </td>
+                    <td class="py-4 px-6">
+                         <?php echo date('H:i',strtotime($data->created_at)) ?> WIB <?php echo date('- d F Y',strtotime($data->created_at)) ?>
+                    </td>
+                    <td class="py-4 px-6">
+                        {{ $data->t_status }}
+                    </td>
+                    <td class="py-4 px-6">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                </tr>
+                @endforeach
     </table>
 </div>  
 @endsection
+
+{{-- ini utk button completed --}}
+{{-- <td class="py-4 px-6">
+    <div class="bg-mainclr w-20 h-6 mx-auto rounded-2xl text-white">
+        <div class="text-center">
+            <p>Completed</p>
+        </div>
+    </div>
+</td> --}}
+
+ {{-- ini utk button uncompleted --}}
+{{-- <td class="py-4 px-6">
+    <div class="bg-red-600 w-24 h-6 mx-auto rounded-2xl text-white">
+        <div class="text-center">
+            <p>Uncompleted</p>
+        </div>
+    </div>
+</td> --}}
