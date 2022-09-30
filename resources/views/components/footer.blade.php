@@ -1,4 +1,3 @@
-@include('components.head')
 <footer class="p-4 bg-white shadow-lg md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
     <span class="text-lg text-gray-500 sm:text-center dark:text-gray-400">Copyright © 2022 <a class="hover:underline font-extrabold text-mainclr">PLN</a>. All Rights Reserved.
     </span>

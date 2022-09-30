@@ -3,17 +3,18 @@
     @include('components\head')
     <body>
         <div class="flex">
-            <div>@include('components\sidebar')</div>
-            <div>
-                @include('components\navbar')
-                <main>
-                    @yield('content')
-                </main>
-                  
+            @include('components\sidebar')
+            <div class="flex-1">
+                <div>
+                    @include('components\navbar')
+                    <main>
+                        @yield('content')
+                    </main>
+                    <div class="pt-24">
+                        @include('components\footer')
+                    </div>
+                </div>
             </div>
-            
         </div>
-     
     </body>
-
 </html>
