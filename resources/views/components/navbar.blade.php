@@ -4,7 +4,8 @@
                 Hello, {{ auth()->user()->name }}
             <button data-collapse-toggle="navbar-default" type="button" class="absolute right-4 top-3 p-2 ml-3 text-sm" aria-controls="navbar-default" aria-expanded="false">
                 {{-- icon ketika muncul notifikasi --}}
-                <img src="imgs/lingkaran.png" alt="" class="absolute w-4">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" class="absolute w-4" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 451.827 451.827" style="enable-background:new 0 0 451.827 451.827;" xml:space="preserve"><g><g><path style="fill:#e20606;" d="M225.922,0C101.351,0,0.004,101.347,0.004,225.917s101.347,225.909,225.917,225.909c124.554,0,225.901-101.347,225.901-225.909C451.823,101.347,350.476,0,225.922,0z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
                 <p class="absolute text-white ml-1 text-xs">4</p>
                 {{-- tanda akhir icon ketika muncul notifikasi --}}
                 
