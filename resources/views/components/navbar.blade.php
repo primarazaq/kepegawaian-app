@@ -3,7 +3,7 @@
     <div class="p-4 bg-white shadow-lg md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
       <div class="flex items-center">
             <p class="text-black font-extrabold text-2xl">
-                Hello, Admin
+                Hello, {{ auth()->user()->name }}
             </p>
             <button data-collapse-toggle="navbar-default" type="button" class="absolute right-4 top-3 p-2 ml-3 text-sm" aria-controls="navbar-default" aria-expanded="false">
                 {{-- icon ketika muncul notifikasi --}}
