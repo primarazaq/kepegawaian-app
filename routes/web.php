@@ -38,13 +38,13 @@ use Illuminate\Support\Facades\Route;
 
         Route::middleware('checklevel:admin')->prefix('admin')->group(function() {
             Route::get('/home', [AdminController::class, 'index']);
-            Route::get('/home/dashboard', [DashboardController::class, 'index']);
+            // Route::get('/home/dashboard', [DashboardController::class, 'index']);
             // Route::get('/home/task', [AdminController::class, 'task']);
             Route::get('/home/employees', [AdminController::class, 'employees']);
             Route::get('/home/profile', [AdminController::class, 'profile']);
 
             //Resource
-            Route::resource('/home/task', TaskPostController::class);
+            Route::resource('/home/dashboard', TaskPostController::class);
         });
 
         Route::middleware('checklevel:pic')->prefix('pic')->group(function() {
@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Route;
             Route::get('/home/profile', [AdminController::class, 'profile']);
 
             //Resource
-            Route::resource('/home/task', TaskPostController::class);
+            // Route::resource('/home/task', TaskPostController::class);
         });
         
         Route::middleware('checklevel:employee')->prefix('employee')->group(function() {

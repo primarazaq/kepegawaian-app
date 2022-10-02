@@ -14,13 +14,18 @@ class LoginController extends Controller
     public function postlogin (Request $request){
         // dd($request->all());
         if (Auth::attempt($request->only('nip','password','level'))){
-           if (auth()->user()->level=="admin"){
-            return redirect('admin/home/dashboard');
-           } else if (auth()->user()->level=="pic"){
-            return redirect('pic/home/dashboard');
-           } else if (auth()->user()->level=="employee"){
-            return redirect('employee/home/dashboard');
-           }
+
+            switch(auth()->user()->level){
+                case('admin'):
+                    return redirect('admin/home/dashboard');
+                break;
+                case('pic'):
+                    return redirect('pic/home/dashboard');
+                break;
+                case('employee'):
+                    return redirect('employee/home/dashboard');
+                break;
+            }
         }
         return redirect('login');
     }
