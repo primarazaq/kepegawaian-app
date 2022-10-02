@@ -1,14 +1,14 @@
 @if (auth()->user()->level=="admin")
 <aside class="w-56 rounded" aria-label="Sidebar">
    <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] rounded-tr-lg rounded-br-lg dark:bg-gray-800 h-screen">
-      <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
-         <img src="imgs/logopln.png" alt="">
-         <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
+      <div href="/home" class="items-center justify-center mb-6 mt-2 flex">
+         <img src="../../imgs/logopln.png" class="w-8" alt="">
+         <h2 class="text-xl font-extrabold whitespace-nowrap dark:text-white ml-3">ETM System</h2>
       </div>
       <div class="border-b-4 mb-4"></div>
       <ul class="space-y-2">
          <li>
-            <a href="/admin/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg bg-black bg-opacity-40 dark:text-white">
+            <a href="/admin/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
                <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></g></svg>
                {{-- <img src="imgs/Vector.png" alt="" class="w-5"> --}}
                <span class="flex-1 ml-3 whitespace-nowrap text-white">Dashboard</span>
