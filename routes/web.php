@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PICController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskPostController;
@@ -48,11 +49,10 @@ use Illuminate\Support\Facades\Route;
         });
 
         Route::middleware('checklevel:pic')->prefix('pic')->group(function() {
-            Route::get('/home', [AdminController::class, 'index']);
-            Route::get('/home/dashboard', [DashboardController::class, 'index']);
-            // Route::get('/home/task', [AdminController::class, 'task']);
-            Route::get('/home/employees', [AdminController::class, 'employees']);
-            Route::get('/home/profile', [AdminController::class, 'profile']);
+            Route::get('/home', [PICController::class, 'index']);
+            Route::get('/home/dashboard', [PICController::class, 'index']);
+            Route::get('/home/task', [PICController::class, 'task']);
+            Route::get('/home/profile', [PICController::class, 'profile']);
 
             //Resource
             // Route::resource('/home/task', TaskPostController::class);
