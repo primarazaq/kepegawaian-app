@@ -11,8 +11,8 @@ class Task extends Model
 
     protected $guarded = ['id'];
 
-    public function user()
+    public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, 'user_tasks', 'user_sender_id', 'task_id', 'user_receiver_id');
     }
 }

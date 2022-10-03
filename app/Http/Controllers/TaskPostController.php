@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class TaskPostController extends Controller
@@ -14,12 +16,28 @@ class TaskPostController extends Controller
      */
     public function index()
     {
-        return view('page.pic.task', [
-            'tasks' => Task::all()
+        $task = DB::table('users as a')
+                    ->select('b.t_due_date','a.nip', 'a.name', 'b.t_title','b.created_at', 'aa.name as pembuat_task', 'b.t_status')
+                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+                    // ->join('users as a', 'a.id', '=', 'c.user_receiver_id')
+                    ->join('tasks as b', 'b.id', '=', 'c.task_id')
+                    ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->get();
+        // $task = Task::join('users as a', 'a.id', '=', 'user_tasks.user_receiver_id')
+        //             ->join('user_tasks', 'tasks.id', '=', 'user_tasks.task_id')
+        //             ->join('users as b', 'b.id', '=', 'user_tasks.user_sender_id')
+        //             ->get();
+                    
+        return view('page.admin.dashboard', ['taskList' => $task]);
 
+        // return view('page.admin.dashboard', [
+            
+            // $task = Task::with('users')->get();
+            // return view('page.admin.dashboard', ['taskList' => $task]);
+            // dd($task);
             //utk berdasarkan yg login
             // 'tasks' => Task::where('user_id', auth()->user()->id)->get()
-        ]);
+        // ]);
     }
 
     /**

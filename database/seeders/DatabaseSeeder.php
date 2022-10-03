@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\UserTask;
 
 class DatabaseSeeder extends Seeder
 {
@@ -60,11 +61,7 @@ class DatabaseSeeder extends Seeder
             't_body' => 'tolong ikhsan buat dokumen penyalaan listrik',
             't_status' => 'uncompleted',
             't_priority' => 'high',
-            't_assigne' => '10119112',
-            't_created_by' => '10119124',
             't_due_date' => '2022-10-01',
-            'user_id' => '1',
-            'user_nip' => '10119112'
         ]);
 
         Task::create([
@@ -72,11 +69,25 @@ class DatabaseSeeder extends Seeder
             't_body' => 'tolong test buat dokumen penyalaan listrik',
             't_status' => 'uncompleted',
             't_priority' => 'high',
-            't_assigne' => '10119112',
-            't_created_by' => '10119097',
             't_due_date' => '2022-10-01',
-            'user_id' => '2',
-            'user_nip' => '10119112'
+        ]);
+
+        UserTask::create([
+            'user_sender_id' => '1',
+            'task_id' => '1',
+            'user_receiver_id' => '3',
+        ]);
+
+        UserTask::create([
+            'user_sender_id' => '1',
+            'task_id' => '2',
+            'user_receiver_id' => '3',
+        ]);
+
+        UserTask::create([
+            'user_sender_id' => '1',
+            'task_id' => '2',
+            'user_receiver_id' => '4',
         ]);
     }
 }

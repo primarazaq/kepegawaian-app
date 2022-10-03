@@ -15,14 +15,16 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id'); //utk ambil id pembuat task
-            $table->foreignId('user_nip'); //utk ambil nip penerima task
+            // $table->foreignId('user_id'); //utk ambil id pembuat task
+            // $table->foreignId('user_nip'); //utk ambil nip penerima task
             $table->string('t_title');
             $table->text('t_body');
             $table->string('t_status');
             $table->string('t_priority');
-            $table->string('t_assigne');
-            $table->string('t_created_by');
+            // $table->string('t_assigne1');
+            // $table->string('t_assigne2');
+            // $table->string('t_assigne3');
+            // $table->string('t_created_by');
             $table->date('t_due_date');
             $table->timestamps();
         });
