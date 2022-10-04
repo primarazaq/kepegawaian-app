@@ -8,6 +8,9 @@
         Employees
     </a>
 </div>
+@if (session()->has('success'))
+    {{ session('success') }}
+@endif
 <div class="overflow-y-auto relative shadow-lg sm:rounded-lg pt-8 pl-5 pr-5">
     <div class="flex pb-4 items-center">
         <div class="flex-auto">
@@ -100,6 +103,9 @@
         <thead class="text-xs text-gray-700 uppercase bg-mainclr dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="py-3 px-6">
+                    No
+                </th>
+                <th scope="col" class="py-3 px-6">
                     Nama Pegawai
                 </th>
                 <th scope="col" class="py-3 px-6">
@@ -120,21 +126,25 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($users as $user)
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
+                    {{ $loop->iteration }}
+                </th>
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ $user->name }}
                 </th>
                 <td class="py-4 px-6">
-                    10-02-2001
+                    {{ $user->tgl_lhr }}
                 </td>
                 <td class="py-4 px-6">
-                    12-2123-123
+                    {{ $user->nip }}
                 </td>
                 <td class="py-4 px-6">
-                    21-06-2020
+                    {{ $user->created_at }}
                 </td>
                 <td class="py-4 px-6">
-                    Pegawai
+                    {{ $user->level }}
                 </td>
                 <td class="py-4 ">
                     <div class="flex mx-auto justify-center">
@@ -143,98 +153,8 @@
                     </div>
                 </td>
             </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
-                </th>
-                <td class="py-4 px-6">
-                    10-02-2001
-                </td>
-                <td class="py-4 px-6">
-                    12-2123-123
-                </td>
-                <td class="py-4 px-6">
-                    21-06-2020
-                </td>
-                <td class="py-4 px-6">
-                    PIC
-                </td>
-                <td class="py-4 ">
-                    <div class="flex mx-auto justify-center">
-                        @include('modal.editEmployees')
-                        @include('modal.disableEmployees')
-                    </div>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
-                </th>
-                <td class="py-4 px-6">
-                    10-02-2001
-                </td>
-                <td class="py-4 px-6">
-                    12-2123-123
-                </td>
-                <td class="py-4 px-6">
-                    21-06-2020
-                </td>
-                <td class="py-4 px-6">
-                    Pegawai
-                </td>
-                <td class="py-4 ">
-                    <div class="flex mx-auto justify-center">
-                        @include('modal.editEmployees')
-                        @include('modal.disableEmployees')
-                    </div>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
-                </th>
-                <td class="py-4 px-6">
-                    10-02-2001
-                </td>
-                <td class="py-4 px-6">
-                    12-2123-123
-                </td>
-                <td class="py-4 px-6">
-                    21-06-2020
-                </td>
-                <td class="py-4 px-6">
-                    Pegawai
-                </td>
-                <td class="py-4 ">
-                    <div class="flex mx-auto justify-center">
-                        @include('modal.editEmployees')
-                        @include('modal.disableEmployees')
-                    </div>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deden Hikmah 
-                </th>
-                <td class="py-4 px-6">
-                    10-02-2001
-                </td>
-                <td class="py-4 px-6">
-                    12-2123-123
-                </td>
-                <td class="py-4 px-6">
-                    21-06-2020
-                </td>
-                <td class="py-4 px-6">
-                    PIC
-                </td>
-                <td class="py-4 ">
-                    <div class="flex mx-auto justify-center">
-                        @include('modal.editEmployees')
-                        @include('modal.disableEmployees')
-                    </div>
-                </td>
-            </tr>
+            @endforeach
+           
         </tbody>
     </table>
 </div>
