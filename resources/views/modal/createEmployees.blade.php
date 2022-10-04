@@ -39,41 +39,48 @@
                   </button>
               </div>
               <!-- Modal body -->
+              <form method="post" action="/admin/home/employees">
+                @csrf
                 <div class="p-5">
                     <div>
-                        <label for="nama-pegawai" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Nama Pegawai</label>
-                        <input type="text" id="nama-pegawai" class="mb-2 block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-mainclr focus:border-mainclr dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr">
+                        <label for="name" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Nama Pegawai</label>
+                        <input type="text" id="name" name="name" class="mb-2 block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-mainclr focus:border-mainclr dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr">
                     </div>
                     <div class="relative">
-                        <label for="tanggal-lahir" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Tanggal Lahir</label>
-                        <input datepicker datepicker-autohide type="date" class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-mainclr focus:border-mainclr block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr" placeholder="Select date">
+                        <label for="tgl_lhr" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Tanggal Lahir</label>
+                        <input datepicker datepicker-autohide type="date" id="tgl_lhr" name="tgl_lhr" class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-mainclr focus:border-mainclr block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr" placeholder="Select date">
                     </div>
                     <div>
                         <label for="nip" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">NIP</label>
-                        <input type="text" id="nip" class="mb-2 block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-mainclr focus:border-mainclr dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr">
-                    </div>
-                    <div class="relative">
-                        <label for="tanggal-mulai" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Tanggal Mulai</label>
-                        <input datepicker datepicker-autohide type="date" class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-mainclr focus:border-mainclr block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr" placeholder="Select date">
+                        <input type="text" id="nip" name="nip" class="mb-2 block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-mainclr focus:border-mainclr dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr">
                     </div>
                     <div>
-                        <label for="status" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Status</label>
+                        <label for="password" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+                        <input type="password" id="password" name="password" class="mb-2 block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-mainclr focus:border-mainclr dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr">
+                    </div>
+                    <div class="hidden relative">
+                        <label for="created_at" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Tanggal Mulai</label>
+                        <input  type="text" id="created_at" name="created_at" class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-mainclr focus:border-mainclr block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainclr dark:focus:border-mainclr" value="<?php echo date("H:i:s - d F Y") ?>" placeholder="<?php echo date("H:i:s - d F Y") ?>" disabled> 
+                    </div>
+                    <div>
+                        <label for="level" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Level</label>
                         <div class="flex">
                             <div class="flex w-full items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
-                                <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-mainclr bg-gray-100 border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="bordered-radio-1" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">PIC</label>
+                                <input id="level" name="level" type="radio" value="pic" name="bordered-radio" class="w-4 h-4 text-mainclr bg-gray-100 border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="level" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">PIC</label>
                             </div>
                             <div class="flex w-full items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
-                                <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4 bg-gray-100 text-mainclr border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="bordered-radio-2" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Pegawai</label>
+                                <input id="level" name="level" type="radio" value="employee" name="bordered-radio" class="w-4 h-4 bg-gray-100 text-mainclr border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="level" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Pegawai</label>
                             </div>
                         </div>
                     </div>
                 </div>
               <!-- Modal footer -->
               <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200  dark:border-gray-600">
-                  <button data-modal-toggle="ModalCreateEMP" type="button" class="text-white mx-auto bg-mainclr font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800">+ Create</button>
+                  <button data-modal-toggle="ModalCreateEMP" type="submit" class="text-white mx-auto bg-mainclr font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800">+ Create</button>
               </div>
+            </form>
           </div>
       </div>
   </div>
