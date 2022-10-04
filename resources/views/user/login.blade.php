@@ -26,7 +26,7 @@
                                         type="nip"
                                         id="nip"
                                         placeholder="NIP"
-                                        class="px-7 py-2 border shadow rounded-lg w-full block bg-transparent text-black border-mainclr focus:outline-none focus:ring-2 focus:ring-mainclr focus:border-mainclr"/>
+                                        class="px-7 py-2 border shadow rounded-lg w-full block bg-transparent text-black border-mainclr focus:outline-none focus:ring-2 focus:ring-mainclr focus:border-mainclr" required/>
                                     </label>
                                 </div>
                                 <div class="pb-1">
@@ -36,7 +36,7 @@
                                     type="password"
                                     id="password"
                                     placeholder="Password"
-                                    class="px-7 py-2 border shadow rounded-lg w-80 block bg-transparent text-black border-mainclr focus:outline-none focus:ring-2 focus:ring-mainclr focus:border-mainclr"/>
+                                    class="px-7 py-2 border shadow rounded-lg w-80 block bg-transparent text-black border-mainclr focus:outline-none focus:ring-2 focus:ring-mainclr focus:border-mainclr" required/>
                                 </label>
                                 </div>
                                 <div class="pt-6">
