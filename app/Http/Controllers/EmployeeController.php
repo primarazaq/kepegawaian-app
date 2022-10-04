@@ -14,7 +14,6 @@ class EmployeeController extends Controller
         return view('page.employee.dashboard');
     }
 
-   
     public function mytask(){
         return view('page.employee.mytask');
     }
