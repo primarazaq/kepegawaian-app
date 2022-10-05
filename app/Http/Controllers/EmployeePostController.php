@@ -48,11 +48,11 @@ class EmployeePostController extends Controller
     {
         
         $validatedData = $request->validate([
-            'nip' => 'required|unique:users|digits_between:0,9',
-            'name' => 'required|regex:[a-zA-Z]',
-            'level' => 'required',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u',
             'tgl_lhr' => 'required',
-            'password' => 'required'
+            'nip' => 'required|unique:users|digits_between:0,9',
+            'password' => 'required',
+            'level' => 'required'
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
