@@ -27,7 +27,7 @@ class LoginController extends Controller
                 break;
             }
         }
-        return redirect('login');
+        return redirect('login')->with('failed','Login gagal! periksa kembali nip dan password anda!');
     }
 
     public function logout (Request $request){
