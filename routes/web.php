@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PICController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeePostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskPostController;
 use Illuminate\Auth\Events\Verified;
@@ -41,11 +42,12 @@ use Illuminate\Support\Facades\Route;
             Route::get('/home', [AdminController::class, 'index']);
             // Route::get('/home/dashboard', [DashboardController::class, 'index']);
             // Route::get('/home/task', [AdminController::class, 'task']);
-            Route::get('/home/employees', [AdminController::class, 'employees']);
+            // Route::get('/home/employees', [AdminController::class, 'employees']);
             Route::get('/home/profile', [AdminController::class, 'profile']);
 
             //Resource
             Route::resource('/home/dashboard', TaskPostController::class);
+            Route::resource('/home/employees', EmployeePostController::class);
         });
 
         Route::middleware('checklevel:pic')->prefix('pic')->group(function() {
