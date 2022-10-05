@@ -25,18 +25,6 @@
             <input id="editor" type="hidden" name="editor">
             <trix-editor input="editor"></trix-editor>
         </div>
-        <div class="flex items-center mb-2">
-            <input id="checkbox-DRT" type="checkbox" value="" class="w-6 h-6 text-mainclr bg-gray-100 rounded border-gray-300">
-            <label for="checkbox-DRT" class="ml-2 text-lg font-bold text-gray-900 dark:text-gray-300">Darurat!</label>
-        </div>
-        <div class="flex items-center mb-2">
-            <input id="checkbox-DRT" type="checkbox" value="" class="w-6 h-6 text-mainclr bg-gray-100 rounded border-gray-300">
-            <label for="checkbox-DRT" class="ml-2 text-lg font-bold text-gray-900 dark:text-gray-300">Diharuskan melampirkan foto/video bukti kerja</label>
-        </div>
-        <div class="flex items-center mb-2">
-            <input id="checkbox-DRT" type="checkbox" value="" class="w-6 h-6 text-mainclr bg-gray-100 rounded border-gray-300">
-            <label for="checkbox-DRT" class="ml-2 text-lg font-bold text-gray-900 dark:text-gray-300">Pengajuan penolakan</label>
-        </div>
     </div>
 
     {{-- flex ke-2 --}}
