@@ -11,6 +11,10 @@
 @if (session()->has('success'))
     {{ session('success') }}
 @endif
+
+
+
+
 <div class="overflow-y-auto relative shadow-lg sm:rounded-lg pt-8 pl-5 pr-5">
     <div class="flex pb-4 items-center">
         <div class="flex-auto">
