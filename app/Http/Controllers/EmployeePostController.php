@@ -13,6 +13,7 @@ class EmployeePostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         return view('page.admin.employees', [
@@ -42,11 +43,13 @@ class EmployeePostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
+        
         $validatedData = $request->validate([
-            'nip' => 'required',
-            'name' => 'required',
+            'nip' => 'required|unique:users|digits_between:0,9',
+            'name' => 'required|regex:[a-zA-Z]',
             'level' => 'required',
             'tgl_lhr' => 'required',
             'password' => 'required'
@@ -54,9 +57,10 @@ class EmployeePostController extends Controller
 
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['password'] = Hash::make($validatedData['password']);
+        // $validatedData['created_at'] = User::save(['timestamps' => FALSE]);
         User::create($validatedData);
 
-        return redirect('/admin/home/employees')->with('success','berhasil!');
+        return redirect('/admin/home/employees')->with('success','Data berhasil dibuat!');
     }
 
     /**
