@@ -43,12 +43,12 @@
                         <label for="status" class="block w-fit text-sm font-medium text-gray-900 dark:text-gray-300">Status</label>
                         <div class="flex">
                             <div class="flex w-full items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
-                                <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-mainclr bg-gray-100 border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="bordered-radio-1" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">PIC</label>
+                                <input id="bordered-radio-editEMP1" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-mainclr bg-gray-100 border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-radio-editEMP1" class="py-2 ml-2 w-full text-left text-sm font-medium text-gray-900 dark:text-gray-300">PIC</label>
                             </div>
                             <div class="flex w-full items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
-                                <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4 bg-gray-100 text-mainclr border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="bordered-radio-2" class="py-2 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Pegawai</label>
+                                <input checked id="bordered-radio-editEMP2" type="radio" value="" name="bordered-radio" class="w-4 h-4 bg-gray-100 text-mainclr border-gray-300 focus:ring-mainclr dark:focus:ring-mainclr dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-radio-editEMP2" class="py-2 ml-2 w-full text-sm text-left font-medium text-gray-900 dark:text-gray-300">Pegawai</label>
                             </div>
                         </div>
                     </div>
