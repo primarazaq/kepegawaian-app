@@ -168,8 +168,35 @@
             </tr>
         </thead>
         <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    
+                </th>
+                <td class="py-4 px-6">
+                    
+                </td>
+                <td class="py-4 px-6">
+                    
+                </td>
+                <td class="py-4 px-6">
+                    
+                </td>
+                <td class="py-4 px-6">
+                    
+                </td>
+                <td class="py-4 px-6">
+                     
+                </td>
+                <td class="py-4 px-6">
             
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                </td>
+                <td class="py-4 px-6">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            
+                {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     
                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $loop->iteration }}
@@ -195,7 +222,7 @@
                     <td class="py-4 px-6">
                         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                     </td>
-                </tr>
+                </tr> --}}
     </table>
 </div>  
 @endsection
