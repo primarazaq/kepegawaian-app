@@ -95,9 +95,3 @@
           </div>
       </div>
   </div>
-
-
-  @if (count($errors) > 0)
-  data-modal-show="true"
-@endif
-  
