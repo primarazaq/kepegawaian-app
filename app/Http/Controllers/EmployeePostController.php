@@ -105,6 +105,8 @@ class EmployeePostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        // dd($id);
+        return redirect('/admin/home/employees')->with('success','Pegawai berhasil dinonaktifkan!');
     }
 }
