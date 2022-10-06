@@ -20,7 +20,7 @@
         </div>
         <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
             <div class="bg-green-500 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" style="width: 45%"> 45%</div>
-          </div>
+        </div>
     </div>
     <div class="flex-1 p-5 mr-7 max-w-sm h-44 bg-mainclr bg-opacity-60 rounded-lg border border-gray-200 shadow-md">
         <div class="flex">
