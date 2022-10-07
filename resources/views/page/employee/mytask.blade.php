@@ -48,9 +48,7 @@
             </div>
         </div>
         {{-- flex 2 --}}
-        <div class="mx-auto items-center">
-            <button type="button" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1 mr-2 mt-11">Detail</button>
-        </div>
+        @include('modal.mytask')
     </div>
     {{-- flex 1 --}}
     <div class="flex border-b-2 border-black">
@@ -67,9 +65,7 @@
             </div>
         </div>
         {{-- flex 2 --}}
-        <div class="mx-auto items-center">
-            <button type="button" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1 mr-2 mt-11">Detail</button>
-        </div>
+        @include('modal.mytask')
     </div>
     {{-- flex 1 --}}
     <div class="flex">
@@ -86,9 +82,7 @@
             </div>
         </div>
         {{-- flex 2 --}}
-        <div class="mx-auto items-center">
-            <button type="button" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1 mr-2 mt-11">Detail</button>
-        </div>
+        @include('modal.mytask')
     </div>
 </div>
 @endsection
