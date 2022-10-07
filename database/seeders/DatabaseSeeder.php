@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
         Task::create([
             't_title' => 'membuat dokumen',
             't_body' => 'tolong ikhsan buat dokumen penyalaan listrik',
-            't_status' => 'uncompleted',
+            't_status' => 'in progress',
             't_priority' => 'high',
             't_due_date' => '2022-10-01',
         ]);
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
             't_title' => 'membuat dokumen2',
             't_body' => 'tolong test buat dokumen penyalaan listrik',
             't_status' => 'uncompleted',
-            't_priority' => 'high',
+            't_priority' => 'medium',
             't_due_date' => '2022-10-01',
         ]);
 

@@ -16,7 +16,7 @@
             <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Completed Task</h5>
         </div>
         <div class="font-extrabold text-5xl p-4 text-center text-green-500 dark:text-gray-400">
-            <p>3</p>
+            <p>{{ count($taskCompleted) }}</p>
         </div>
         <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
             <div class="bg-green-500 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" style="width: 45%"> 45%</div>
@@ -28,7 +28,7 @@
             <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Uncompleted Task</h5>
         </div>
         <div class="font-extrabold text-5xl p-4 text-center text-red-600 dark:text-gray-400">
-            <p>1</p>
+            <p>{{ count($taskUncompleted) }}</p>
         </div>
         <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
             <div class="bg-red-600 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" style="width: 45%"> 45%</div>
@@ -40,7 +40,7 @@
             <h5 class="text-2xl font-extrabold text-white dark:text-grey">Employees</h5>
         </div>
         <div class="font-bold text-4xl p-4 mt-10 text-white dark:text-gray-400">
-            <p>10 Person</p>
+            <p>{{ count($userList) }} Person</p>
         </div>
     </div>
 </div>
