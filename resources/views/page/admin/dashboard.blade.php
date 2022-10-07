@@ -15,12 +15,27 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 ml-10 absolute fill-white" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M192 0c-41.8 0-77.4 26.7-90.5 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H282.5C269.4 26.7 233.8 0 192 0zm0 128c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32zM307.8 275.8l-128 128c-10.9 10.9-28.7 10.9-39.6 0l-64-64c-10.9-10.9-10.9-28.7 0-39.6s28.7-10.9 39.6 0L160 344.4 268.2 236.2c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6z"/></svg>
             <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Completed Task</h5>
         </div>
+        <?php 
+        //inisialisasi data progress bar
+        $progress1 = count($taskCompleted);
+        $progress2 = count($taskInProgress); 
+        $progress3 = count($taskUncompleted); 
+        $total = $progress1 + $progress2 + $progress3;
+        ?>
         <div class="font-extrabold text-5xl p-4 text-center text-green-500 dark:text-gray-400">
             <p>{{ count($taskCompleted) }}</p>
         </div>
-        <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-            <div class="bg-green-500 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" style="width: 45%"> 45%</div>
+        
+        {{-- progress bar lama (tailwind) --}}
+        {{-- <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+            <div  class="bg-green-500 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" style="width: 45%;max-width:45%"> 45%</div>
+        </div> --}}
+
+        <div class="relative w-full">
+            <label id="p02d-label" for="p02d" class="absolute top-0 left-0 block w-1/2 mb-0 text-xs text-center text-white animate-pulse">%</label>
+            <progress aria-labelledby="p02d-label" id="bar" max="{{ $total }}"  class="block w-full overflow-hidden rounded-full "></progress>
         </div>
+        @include('components.scriptprogressbar')
     </div>
     <div class="flex-1 p-5 mr-7 max-w-sm h-44 bg-mainclr bg-opacity-60 rounded-lg border border-gray-200 shadow-md">
         <div class="flex">
@@ -28,11 +43,15 @@
             <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Uncompleted Task</h5>
         </div>
         <div class="font-extrabold text-5xl p-4 text-center text-red-600 dark:text-gray-400">
-            <p>{{ count($taskUncompleted) }}</p>
+            <p>{{ count($taskInProgress) }}</p>
         </div>
-        <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+        {{-- <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
             <div class="bg-red-600 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" style="width: 45%"> 45%</div>
-          </div>
+          </div> --}}
+          <div class="relative w-full">
+            <label id="p02d-label" for="p02d" class="absolute top-0 left-0 block w-1/2 mb-0 text-xs text-center text-white animate-pulse">50%</label>
+            <progress aria-labelledby="p02d-label" id="bar2" max="{{ $total }}"  class="block w-full overflow-hidden rounded-full "></progress>
+        </div>
     </div>
     <div class="flex-1 p-5 mr-7 max-w-sm h-44 bg-mainclr bg-opacity-80 rounded-lg border border-gray-200 shadow-md">
         <div class="flex">

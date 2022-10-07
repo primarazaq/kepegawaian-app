@@ -22,6 +22,7 @@ class TaskPostController extends Controller
                     // ->join('users as a', 'a.id', '=', 'c.user_receiver_id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->orderBy('b.id' , 'asc')
                     ->get();
         // $task = Task::join('users as a', 'a.id', '=', 'user_tasks.user_receiver_id')
         //             ->join('user_tasks', 'tasks.id', '=', 'user_tasks.task_id')
