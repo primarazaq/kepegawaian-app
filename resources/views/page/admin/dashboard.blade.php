@@ -190,7 +190,7 @@
                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $loop->iteration }}
                     </th>
-                    <td class="py-4 px-6">
+                    <td class="py-4 px-6 text-red-600  font-semibold">
                         <?php echo date('H:i',strtotime($data->t_due_date)) ?> WIB  <?php echo date('- d F Y',strtotime($data->t_due_date)) ?>
                     </td>
                     <td class="py-4 px-6">
@@ -206,7 +206,35 @@
                          <?php echo date('H:i',strtotime($data->created_at)) ?> WIB <?php echo date('- d F Y',strtotime($data->created_at)) ?>
                     </td>
                     <td class="py-4 px-6">
-                        {{ $data->t_status }}
+
+                        <?php 
+                            switch ($data->t_status) {
+                                case 'completed':
+                                ?>
+                                    <div class="bg-mainclr w-24 h-6 mx-auto rounded-2xl text-white">
+                                        <div class="text-center">
+                                            <p>Completed</p>
+                                        </div>
+                                    </div> <?php
+                                    break;
+                                case 'in progress':
+                                    ?>
+                                    <div class="bg-yellow-400 w-24 h-6 mx-auto rounded-2xl text-white">
+                                    <div class="text-center">
+                                        <p>In Progress</p>
+                                    </div>
+                                </div> <?php
+                                break;
+                                case 'uncompleted':
+                                    ?>
+                                    <div class="bg-red-600 w-24 h-6 mx-auto rounded-2xl text-white">
+                                    <div class="text-center">
+                                        <p>Uncompleted</p>
+                                    </div>
+                                </div> <?php
+                                break;
+                            }
+                        ?>
                     </td>
                     <td class="py-4 px-6">
                         <a href="#" class="font-medium text-mainclr dark:text-teal-500 hover:underline">Edit</a>
