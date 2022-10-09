@@ -22,13 +22,25 @@ class TaskPostController extends Controller
                     // ->join('users as a', 'a.id', '=', 'c.user_receiver_id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->orderBy('b.id' , 'asc')
                     ->get();
         // $task = Task::join('users as a', 'a.id', '=', 'user_tasks.user_receiver_id')
         //             ->join('user_tasks', 'tasks.id', '=', 'user_tasks.task_id')
         //             ->join('users as b', 'b.id', '=', 'user_tasks.user_sender_id')
         //             ->get();
-                    
-        return view('page.admin.dashboard', ['taskList' => $task]);
+
+        $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
+        $taskCompleted = Task::where('t_status', 'completed')->get();
+        $taskInProgress = Task::where('t_status', 'in progress')->get();
+        $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
+
+        return view('page.admin.dashboard', [
+            'taskList' => $task, 
+            'userList' => $users,
+            'taskCompleted' => $taskCompleted,
+            'taskInProgress' => $taskInProgress,
+            'taskUncompleted' => $taskUncompleted
+        ]);
 
         // return view('page.admin.dashboard', [
             

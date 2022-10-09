@@ -26,25 +26,25 @@
     <div class="relative p-4 space-y-4">
             <div class="text-center">
                 <h1 class="font-extrabold text-5xl ml-20">
-                    Primarazaq NPH
+                    {{ $user->name }}
                 </h1>
                 <h3 class="mr-40 font-semibold text-xl text-gray-600">
-                    Super Admin
+                    {{ $user->level }}
                 </h3>
             </div>        
             <div class="flex ">
                 <div class="w-full text-2xl">
                     <h5 class="font-extrabold">NIP</h5>
-                    <h5 class="font-extrabold text-mainclr mb-8">12.212.123</h5>
+                    <h5 class="font-extrabold text-mainclr mb-8">{{ $user->nip }}</h5>
                     <h5 class="font-extrabold">Lahir</h5>
-                    <h5 class="font-extrabold text-mainclr">10-02-2001</h5>
+                    <h5 class="font-extrabold text-mainclr"><?php echo date('d F Y',strtotime($user->tgl_lhr)) ?></h5>
                 </div>
                 <div class="w-full text-2xl">
                     <div class=" text-black text-2xl mb-1">
                         <h5 class="font-extrabold">Status</h5>
                         <h5 class="font-extrabold text-mainclr mb-8">Admin</h5>
                         <h5 class="font-extrabold">Tanggal Masuk</h5>
-                        <h5 class="font-extrabold text-mainclr">21-06-2020</h5>
+                        <h5 class="font-extrabold text-mainclr"><?php echo date('d F Y',strtotime($user->created_at)) ?></h5>
                     </div>
                 </div>
             </div>

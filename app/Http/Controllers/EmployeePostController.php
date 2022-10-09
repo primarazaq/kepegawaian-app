@@ -34,7 +34,7 @@ class EmployeePostController extends Controller
      */
     public function create()
     {
-       
+       //
     }
 
     /**
