@@ -5,7 +5,7 @@
 </div>
   <!-- Main modal -->
   <div id="ModalMyTaskEMP" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
-      <div class="relative w-10/12 h-fit md:h-auto">
+      <div class="relative w-8/12 h-fit md:h-auto">
           <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <!-- Modal header -->
@@ -92,7 +92,7 @@
                             </p>
                             <div class="flex-1">
                                 <label for="small-input" class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"></label>
-                                <input type="text" id="small-input" class=" p-2 w-9/12 text-gray-900 bg-gray-50 rounded-lg border align-text-top border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan deskripsi bukti progress kerja dengan lengkap...">
+                                <input type="text" id="small-input" class=" p-2 w-11/12 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500" placeholder="Masukkan deskripsi bukti progress kerja dengan lengkap...">
                             </div>
                         </div>
                         
