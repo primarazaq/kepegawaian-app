@@ -1,14 +1,107 @@
 @extends('home')
 
 @section('content')
-    <div>
-        
-<a href="#" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-</a>
-
+<div class="flex items-center justify-end">
+    <p class="text-black font-medium pt-4">
+        Home /
+    </p>
+    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-blue-400">
+        Task Complete
+    </a>
+</div>
+<div class="flex">
+    <div class="w-3/5 mt-6 h-fit mr-5 mb-2">
+        <div class="ml-2 text-4xl flex font-semibold justify-center">
+            <p>Terima kasih</p>
+            <p class="inline-flex ml-2 text-4xl font-extrabold">USER</p>
+            <p>, sudah</p>
+        </div>
+        <div class="ml-2 text-4xl flex font-semibold justify-center mb-14">
+            <p>menyelesaikan tugas dengan baik.</p>
+        </div>
+        <div class="flex ml-40">
+            <p class="text-4xl font-semibold mr-2">Were are proud of your</p>
+            <p class="inline-flex text-4xl font-semibold text-mainclr underline">performance
+                <p class="inline-flex text-4xl font-semibold">!</p>
+            </p>
+        </div>
     </div>
+    <img src="../../imgs/hiasan4.png" class="w-80" alt="">
+</div>
 
-    <div class="flex-auto">Task Completed</div>
+<div class="flex-auto">
+    <div class="bg-mainclr w-48 p-1 ml-16 rounded-full text-white flex">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-white ml-3 mr-7" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
+        <div class="font-extrabold">
+            <p>Task List</p>
+        </div>
+    </div>
+</div>
+<div class=" text-gray-900 tracking-wider">
+	<!--Container-->
+	<div class="container w-full md:w-4/5 xl:w-11/12 mx-auto px-2">
+
+		<!--Card-->
+		<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow-lg bg-white">
+			<table id="TBtaskComplt" class="stripe hover text-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+				<thead>
+					<tr>
+						<th data-priority="1">Judul Tugas</th>
+						<th data-priority="2">Deadline</th>
+						<th data-priority="3">Terselesaikan</th>
+						<th data-priority="4">No. Tugas</th>
+						<th data-priority="5">Status</th>
+						<th data-priority="6">Sumber Tugas</th>
+                        <th data-priority="7">-</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Tiger Nixon</td>
+						<td>System Architect</td>
+						<td>Edinburgh</td>
+						<td>61</td>
+						<td>2011/04/25</td>
+						<td>$320,800</td>
+                        <td class="py-4 px-6">
+                            @include('modal.taskcompleted')
+                        </td>
+					</tr>
+
+					<tr>
+						<td>Donna Snider</td>
+						<td>Customer Support</td>
+						<td>New York</td>
+						<td>27</td>
+						<td>2011/01/25</td>
+						<td>$112,000</td>
+                        <td class="py-4 px-6">
+                            @include('modal.taskcompleted')
+                        </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!--/Card-->
+	</div>
+</div>
+	<!--/container-->
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!--Datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            var table = $('#TBtaskComplt').DataTable({
+                    responsive: true
+                })
+                .columns.adjust()
+                .responsive.recalc();
+        });
+    </script>
 @endsection
