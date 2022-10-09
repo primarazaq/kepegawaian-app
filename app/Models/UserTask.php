@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserTask extends Model
 {
+    protected $fillable = [
+        'user_sender_id',
+        'task_id',
+        'user_receiver_id',
+    ];
     use HasFactory;
 
     // public function task()
