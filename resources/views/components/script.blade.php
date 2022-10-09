@@ -1,7 +1,7 @@
 {{-- <script src="../path/to/flowbite/dist/flowbite.js"></script> --}}
 <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 <script src="../path/to/flowbite/dist/datepicker.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
 
 
 {{-- <script>
