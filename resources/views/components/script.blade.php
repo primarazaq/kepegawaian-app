@@ -2,6 +2,8 @@
 <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 <script src="../path/to/flowbite/dist/datepicker.js"></script>
 
+
+
 {{-- <script>
     var tag = document.createElement("script");
     tag.src = "https://unpkg.com/flowbite@1.5.1/dist/flowbite.js";
