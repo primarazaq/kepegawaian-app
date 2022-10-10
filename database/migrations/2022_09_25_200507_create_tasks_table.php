@@ -16,20 +16,14 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id'); //utk ambil id pembuat task
-            // $table->foreignId('user_nip'); //utk ambil nip penerima task
             $table->string('t_title');
+            $table->string('t_file')->nullable();
             $table->text('t_body');
             $table->string('t_status');
             $table->string('t_priority');
-            // $table->string('t_assigne1');
-            // $table->string('t_assigne2');
-            // $table->string('t_assigne3');
-            // $table->string('t_created_by');
             $table->timestamp('t_due_date');
             $table->timestamps();
-            // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            
         });
     }
 
