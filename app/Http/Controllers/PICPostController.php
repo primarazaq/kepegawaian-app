@@ -45,7 +45,7 @@ class PICPostController extends Controller
     {
         $DataTask = $request->validate([
             't_title' => 'required',
-            't_file' => 'mimes:jpeg,jpg,png,docx,pdf,zip,rar|file|max:10240',
+            't_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
             't_body' => 'required',
             't_status' => 'required',
             't_priority' => 'required',
@@ -69,7 +69,7 @@ class PICPostController extends Controller
             ];
            
             UserTask::create($DataUserTask);
-            return redirect('/pic/home/task')->with('success','Data berhasil dibuat!');
+            return redirect('/pic/home/task')->with('success','Tugas berhasil dibuat!');
         }else{
             $penerimaTask = $data['user_receiver_id'];
             foreach ($penerimaTask as $list){
@@ -81,7 +81,7 @@ class PICPostController extends Controller
                 UserTask::create($DataUserTask);
             }
             
-            return redirect('/pic/home/task')->with('success','Data berhasil dibuat!');
+            return redirect('/pic/home/task')->with('success','Tugas berhasil dibuat!');
 
         }
 
