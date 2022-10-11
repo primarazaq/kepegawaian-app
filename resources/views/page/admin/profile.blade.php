@@ -29,7 +29,7 @@
                     {{ $user->name }}
                 </h1>
                 <h3 class="mr-40 font-semibold text-xl text-gray-600">
-                    {{ $user->level }}
+                    Super Admin
                 </h3>
             </div>        
             <div class="flex ">

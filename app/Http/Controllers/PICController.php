@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PICController extends Controller
@@ -19,6 +19,7 @@ class PICController extends Controller
     }
 
     public function profile(){
-        return view('page.pic.profile');
+        $user = User::find(auth()->user()->id);
+        return view('page.pic.profile', ['pic' => $user]);
     }
 }

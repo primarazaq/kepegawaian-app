@@ -17,7 +17,12 @@ class PICPostController extends Controller
      */
     public function index()
     {
-        return view('page.pic.task');
+        $employee = User::where('level', 'employee')->get();
+        $totalTask = Task::all();
+        return view('page.pic.task',[
+            'pegawai' => $employee,
+            'totalTask' =>$totalTask
+        ]);
     }
 
     /**
@@ -40,13 +45,14 @@ class PICPostController extends Controller
     {
         $DataTask = $request->validate([
             't_title' => 'required',
+            't_file' => 'mimes:jpeg,jpg,png,docx,pdf,zip,rar|file|max:10240',
             't_body' => 'required',
             't_status' => 'required',
             't_priority' => 'required',
             't_due_date' => 'required'
             
         ]);
-        
+        $DataTask['t_file'] = $request->file('t_file')->store('task-file');
         $createdTask = Task::create($DataTask);
 
         $data = $request->validate([

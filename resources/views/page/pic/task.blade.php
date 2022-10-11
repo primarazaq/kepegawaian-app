@@ -25,20 +25,30 @@
 {{-- flex ke-1 --}}
 <div class="flex mx-auto max-w-fit h-fit border-4 rounded-lg border-mainclr">
     <div class="basis-1/2 bg-gray-100 rounded-l-lg p-5">
-        <div class="font-extrabold text-right text-2xl">No. Task: 123412</div>
-        <div>
-            <form method="post" action="/pic/home/task">
+        <div class="font-extrabold text-right text-2xl">No. Task: {{ count($totalTask) + 1 }}</div>
+       
+            <form method="post" action="/pic/home/task" enctype="multipart/form-data">
                 @csrf
             <div>
                 <label for="t_title" class="block ml-4 text-lg font-semibold text-gray-800 dark:text-gray-300">Title Task</label>
-                <input type="text" id="t_title" name="t_title" placeholder="Tuliskan Judul tugas disini..." class="block w-full text-3xl text-gray-900 bg-gray-100 border-gray-100">
+                <input type="text" id="t_title" name="t_title" placeholder="Tuliskan Judul tugas disini..." class="block w-full text-3xl text-gray-900 bg-gray-100 border-gray-100 :focus-visible" required>
             </div>
-        </div>
-        <div class="mb-4">
-            <label for="t_body" class="ml-4 text-lg font-semibold text-gray-900 dark:text-gray-300">Description Task</label>
-            <input id="t_body" type="hidden" name="t_body">
-            <trix-editor input="t_body" style="overflow-y:auto"></trix-editor>
-        </div>
+            <div class="mb-2">
+                
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="t_file">Upload file</label>
+                <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="t_file_help" id="t_file" name="t_file" type="file">
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="t_file_help">*jpeg , jpg, png, docx, pdf, zip, rar (MAX FILE 10MB).</p>
+
+            </div>
+            <div class="mb-4">
+                <label for="t_body" class="ml-4 text-lg font-semibold text-gray-900 dark:text-gray-300">Description Task</label>
+                <input id="t_body" type="hidden" name="t_body">
+                @error('t_body')
+                    <p>{{ $message }}</p>
+                @enderror
+                <trix-editor input="t_body" style="overflow-y:auto"></trix-editor>
+            </div>
+        
     </div>
 
     {{-- flex ke-2 --}}
@@ -58,7 +68,7 @@
             </div>
 
             <div class="t_priority-dropdown">
-				<select name="t_priority">
+				<select name="t_priority" required>
 					<option value="">Select Priority</option>
 					<option value="low">Low</option>
 					<option value="medium">Medium</option>
@@ -108,9 +118,10 @@
             <div class="user_receiver_id-dropdown">
 				<select data-placeholder="Select People" name="user_receiver_id[]" multiple class="chosen-select form-control" style="width: 156px" multiple>
 					<option></option>
-					<option value="2" >Ikhsan</option>
-					<option value="3">Hilman</option>
-					<option value="4">Dedeng</option>
+                    @foreach ($pegawai as $item)
+                        
+					    <option value="{{ $item['id'] }}" >{{ $item['name'] }}</option>
+                    @endforeach
 				</select>
 			</div>
             <script>
@@ -169,7 +180,7 @@
             </div>
             <div date-rangepicker class="items-center ml-2">
                 <div class="relative">
-                    <input name="t_due_date" type="dateTime-local" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                    <input name="t_due_date" type="dateTime-local" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end" required>
                 </div>
             </div>
         </div>
@@ -179,15 +190,22 @@
                 Source
             </div>
             <div class="font-extrabold text-lg ml-16">
-                PIC
+                PIC <br> {{ auth()->user()->name }}
             </div>
         </div>
-        <div class="flex items-center justify-center">
+        <div class="flex items-center justify-center mt-32">
             <button type="reset" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 mr-4 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancel</button>
             <button type="submit" class="text-white bg-mainclr hover:bg-teal-800 font-medium rounded-lg text-sm px-5 py-2 mr-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700">+ Create</button>
         </div>
     </form>
     </div>
 </div>
+
+<script>
+    //nonaktif add file trix
+    document.addEventListener('trix-file-accept', function(e){
+        e.preventDefault();
+    });
+</script>
 
 @endsection

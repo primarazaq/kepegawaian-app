@@ -8,8 +8,11 @@ use App\Http\Controllers\EmployeePostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskPostController;
 use App\Http\Controllers\PICPostController;
+use App\Http\Controllers\PICDashboardController;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,12 +56,29 @@ use Illuminate\Support\Facades\Route;
 
         Route::middleware('checklevel:pic')->prefix('pic')->group(function() {
             Route::get('/home', [PICController::class, 'index']);
-            Route::get('/home/dashboard', [PICController::class, 'index']);
+            // Route::get('/home/dashboard', [PICController::class, 'index']);
             // Route::get('/home/task', [PICController::class, 'task']);
             Route::get('/home/profile', [PICController::class, 'profile']);
 
             //Resource
+            Route::resource('/home/dashboard', PICDashboardController::class);
             Route::resource('/home/task', PICPostController::class);
+
+            Route::get('storage/{$data->t_file}', function ($filename){
+                        $path = storage_path('public/' . $filename);
+
+                        if (!File::exists($path)) {
+                            abort(404);
+                        }
+
+                        $file = File::get($path);
+                        $type = File::mimeType($path);
+
+                        $response = Response::make($file, 200);
+                        $response->header("Content-Type", $type);
+
+                        return $response;
+                    });
         });
         
         Route::middleware('checklevel:employee')->prefix('employee')->group(function() {
