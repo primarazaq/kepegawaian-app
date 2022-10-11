@@ -23,7 +23,7 @@
 </div>
 
 {{-- flex ke-1 --}}
-<div class="flex mx-auto max-w-5xl h-fit border-4 rounded-lg border-mainclr">
+<div class="flex mx-auto max-w-fit h-fit border-4 rounded-lg border-mainclr">
     <div class="basis-1/2 bg-gray-100 rounded-l-lg p-5">
         <div class="font-extrabold text-right text-2xl">No. Task: {{ count($totalTask) + 1 }}</div>
        
@@ -52,7 +52,7 @@
     </div>
 
     {{-- flex ke-2 --}}
-    <div class=" bg-white p-5">
+    <div class=" bg-white p-5 rounded-r-lg">
         <div class="font-extrabold text-left text-2xl pb-3">ATTRIBUTES</div>
         <div class="flex mb-4">
             <div class="mr-14 font-extrabold text-lg ml-5 text-gray-500">
