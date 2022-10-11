@@ -14,8 +14,8 @@ class MyTaskEmpController extends Controller
      */
     public function index()
     {
-        $task = Task::with('users')->get();
-        dd($task);
+        // $task = Task::with('users')->get();
+        // dd($task);
         return view('page.employee.mytask');
     }
 
