@@ -6,6 +6,7 @@ use App\Http\Controllers\PICController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeePostController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MyTaskEmpController;
 use App\Http\Controllers\TaskPostController;
 use App\Http\Controllers\PICPostController;
 use App\Http\Controllers\PICDashboardController;
@@ -84,9 +85,12 @@ use Illuminate\Support\Facades\Response;
         Route::middleware('checklevel:employee')->prefix('employee')->group(function() {
             Route::get('/home', [EmployeeController::class, 'index']);
             Route::get('/home/dashboard', [EmployeeController::class, 'dashboard']);
-            Route::get('/home/mytask', [EmployeeController::class, 'mytask']);
+            // Route::get('/home/mytask', [EmployeeController::class, 'mytask']);
             Route::get('/home/taskcompleted', [EmployeeController::class, 'taskcompleted']);
             Route::get('/home/profile', [EmployeeController::class, 'profile']);
+
+            //Resource
+            Route::resource('/home/mytask', MyTaskEmpController::class);
         });
     });
 
