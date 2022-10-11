@@ -21,6 +21,11 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
+        trix-editor {
+            height: 200px !important;
+            max-height: 200px !important;
+            overflow-y: auto !important;
+        }
     </style>
 
 <style>
@@ -123,6 +128,9 @@
         trix-toolbar [data-trix-button-group="file-tools"]{
             display:none;
         }
+        /* trix-toolbar [data-trix-button-group="block-tools"]{
+            display:none;
+        } */
     </style>
 
 </head>
