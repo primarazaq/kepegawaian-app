@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MyTaskEmpController extends Controller
@@ -16,7 +18,39 @@ class MyTaskEmpController extends Controller
     {
         // $task = Task::with('users')->get();
         // dd($task);
-        return view('page.employee.mytask');
+        // $task = DB::table('users as a')
+        //             ->select('b.t_due_date','a.nip', 'a.name', 'b.t_title','b.created_at', 'aa.name as pembuat_task', 'b.t_status', 'b.t_file')
+        //             ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+        //             ->join('tasks as b', 'b.id', '=', 'c.task_id')
+        //             ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+        //             ->orderBy('b.id' , 'asc')
+        //             ->get();
+        $task = DB::table('users as a')
+                    ->select('b.*', 'a.*', 'aa.*')
+                    ->where('c.user_receiver_id',auth()->user()->id)
+                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+                    ->join('tasks as b', 'b.id', '=', 'c.task_id')
+                    ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->orderBy('b.id' , 'asc')
+                    ->get();
+       
+        // $task['t_due_date']->diffForHumans('null, true, true, 2');
+
+
+        $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
+        $taskCompleted = Task::where('t_status', 'completed')->get();
+        $taskInProgress = Task::where('t_status', 'in progress')->get();
+        $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
+
+        return view('page.employee.mytask', [
+            'taskList' => $task, 
+            'userList' => $users,
+            'taskCompleted' => $taskCompleted,
+            'taskInProgress' => $taskInProgress,
+            'taskUncompleted' => $taskUncompleted
+            // 'substract' => $substract
+        ]);
+        // return view('page.employee.mytask');
     }
 
     /**
