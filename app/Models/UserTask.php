@@ -13,6 +13,8 @@ class UserTask extends Model
         'user_sender_id',
         'task_id',
         'user_receiver_id',
+        'response_file',
+        'response_body',
     ];
     use HasFactory;
 

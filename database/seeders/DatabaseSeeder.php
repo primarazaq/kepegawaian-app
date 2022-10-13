@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
         Task::create([
             't_title' => 'membuat dokumen2',
             't_body' => 'tolong test buat dokumen penyalaan listrik',
-            't_status' => 'uncompleted',
+            't_status' => 'in progress',
             't_priority' => 'medium',
             't_due_date' => '2022-12-21',
         ]);
@@ -151,7 +151,7 @@ class DatabaseSeeder extends Seeder
         UserTask::create([
             'user_sender_id' => '2',
             'task_id' => '2',
-            'user_receiver_id' => '3',
+            'user_receiver_id' => '4',
         ]);
 
         UserTask::create([
