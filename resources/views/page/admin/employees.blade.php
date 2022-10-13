@@ -178,7 +178,7 @@
                     {{ $user->nip }}
                 </td>
                 <td class="py-4 px-6">
-                    {{ $user->created_at }}
+                    {{ $date = date('d F Y, H.i A',strtotime($user->created_at)) }}
                 </td>
                 <td class="py-4 px-6">
                     {{ $user->level }}
