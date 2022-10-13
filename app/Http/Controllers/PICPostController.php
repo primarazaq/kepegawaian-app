@@ -69,7 +69,7 @@ class PICPostController extends Controller
             ];
            
             UserTask::create($DataUserTask);
-            return redirect('/pic/home/task')->with('success','Tugas berhasil dibuat!');
+            
         }else{
             $penerimaTask = $data['user_receiver_id'];
             foreach ($penerimaTask as $list){
