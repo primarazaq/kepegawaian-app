@@ -15,7 +15,7 @@
               <!-- Modal header -->
               <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                   <h3 class="font-semibold text-gray-900 ml-3 text-3xl dark:text-white">
-                        No Tugas - {{ $data->t_title }}
+                        No. Task : {{ $data->t_id }} - {{ $data->t_title }}
                   </h3>
                   <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="ModalMyTaskEMP-{{ $data->t_id }}">
                       <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -35,6 +35,7 @@
                                 :&nbsp; <?php echo $data->t_body ?>
                                 </p>
                         </div>
+                        @if ($data->t_file)
                         <div class="flex pr-32 mb-2">
                             <div class="basis-1/5">
                                 <p class="leading-relaxed text-gray-500 dark:text-gray-400">
@@ -44,7 +45,9 @@
                             <p class="inline-flex leading-relaxed text-gray-500 dark:text-gray-400">
                                 :&nbsp; <a href="{{ asset('storage/' . $data->t_file) }}" class="text-mainclr dark:text-teal-500 hover:underline">   lihat file</a>
                                 </p>
-                        </div><hr>
+                        </div>
+                        @endif
+                        <hr>
                         <div class="flex pr-32 mt-2 mb-2">
                             <div class="basis-1/5">
                                 <p class="leading-relaxed text-gray-500 dark:text-gray-400">
@@ -72,14 +75,14 @@
                                 </p>  
                             </div>
                             <p class="inline-flex leading-relaxed text-gray-500 dark:text-gray-400">
-                                : PIC
+                                : PIC - {{ $data->sender_name }}
                             </p>
                         </div>
                         <form method="post" action="/employee/home/mytask/{{ $data->t_id }}" enctype="multipart/form-data">
                             @method('put')
                             @csrf
                             <div class="hidden">
-                                    <input type="text" name="user_sender_id" value="{{ $data->sender_id }}" hidden>
+                                    <input type="hidden" name="user_sender_id" value="{{ $data->sender_id }}" hidden>
                             </div>
                         <div class="flex pr-32">
                             <div class="basis-1/5">
