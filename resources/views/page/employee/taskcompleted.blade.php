@@ -30,10 +30,10 @@
 </div>
 
 <div class="flex-auto">
-    <div class="bg-mainclr w-48 p-1 ml-16 mb-4 rounded-full text-white flex">
+    <div class="bg-mainclr w-52 p-1 ml-16 mb-4 rounded-full text-white flex">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-white ml-3 mr-7" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
         <div class="font-extrabold">
-            <p>Task List</p>
+            <p>Task Completed</p>
         </div>
     </div>
 </div>
@@ -46,39 +46,40 @@
 			<table id="TBtaskComplt" class="stripe hover text-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
 				<thead>
 					<tr>
+						<th data-priority="1">No.</th>
 						<th data-priority="1">Judul Tugas</th>
 						<th data-priority="2">Deadline</th>
 						<th data-priority="3">Terselesaikan</th>
 						<th data-priority="4">No. Tugas</th>
 						<th data-priority="5">Status</th>
 						<th data-priority="6">Sumber Tugas</th>
-                        <th data-priority="7">-</th>
+                        <th data-priority="7">Action</th>
 					</tr>
 				</thead>
 				<tbody>
+                    @foreach ($taskList as $data)
 					<tr>
-						<td>Tiger Nixon</td>
-						<td>System Architect</td>
-						<td>Edinburgh</td>
-						<td>61</td>
-						<td>2011/04/25</td>
-						<td>$320,800</td>
+						<td>{{ $loop->iteration }}</td>
+						<td>{{ $data->t_title }}</td>
+						<td class="text-red-600">{{ $date = date('d M Y, H.i A',strtotime($data->t_due_date)) }}</td>
+						<td class="text-mainclr">{{ $date = date('d M Y, H.i A',strtotime($data->updated_at)) }}</td>
+						<td>{{ $data->t_id }}</td>
+                        <td>
+                            <div class="bg-mainclr mx-auto py-1 px-5 rounded-2xl text-white">
+                            <div class="text-center">
+                                <p>Completed</p>
+                            </div>
+                            </div>
+						</td>
+						<td>PIC - {{ $data->sender_name }}</td>
                         <td class="py-4 px-6">
+                            <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button" data-modal-toggle="modalTaskComplt-{{ $data->t_id }}">
+                                Detail
+                                </button> 
                             @include('modal.taskcompleted')
                         </td>
 					</tr>
-
-					<tr>
-						<td>Donna Snider</td>
-						<td>Customer Support</td>
-						<td>New York</td>
-						<td>27</td>
-						<td>2011/01/25</td>
-						<td>$112,000</td>
-                        <td class="py-4 px-6">
-                            @include('modal.taskcompleted')
-                        </td>
-					</tr>
+                    @endforeach
 				</tbody>
 			</table>
 		</div>
