@@ -17,15 +17,6 @@ class MyTaskEmpController extends Controller
      */
     public function index()
     {
-        // $task = Task::with('users')->get();
-        // dd($task);
-        // $task = DB::table('users as a')
-        //             ->select('b.t_due_date','a.nip', 'a.name', 'b.t_title','b.created_at', 'aa.name as pembuat_task', 'b.t_status', 'b.t_file')
-        //             ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-        //             ->join('tasks as b', 'b.id', '=', 'c.task_id')
-        //             ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
-        //             ->orderBy('b.id' , 'asc')
-        //             ->get();
         $task = DB::table('users as a')
                     ->select('b.t_due_date', 'a.id as receiver_id', 'a.name as receiver_name', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name')
                     ->where('c.user_receiver_id',auth()->user()->id)->where('b.t_status', 'in progress')
@@ -34,21 +25,9 @@ class MyTaskEmpController extends Controller
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
                     ->orderBy('b.id' , 'asc')
                     ->get();
-        // $task['t_due_date']->diffForHumans('null, true, true, 2');
-
-
-        $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
-        $taskCompleted = Task::where('t_status', 'completed')->get();
-        $taskInProgress = Task::where('t_status', 'in progress')->get();
-        $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
         
         return view('page.employee.mytask', [
-            'taskList' => $task, 
-            'userList' => $users,
-            'taskCompleted' => $taskCompleted,
-            'taskInProgress' => $taskInProgress,
-            'taskUncompleted' => $taskUncompleted
-            // 'substract' => $substract
+            'taskList' => $task
         ]);
         // return view('page.employee.mytask');
     }
@@ -127,10 +106,10 @@ class MyTaskEmpController extends Controller
                 ->where('user_sender_id',$sender_id)
                 ->where('user_receiver_id',$receiver_id)
                 ->update($validatedData);
-                // ->update([
-                //     'response_file' => $request['response_file'],
-                //     'response_body' => $request['response_body']
-                // ]);
+                
+        Task::where('id', $task_id)
+            ->update(['t_status' => 'completed']);
+
         // dd($task);
         return redirect('/employee/home/mytask')->with('success','Task Berhasil dikirimkan!');
 
