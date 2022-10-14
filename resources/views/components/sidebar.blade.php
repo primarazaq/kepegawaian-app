@@ -101,7 +101,6 @@
 	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
       {{-- <img src="imgs/Brief.png" alt="" class="w-6"> --}}
       <span class="flex-1 ml-2 whitespace-nowrap text-white">Task</span>
-      <span class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span>
    </a>
 </li>
 <li>
@@ -173,12 +172,11 @@
 </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
       {{-- <img src="imgs/Brief.png" alt="" class="w-6"> --}}
      <span class="flex-1 ml-3 whitespace-nowrap text-white">My Task</span>
-     <span class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span>
   </a>
 </li>
 <li>
    <a href="/employee/home/taskcompleted" class="{{ Request::is('/home/taskcompleted') ? 'active':'' }}flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
-      <svg version="1.1" class="w-8 fill-white" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      <svg version="1.1" class="w-6 fill-white" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 491.5 491.5" style="enable-background:new 0 0 491.5 491.5;" xml:space="preserve">
 <g>
 	<g>
@@ -199,7 +197,6 @@
 	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
       {{-- <img src="imgs/Task Completed.png" alt="" class="w-6"> --}}
       <span class="flex-1 ml-2 whitespace-nowrap text-white">Task Completed</span>
-      <span class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span>
    </a>
  </li>
 <li>
