@@ -5,10 +5,9 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\UserTask;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class MyTaskEmpController extends Controller
+class TaskCompletedEmpController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,18 +17,17 @@ class MyTaskEmpController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date', 'a.id as receiver_id', 'a.name as receiver_name', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name')
-                    ->where('c.user_receiver_id',auth()->user()->id)->where('b.t_status', 'in progress')
+                    ->select('b.t_due_date', 'a.id as receiver_id', 'a.name as receiver_name', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name', 'c.updated_at','c.response_file','c.response_body')
+                    ->where('c.user_receiver_id',auth()->user()->id)->where('b.t_status', 'completed')
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
                     ->orderBy('b.id' , 'asc')
                     ->get();
         
-        return view('page.employee.mytask', [
+        return view('page.employee.taskcompleted', [
             'taskList' => $task
         ]);
-        // return view('page.employee.mytask');
     }
 
     /**
@@ -82,39 +80,9 @@ class MyTaskEmpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $task_id)
+    public function update(Request $request, $id)
     {
-        // $data = $request->validate([
-        //     'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
-        //     'response_body' => 'required'
-        // ]);
-
-        $rules =[
-            'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
-            'response_body' => 'required'
-        ];
-
-        $validatedData = $request->validate($rules);
-
-        $validatedData['response_file'] = $request->file('response_file')->store('task-file');
-
-        // dd($validatedData);
-        $sender_id = $request['user_sender_id'];
-        $receiver_id = auth()->user()->id;
-        // $task = UserTask::where('task_id',$task_id)->get();
-        UserTask::where('task_id',$task_id)
-                ->where('user_sender_id',$sender_id)
-                ->where('user_receiver_id',$receiver_id)
-                ->update($validatedData);
-                
-        Task::where('id', $task_id)
-            ->update(['t_status' => 'completed']);
-
-        // dd($task);
-        return redirect('/employee/home/mytask')->with('success','Task Berhasil dikirimkan!');
-
-
-        
+        //
     }
 
     /**

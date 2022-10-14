@@ -89,7 +89,8 @@
                                 {{ $loop->iteration }}
                             </th>
                             <td class="py-4 px-6 text-red-600  font-semibold">
-                                <?php echo date('H:i',strtotime($data->t_due_date)) ?> WIB  <?php echo date('- d F Y',strtotime($data->t_due_date)) ?>
+                                {{ $date = date('l, d F Y, H.i A',strtotime($data->t_due_date)) }}
+                                
                             </td>
                             <td class="py-4 px-6">
                                 {{ $data->nip }}
@@ -101,7 +102,7 @@
                                 {{ $data->t_title }}
                             </td>
                             <td class="py-4 px-6">
-                                 <?php echo date('H:i',strtotime($data->created_at)) ?> WIB <?php echo date('- d F Y',strtotime($data->created_at)) ?>
+                                {{ $date = date('l, d F Y, H.i A',strtotime($data->created_at)) }}
                             </td>
                             <td class="py-4 px-6">
                                 <?php 
