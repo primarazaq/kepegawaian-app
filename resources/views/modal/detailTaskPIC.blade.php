@@ -16,42 +16,131 @@
                 </h3>
             </div>
             <!-- Modal body -->
-            <div class="p-6">
-                <div class="flex">
-                    <div class="basis-auto mr-16 text-base space-y-5 text-left leading-relaxed text-gray-500 dark:text-gray-400">
-                        <p>NO Tugas</p>
-                        <p>Nama Pengirim</p>
-                        <p>Nama Penerima</p>
-                        <p>NIP</p>
-                        <p>Deadline</p>
-                        <p>Tanggal Mulai</p>
-                        <p>Sumber Tugas</p>
-                        <p>Detail Tugas</p>
-                        <p>Bukti File</p>
-                        <p>Keterangan pewagai</p>
-                    </div> 
-                    <div class="text-base space-y-5 text-left mb-5 leading-relaxed">
-                        <p>: 12832</p>
-                        <p>: Hilman Ahmad Fathoni</p>
-                        <p>: Ikhsan Nurul Rizki, Primarazaq</p>
-                        <p>: 10119097, 10119124</p>
-                        <p>: 00:00 WIB - 01 October 2022</p>
-                        <p>: 04:14 WIB - 11 October 2022</p>
-                        <p>: PIC</p>
-                        <p>: Tugas Memperbaiki dokumen Penyalaan pada Pelaggan A</p>
-                        <div class="flex">
-                            <p class="inline-flex mr-2">:</p>
-                            <a href="{{ asset('storage/' . $data->t_file) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
-                        </div>
-                        <p>: Dokumen berhasil diperbaiki, siap digunakan.</p>
-                    </div>
+            <div class="overflow-x-auto relative pl-3">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <tbody class="">
+                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                No Tugas
+                            </th>
+                            <td class="py-4 px-6 w-1">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                12832
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Nama Pengirim
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                Hilman Ahmad Fathoni
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Nama Penerima
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                Ikhsan Nurul Rizki, Primarazaq
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                NIP
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                10119097, 10119124
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Deadline
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                00:00 WIB - 01 October 2022
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Tanggal Mulai
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                04:14 WIB - 11 October 2022
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Sumber Tugas
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                PIC
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Detail Tugas
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, deleniti. Reiciendis aut iste ad ut harum neque ducimus, soluta, expedita laudantium laboriosam ex necessitatibus impedit. Dolor est eos doloribus reiciendis.
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Bukti File
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <a href="{{ asset('storage/' . $data->t_file) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Keterangan pewagai
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                Dokumen berhasil diperbaiki, siap digunakan.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="py-4">
+                    <img src="../../imgs/progress.png" class="w-16 mx-auto" alt="">
+                    <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
+                        Tasks in progress
+                    </h3>
                 </div>
-                <img src="../../imgs/progress.png" class="w-16 mx-auto" alt="">
-                {{-- <img src="../../imgs/undone.png" class="w-16 mx-auto" alt=""> --}}
+            {{-- <img src="../../imgs/undone.png" class="w-16 mx-auto" alt="">
                 <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
-                    Tasks in progress
-                </h3>
-                {{-- <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
                     Tasks are not completed on time
                 </h3> --}}
             </div>

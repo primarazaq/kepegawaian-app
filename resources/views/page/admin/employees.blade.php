@@ -11,7 +11,7 @@
 
 
 
-<div class="overflow-y-auto relative shadow-lg sm:rounded-lg pt-8 pl-5 pr-5">
+<div class="overflow-y-auto relative pt-8 pl-5 pr-5">
     <div class="flex pb-4 items-center">
         <div class="flex-auto">
             <div>
@@ -51,7 +51,104 @@
                             })
                           );</script>
             </div>
-            <div class="bg-mainclr w-48 p-1 rounded-full text-white flex">
+            <div class="flex pb-3 justify-between">
+                <div class="bg-mainclr w-48 p-1 ml-16 rounded-full text-white flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-white ml-3 mr-7" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
+                    <div class="font-extrabold">
+                        <p>Task List</p>
+                    </div>
+                </div>
+                <div class="inline-flex mr-16">
+                    @include('modal.createEmployees')
+                </div>
+            </div>
+            <div class=" text-gray-900 tracking-wider">
+                <!--Container-->
+                <div class="container w-full md:w-4/5 xl:w-11/12 mx-auto px-2">
+                    <!--Card-->
+                    <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded-lg shadow-lg bg-white border-2 border-mainclr">
+                        <table id="TBtaskComplt" class="stripe hover text-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">NO</th>
+                                    <th data-priority="2">NAMA PEGAWAI</th>
+                                    <th data-priority="3">TANGGAL LAHIR</th>
+                                    <th data-priority="4">NIP</th>
+                                    <th data-priority="5">TANGGAL MULAI</th>
+                                    <th data-priority="6">STATUS</th>
+                                    <th data-priority="7">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $user)
+                                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $loop->iteration }}
+                                    </th>
+                                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $user->name }}
+                                    </th>
+                                    <td class="py-4 px-6">
+                                        {{ $user->tgl_lhr }}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{ $user->nip }}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{ $date = date('d F Y, H.i A',strtotime($user->created_at)) }}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{ $user->level }}
+                                    </td>
+                                    <td class="py-4 ">
+                                        <div class="flex mx-auto justify-center">
+                                            <button class="block bg-mainclr p-2 mr-3 rounded-lg text-white" type="button" data-modal-toggle="ModalEditEMP-{{ $user->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 fill-white" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                                            </button> @include('modal.editEmployees')
+                                            <button class="block text-white bg-red-600 p-2 rounded-lg font-medium text-sm py-2 text-center" type="button" data-modal-toggle="popup-modal-disableEMP-{{ $user->id }}">
+                                                <svg version="1.1" class="w-5 fill-white" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                                        viewBox="0 0 177.055 177.055" style="enable-background:new 0 0 177.055 177.055;" xml:space="preserve">
+                                                                    <path d="M0.001,88.527c0,48.814,39.713,88.527,88.527,88.527c48.813,0,88.526-39.713,88.526-88.527S137.341,0,88.528,0
+                                                                        C39.714,0,0.001,39.713,0.001,88.527z M88.528,24.304c35.413,0,64.224,28.811,64.224,64.224c0,13.324-4.081,25.712-11.055,35.983
+                                                                        L52.544,35.359C62.816,28.385,75.204,24.304,88.528,24.304z M124.511,141.696c-10.272,6.974-22.659,11.055-35.983,11.055
+                                                                        c-35.413,0-64.223-28.811-64.223-64.224c0-13.324,4.081-25.711,11.054-35.983L124.511,141.696z"/>
+                                                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+                                              </button> @include('modal.disableEmployees')
+                                              
+                                        </div>
+                                    </td>
+                                    @endforeach
+                                    
+                                </tr>
+                               
+                               
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--/Card-->
+                </div>
+            </div>
+                <!--/container-->
+            
+            
+                <!-- jQuery -->
+                <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            
+                <!--Datatables -->
+                <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+            
+                        var table = $('#TBtaskComplt').DataTable({
+                                responsive: true
+                            })
+                            .columns.adjust()
+                            .responsive.recalc();
+                    });
+                </script> 
+        {{-- <div class="bg-mainclr w-48 p-1 rounded-full text-white flex">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-white ml-3 mr-7" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
                 <div class="font-extrabold">
                     <p>Employees</p>
@@ -207,6 +304,6 @@
            
            
         </tbody>
-    </table>
+    </table> --}}
 </div>
 @endsection
