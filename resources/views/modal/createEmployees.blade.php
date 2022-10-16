@@ -1,7 +1,7 @@
 <!-- Modal toggle -->
-<button class="bg-mainclr w-28 p-1 rounded-full font-extrabold text-white" type="button" data-modal-toggle="ModalCreateEMP">
+<button class="bg-mainclr w-56 p-1 rounded-full font-extrabold text-white" type="button" data-modal-toggle="ModalCreateEMP">
     <p>
-        +
+        + Tambah Pegawai Baru
     </p>
 </button>
 
