@@ -2,9 +2,6 @@
 
 @section('content')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
 
 
 <div class="flex items-center justify-end mb-8">
@@ -15,10 +12,24 @@
         Task
     </a>
 </div>
-
+<div class="flex pb-3 justify-between pl-14 pr-32">
+    <div class="bg-mainclr w-60 p-1 ml-16 rounded-full text-white flex">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-white ml-3 mr-7" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
+        <div class="font-extrabold">
+            <p>+ Buat Task Baru</p>
+        </div>
+    </div>
+    <a href="/pic/home/dashboard">
+        <button class="bg-mainclr w-36 p-1 justify-self-end rounded-full hover:bg-teal-600 text-white">
+            Lihat Task
+        </button>
+    </a>
+</div>
 {{-- flex ke-1 --}}
 <div class="flex mx-auto max-w-fit h-fit border-4 rounded-lg border-mainclr">
+    
     <div class="basis-1/2 bg-gray-100 rounded-l-lg p-5">
+        
         <div class="font-extrabold text-right text-2xl">No. Task: {{ count($totalTask) + 1 }}</div>
        
             <form method="post" action="/pic/home/task" enctype="multipart/form-data">
@@ -113,60 +124,15 @@
 				<select data-placeholder="Select People" name="user_receiver_id[]" multiple class="chosen-select form-control" style="width: 156px" multiple>
 					<option></option>
                     @foreach ($pegawai as $item)
-                        
 					    <option value="{{ $item['id'] }}" >{{ $item['name'] }}</option>
                     @endforeach
 				</select>
 			</div>
             <script>
-                // $('.chosen-select').each(function(i,selected){
-                //     var value = $(selected).val();
-                // });
-
-                // $(".chosen-select").chosen().change(function(){
-                //     $(".chosen-select").chosen().val();
-                //  });
-
-                
                 $(document).ready(function() {
                     $(".chosen-select").chosen();
                 });
-                
             </script>
-            {{-- </form> --}}
-            {{-- <button id="dropdownPeople" data-dropdown-toggle="dropdown2" class="text-grey hover:bg-gray-400 hover:text-white font-medium rounded-lg text-sm px-4 text-center inline-flex items-center border-2" type="button">Select people<svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-
-            <!-- Dropdown menu -->
-            <div id="dropdown2" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownPeople">
-                <li>
-                    <button class="inline-flex py-2 px-4 items-center w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        <img src="../../imgs/avatar.png" class="mr-2 w-6" alt="">
-                        Riska S. E
-                        <img src="../../imgs/low.png" class="mr-1 w-8" alt="">
-                    </button>
-                </li>
-                <li>
-                    <button class="inline-flex py-2 px-4 w-full items-center hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        <img src="../../imgs/avatar.png" class="mr-2 w-6" alt="">
-                        Juned A
-                    </button>
-                </li>
-                <li>
-                    <button class="inline-flex py-2 px-4 w-full items-center hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        <img src="../../imgs/avatar.png" class="mr-2 w-6" alt="">
-                        Udin S. D
-                        <img src="../../imgs/low.png" class="mr-1 w-8" alt="">
-                    </button>
-                </li>
-                <li>
-                    <button class="inline-flex py-2 px-4 w-full items-center hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        <img src="../../imgs/avatar.png" class="mr-2 w-6" alt="">
-                        Ahmad F
-                    </button>
-                </li>
-                </ul>
-            </div> --}}
         </div>
         <div class="flex mb-4">
             <div class="mr-2 font-extrabold text-lg ml-5 text-gray-500 items-center">
