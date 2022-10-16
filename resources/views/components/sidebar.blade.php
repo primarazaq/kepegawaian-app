@@ -1,8 +1,8 @@
 @if (auth()->user()->level=="admin")
 <aside class="w-56 rounded" aria-label="Sidebar">
-   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] rounded-tr-lg rounded-br-lg dark:bg-gray-800 h-screen">
+   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
       <div href="/home" class="items-center justify-center mb-6 mt-2 flex">
-         <img src="../../imgs/logopln.png" class="w-8" alt="">
+         <img src="../../imgs/logopln.png" class="w-8" alt="logo">
          <h2 class="text-xl font-extrabold whitespace-nowrap dark:text-white ml-3">ETM System</h2>
       </div>
       <div class="border-b-4 mb-4"></div>
@@ -44,22 +44,25 @@
             </a>
          </li>
          <li>
-            <a href="{{ route('logout')}}" class="flex absolute bottom-4 items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
-               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               class="w-6 absolute ml-11 fill-white" viewBox="0 0 96.943 96.943" style="enable-background:new 0 0 96.943 96.943;"
-	 xml:space="preserve">
-<g>
-	<g>
-		<path d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
-			c0,1.104,0.896,2,2,2h59.168c1.105,0,2-0.896,2-2V85.92C63.168,84.814,62.274,83.92,61.168,83.92z"/>
-		<path d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
-			l12.16,12.162H19.737c-1.104,0-2,0.896-2,2v9.912c0,1.104,0.896,2,2,2h52.644L60.221,67.59c-0.781,0.781-0.781,2.047,0,2.828
-			l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
-			c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z"/>
-	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-               {{-- <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11"> --}}
-               <span class="flex-1 ml-20 whitespace-nowrap text-center text-white">Logout</span>
-            </a>
+            <div class="mx-auto text-center">
+               <button class="blok absolute bottom-4 right-14 left-14 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white" type="button" data-modal-toggle="logoutModal">
+               
+                   <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                   class="w-6 absolute fill-white" viewBox="0 0 96.943 96.943" style="enable-background:new 0 0 96.943 96.943;"
+                   xml:space="preserve">
+                   <g>
+                   <g>
+                   <path d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
+                   c0,1.104,0.896,2,2,2h59.168c1.105,0,2-0.896,2-2V85.92C63.168,84.814,62.274,83.92,61.168,83.92z"/>
+                   <path d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
+                   l12.16,12.162H19.737c-1.104,0-2,0.896-2,2v9.912c0,1.104,0.896,2,2,2h52.644L60.221,67.59c-0.781,0.781-0.781,2.047,0,2.828
+                   l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
+                   c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z"/>
+                   </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+                   {{-- <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11"> --}}
+                   <span class="inline-block whitespace-nowrap ml-10 text-white">Logout</span>
+               </button>
+           </div>
          </li>
 </ul>
 </div>
@@ -68,9 +71,9 @@
 
 @if (auth()->user()->level=="pic")
 <aside class="w-56 rounded" aria-label="Sidebar">
-   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] rounded-tr-lg rounded-br-lg dark:bg-gray-800 h-screen">
+   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
       <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
-         <img src="imgs/logopln.png" alt="">
+         <img src="../../imgs/logopln.png" class="w-8" alt="logo">
          <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
       </div>
       <div class="border-b-4 mb-4"></div>
@@ -119,22 +122,25 @@
    </a>
 </li>
 <li>
-   <a href="{{ route('logout')}}" class="flex absolute bottom-4 items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               class="w-6 absolute ml-11 fill-white" viewBox="0 0 96.943 96.943" style="enable-background:new 0 0 96.943 96.943;"
-	 xml:space="preserve">
-<g>
-	<g>
-		<path d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
-			c0,1.104,0.896,2,2,2h59.168c1.105,0,2-0.896,2-2V85.92C63.168,84.814,62.274,83.92,61.168,83.92z"/>
-		<path d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
-			l12.16,12.162H19.737c-1.104,0-2,0.896-2,2v9.912c0,1.104,0.896,2,2,2h52.644L60.221,67.59c-0.781,0.781-0.781,2.047,0,2.828
-			l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
-			c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z"/>
-	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-      {{-- <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11"> --}}
-      <span class="flex-1 ml-20 whitespace-nowrap text-center text-white">Logout</span>
-   </a>
+   <div class="mx-auto text-center">
+      <button class="blok absolute bottom-4 right-14 left-14 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white" type="button" data-modal-toggle="logoutModal">
+      
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          class="w-6 absolute fill-white" viewBox="0 0 96.943 96.943" style="enable-background:new 0 0 96.943 96.943;"
+          xml:space="preserve">
+          <g>
+          <g>
+          <path d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
+          c0,1.104,0.896,2,2,2h59.168c1.105,0,2-0.896,2-2V85.92C63.168,84.814,62.274,83.92,61.168,83.92z"/>
+          <path d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
+          l12.16,12.162H19.737c-1.104,0-2,0.896-2,2v9.912c0,1.104,0.896,2,2,2h52.644L60.221,67.59c-0.781,0.781-0.781,2.047,0,2.828
+          l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
+          c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z"/>
+          </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+          {{-- <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11"> --}}
+          <span class="inline-block whitespace-nowrap ml-10 text-white">Logout</span>
+      </button>
+  </div>
 </li>
 </ul>
 </div>
@@ -143,9 +149,9 @@
 
 @if (auth()->user()->level=="employee")
 <aside class="w-56 rounded" aria-label="Sidebar">
-   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] rounded-tr-lg rounded-br-lg dark:bg-gray-800 h-screen">
+   <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
       <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
-         <img src="imgs/logopln.png" alt="">
+         <img src="../../imgs/logopln.png" class="w-8" alt="logo">
          <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
       </div>
       <div class="border-b-4 mb-4"></div>
@@ -215,22 +221,25 @@
    </a>
 </li>
 <li>
-   <a href="{{ route('logout')}}" class="flex absolute bottom-4 items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               class="w-6 absolute ml-11 fill-white" viewBox="0 0 96.943 96.943" style="enable-background:new 0 0 96.943 96.943;"
-	 xml:space="preserve">
-<g>
-	<g>
-		<path d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
-			c0,1.104,0.896,2,2,2h59.168c1.105,0,2-0.896,2-2V85.92C63.168,84.814,62.274,83.92,61.168,83.92z"/>
-		<path d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
-			l12.16,12.162H19.737c-1.104,0-2,0.896-2,2v9.912c0,1.104,0.896,2,2,2h52.644L60.221,67.59c-0.781,0.781-0.781,2.047,0,2.828
-			l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
-			c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z"/>
-	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-      {{-- <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11"> --}}
-      <span class="flex-1 ml-20 whitespace-nowrap text-center text-white">Logout</span>
-   </a>
+   <div class="mx-auto text-center">
+      <button class="blok absolute bottom-4 right-14 left-14 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white" type="button" data-modal-toggle="logoutModal">
+      
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          class="w-6 absolute fill-white" viewBox="0 0 96.943 96.943" style="enable-background:new 0 0 96.943 96.943;"
+          xml:space="preserve">
+          <g>
+          <g>
+          <path d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
+          c0,1.104,0.896,2,2,2h59.168c1.105,0,2-0.896,2-2V85.92C63.168,84.814,62.274,83.92,61.168,83.92z"/>
+          <path d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
+          l12.16,12.162H19.737c-1.104,0-2,0.896-2,2v9.912c0,1.104,0.896,2,2,2h52.644L60.221,67.59c-0.781,0.781-0.781,2.047,0,2.828
+          l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
+          c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z"/>
+          </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+          {{-- <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11"> --}}
+          <span class="inline-block whitespace-nowrap ml-10 text-white">Logout</span>
+      </button>
+  </div>
 </ul>
 </div>
 </aside>

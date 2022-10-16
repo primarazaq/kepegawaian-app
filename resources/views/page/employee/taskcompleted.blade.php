@@ -5,7 +5,7 @@
     <p class="text-black font-medium pt-4">
         Home /
     </p>
-    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-blue-400">
+    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-teal-600">
         Task Complete
     </a>
 </div>
@@ -48,12 +48,12 @@
 					<tr>
 						<th data-priority="1">No.</th>
 						<th data-priority="1">Judul Tugas</th>
-						<th data-priority="2">Deadline</th>
-						<th data-priority="3">Terselesaikan</th>
-						<th data-priority="4">No. Tugas</th>
-						<th data-priority="5">Status</th>
-						<th data-priority="6">Sumber Tugas</th>
-                        <th data-priority="7">Action</th>
+						{{-- <th data-priority="2">Deadline</th> --}}
+						<th data-priority="2">Terselesaikan</th>
+						{{-- <th data-priority="4">No. Tugas</th> --}}
+						<th data-priority="3">Status</th>
+						{{-- <th data-priority="6">Sumber Tugas</th> --}}
+                        <th data-priority="4">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,17 +61,22 @@
 					<tr>
 						<td>{{ $loop->iteration }}</td>
 						<td>{{ $data->t_title }}</td>
-						<td class="text-red-600">{{ $date = date('d M Y, H.i A',strtotime($data->t_due_date)) }}</td>
+						{{-- <td class="text-red-600">{{ $date = date('d M Y, H.i A',strtotime($data->t_due_date)) }}</td> --}}
 						<td class="text-mainclr">{{ $date = date('d M Y, H.i A',strtotime($data->updated_at)) }}</td>
-						<td>{{ $data->t_id }}</td>
+						{{-- <td>{{ $data->t_id }}</td> --}}
                         <td>
-                            <div class="bg-mainclr mx-auto py-1 px-5 rounded-2xl text-white">
-                            <div class="text-center">
-                                <p>Completed</p>
+                            <div class="bg-mainclr mx-auto py-1 rounded-2xl text-white">
+                                <div class="text-center">
+                                    <p>Completed</p>
+                                </div>
                             </div>
-                            </div>
+                            {{-- <div class="bg-red-600 mx-auto py-1 rounded-2xl text-white">
+                                <div class="text-center">
+                                    <p>Uncompleted</p>
+                                </div>
+                            </div> --}}
 						</td>
-						<td>PIC - {{ $data->sender_name }}</td>
+						{{-- <td>PIC - {{ $data->sender_name }}</td> --}}
                         <td class="py-4 px-6">
                             <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button" data-modal-toggle="modalTaskComplt-{{ $data->t_id }}">
                                 Detail

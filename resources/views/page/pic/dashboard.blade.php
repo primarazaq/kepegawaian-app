@@ -7,7 +7,7 @@
     <p class="text-black font-medium pt-4">
         Home /
     </p>
-    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-blue-400">
+    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-teal-600">
         Dashboard
     </a>
 </div>
@@ -35,7 +35,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 mr-5 fill-white" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M0 24C0 10.7 10.7 0 24 0H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H24C10.7 48 0 37.3 0 24zM0 488c0-13.3 10.7-24 24-24H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H24c-13.3 0-24-10.7-24-24zM211.2 160c0 35.3-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64zM32 320c0-35.3 28.7-64 64-64h96c12.2 0 23.7 3.4 33.4 9.4c-37.2 15.1-65.6 47.2-75.8 86.6H64c-17.7 0-32-14.3-32-32zm461.6 32c-10.3-40.1-39.6-72.6-77.7-87.4c9.4-5.5 20.4-8.6 32.1-8.6h96c35.3 0 64 28.7 64 64c0 17.7-14.3 32-32 32H493.6zM391.2 290.4c32.1 7.4 58.1 30.9 68.9 61.6c3.5 10 5.5 20.8 5.5 32c0 17.7-14.3 32-32 32h-224c-17.7 0-32-14.3-32-32c0-11.2 1.9-22 5.5-32c10.5-29.7 35.3-52.8 66.1-60.9c7.8-2.1 16-3.1 24.5-3.1h96c7.4 0 14.7 .8 21.6 2.4zM563.2 160c0 35.3-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64zM321.6 256c-44.2 0-80-35.8-80-80s35.8-80 80-80s80 35.8 80 80s-35.8 80-80 80z"/></svg>
             <h5 class="text-2xl font-extrabold text-white dark:text-grey">In Progress</h5>
         </div>
-        <div class="font-bold text-4xl p-4 mt-10 text-white dark:text-gray-400">
+        <div class="font-bold text-5xl p-4 mt-10 text-white dark:text-gray-400">
             <p>2 Task</p>
         </div>
     </div>
@@ -65,14 +65,14 @@
 				<thead>
 					<tr>
 						<th data-priority="1">NO</th>
-						<th data-priority="2">DEADLINE</th>
-						<th data-priority="3">NIP</th>
-						<th data-priority="4">NAMA PEGAWAI</th>
-						<th data-priority="5">JUDUL TUGAS</th>
-						<th data-priority="6">TANGGAL MULAI</th>
-                        <th data-priority="7">STATUS</th>
-                        <th data-priority="8">LAINNYA</th>
-                        <th data-priority="9">ACTION</th>
+						{{-- <th data-priority="2">DEADLINE</th> --}}
+						<th data-priority="2">NIP</th>
+						<th data-priority="3">NAMA PEGAWAI</th>
+						<th data-priority="4">JUDUL TUGAS</th>
+						{{-- <th data-priority="6">TANGGAL MULAI</th> --}}
+                        <th data-priority="5">STATUS</th>
+                        <th data-priority="6">LAINNYA</th>
+                        <th data-priority="7">ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -82,9 +82,9 @@
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $loop->iteration }}
                             </th>
-                            <td class="py-4 px-6 text-red-600  font-semibold">
-                                {{ $date = date('D, d M Y, H.i A',strtotime($data->t_due_date)) }}
-                            </td>
+                            {{-- <td class="py-4 px-6 text-red-600  font-semibold">
+                                <?php echo date('H:i',strtotime($data->t_due_date)) ?> WIB  <?php echo date('- d F Y',strtotime($data->t_due_date)) ?>
+                            </td> --}}
                             <td class="py-4 px-6">
                                 {{-- menampilkan multinip --}}
                                 <?php 
@@ -112,16 +112,15 @@
                             <td class="py-4 px-6">
                                 {{ $data->t_title }}
                             </td>
-                            <td class="py-4 px-6">
+                            {{-- <td class="py-4 px-6">
                                 {{ $date = date('D, d M Y, H.i A',strtotime($data->created_at)) }}
-                            </td>
+                            </td> --}}
                             <td class="py-4 px-6">
-        
                                 <?php 
                                     switch ($data->t_status) {
                                         case 'completed':
                                         ?>
-                                            <div class="bg-mainclr py-1 px-5 mx-auto rounded-2xl text-white">
+                                            <div class="bg-mainclr py-1 mx-auto rounded-2xl text-white">
                                                 <div class="text-center">
                                                     <p>Completed</p>
                                                 </div>
@@ -129,7 +128,7 @@
                                             break;
                                         case 'in progress':
                                             ?>
-                                            <div class="bg-yellow-400 py-1 px-3 mx-auto rounded-2xl text-white">
+                                            <div class="bg-yellow-400 py-1 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
                                                 <p>In Progress</p>
                                             </div>
@@ -137,7 +136,7 @@
                                         break;
                                         case 'uncompleted':
                                             ?>
-                                            <div class="bg-red-600 py-1 px-3 mx-auto rounded-2xl text-white">
+                                        <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
                                                 <p>Uncompleted</p>
                                             </div>
