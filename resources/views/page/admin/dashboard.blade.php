@@ -5,7 +5,7 @@
     <p class="text-black font-medium pt-4">
         Home /
     </p>
-    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-blue-400">
+    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-teal-600">
         Dashboard
     </a>
 </div>
@@ -88,10 +88,10 @@
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $loop->iteration }}
                             </th>
-                            <td class="py-4 px-6 text-red-600  font-semibold">
+                            {{-- <td class="py-4 px-6 text-red-600  font-semibold">
                                 {{ $date = date('D, d M Y, H.i A',strtotime($data->t_due_date)) }}
                                 
-                            </td>
+                            </td> --}}
                             <td class="py-4 px-6">
                                 {{-- menampilkan multinip --}}
                                 <?php 
@@ -120,9 +120,9 @@
                             <td class="py-4 px-6">
                                 {{ $data->t_title }}
                             </td>
-                            <td class="py-4 px-6">
+                            {{-- <td class="py-4 px-6">
                                 {{ $date = date('D, d M Y, H.i A',strtotime($data->created_at)) }}
-                            </td>
+                            </td> --}}
                             <td class="py-4 px-6">
                                 <?php 
                                     switch ($data->t_status) {

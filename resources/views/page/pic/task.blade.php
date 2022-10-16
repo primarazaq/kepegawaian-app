@@ -8,7 +8,7 @@
     <p class="text-black font-medium pt-4">
         Home /
     </p>
-    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-blue-400">
+    <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-teal-600">
         Task
     </a>
 </div>
