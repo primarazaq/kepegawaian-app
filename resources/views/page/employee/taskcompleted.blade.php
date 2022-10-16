@@ -66,10 +66,15 @@
 						{{-- <td>{{ $data->t_id }}</td> --}}
                         <td>
                             <div class="bg-mainclr mx-auto py-1 rounded-2xl text-white">
-                            <div class="text-center">
-                                <p>Completed</p>
+                                <div class="text-center">
+                                    <p>Completed</p>
+                                </div>
                             </div>
-                            </div>
+                            {{-- <div class="bg-red-600 mx-auto py-1 rounded-2xl text-white">
+                                <div class="text-center">
+                                    <p>Uncompleted</p>
+                                </div>
+                            </div> --}}
 						</td>
 						{{-- <td>PIC - {{ $data->sender_name }}</td> --}}
                         <td class="py-4 px-6">

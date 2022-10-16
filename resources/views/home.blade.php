@@ -16,6 +16,7 @@
                 @include('components\footer')
             </div>
         </div>
+        @include('modal.logout')
         @include('modal.script')
     </body>
 </html>
