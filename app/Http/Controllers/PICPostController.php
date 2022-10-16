@@ -52,7 +52,10 @@ class PICPostController extends Controller
             't_due_date' => 'required'
             
         ]);
-        $DataTask['t_file'] = $request->file('t_file')->store('task-file');
+        if($request->file('t_file')){
+            $DataTask['t_file'] = $request->file('t_file')->store('task-file');
+        }
+        
         $createdTask = Task::create($DataTask);
 
         $data = $request->validate([

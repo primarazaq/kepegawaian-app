@@ -37,7 +37,7 @@
             <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Uncompleted Task</h5>
         </div>
         <div class="font-extrabold text-5xl mt-9 p-4 text-center text-red-600 dark:text-gray-400">
-            <p>{{ count($taskInProgress) }} Task</p>
+            <p>{{ count($taskUncompleted) }} Task</p>
         </div>
         {{-- <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
             <div class="bg-red-600 text-xs font-medium text-blue-100 text-center  leading-none rounded-full" style="width: 45%"> 45%</div>
@@ -88,21 +88,41 @@
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $loop->iteration }}
                             </th>
-                            {{-- <td class="py-4 px-6 text-red-600  font-semibold">
-                                {{ $date = date('l, d F Y, H.i A',strtotime($data->t_due_date)) }}
-                            </td> --}}
-                            <td class="py-4 px-6">
-                                {{ $data->nip }}
+                            <td class="py-4 px-6 text-red-600  font-semibold">
+                                {{ $date = date('D, d M Y, H.i A',strtotime($data->t_due_date)) }}
+                                
                             </td>
                             <td class="py-4 px-6">
-                                {{ $data->name }}
+                                {{-- menampilkan multinip --}}
+                                <?php 
+                                    $arrayNip = $data->multinip; 
+                                    $multinip = explode(",", $arrayNip);
+                                    ?>
+                                @foreach ($multinip as $nip)
+                                <?php 
+                                     echo ("-".$nip); ?> <br> <?php 
+                                ?>
+                                @endforeach
+                            </td>
+                            <td class="py-4 px-6 text-left" style="width:22%">
+                                {{-- menampilkan multi user assigned --}}
+                                <?php $arrayID = $data->task_id - 1; ?>
+                                @foreach ($assigned[$arrayID] as $item)
+                                    <?php 
+                                        $items = explode(",", $item);
+                                        foreach ($items as $name){
+                                            echo ("-".$name); ?> <br> <?php 
+                                        }
+                                    ?>
+                                @endforeach
+                                
                             </td>
                             <td class="py-4 px-6">
                                 {{ $data->t_title }}
                             </td>
-                            {{-- <td class="py-4 px-6">
-                                {{ $date = date('l, d F Y, H.i A',strtotime($data->created_at)) }}
-                            </td> --}}
+                            <td class="py-4 px-6">
+                                {{ $date = date('D, d M Y, H.i A',strtotime($data->created_at)) }}
+                            </td>
                             <td class="py-4 px-6">
                                 <?php 
                                     switch ($data->t_status) {
@@ -134,6 +154,9 @@
                                 ?>
                             </td>
                             <td class="py-4 px-6">
+                                <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button" data-modal-toggle="modalTaskDetail-{{ $data->task_id }}">
+                                    Detail
+                                    </button> 
                                 @include('modal.detailTaskAdmin')
                             </td>
                         </tr>

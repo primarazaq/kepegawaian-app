@@ -17,17 +17,20 @@ class TaskPostController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date','a.nip', 'a.name', 'b.t_title','b.created_at', 'aa.name as pembuat_task', 'b.t_status')
+                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'))
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-                    // ->join('users as a', 'a.id', '=', 'c.user_receiver_id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->groupBy('c.task_id')
                     ->orderBy('b.id' , 'asc')
                     ->get();
-        // $task = Task::join('users as a', 'a.id', '=', 'user_tasks.user_receiver_id')
-        //             ->join('user_tasks', 'tasks.id', '=', 'user_tasks.task_id')
-        //             ->join('users as b', 'b.id', '=', 'user_tasks.user_sender_id')
-        //             ->get();
+        $assigned = DB::table('users as a')
+                    ->select(DB::raw('group_concat(a.name) as name'))
+                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+                    ->groupBy('c.task_id')
+                    ->orderBy('c.task_id' , 'asc')
+                    ->get(); 
+                    // dd($task);
 
         $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $taskCompleted = Task::where('t_status', 'completed')->get();
@@ -36,6 +39,7 @@ class TaskPostController extends Controller
 
         return view('page.admin.dashboard', [
             'taskList' => $task, 
+            'assigned' => $assigned,
             'userList' => $users,
             'taskCompleted' => $taskCompleted,
             'taskInProgress' => $taskInProgress,
