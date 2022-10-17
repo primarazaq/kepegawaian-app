@@ -94,6 +94,7 @@
                                 &nbsp;<?php echo ($data->response_body) ?>
                             </td>
                         </tr>
+                        @if ($data->response_file)
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 File Laporan Anda
@@ -105,6 +106,7 @@
                                 &nbsp; <a href="{{ asset('storage/' . $data->response_file) }}" class="text-mainclr dark:text-teal-500 hover:underline">lihat file</a>
                             </td>
                         </tr>
+                        @endif
                     </tbody>
                 </table>
                 <div class="py-4">

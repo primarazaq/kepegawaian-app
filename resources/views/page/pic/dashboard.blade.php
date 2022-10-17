@@ -18,7 +18,7 @@
             <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Completed Task</h5>
         </div>
         <div class="font-extrabold text-5xl mt-9 p-4 text-center text-green-500 dark:text-gray-400">
-            <p>3 Task</p>
+            <p>{{ count($taskCompleted) }} Task</p>
         </div>
     </div>
     <div class="flex-1 p-5 mr-7 max-w-sm h-44 bg-mainclr bg-opacity-60 rounded-lg border border-gray-200 shadow-md">
@@ -27,7 +27,7 @@
             <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Uncompleted Task</h5>
         </div>
         <div class="font-extrabold text-5xl mt-9 p-4 text-center text-red-600 dark:text-gray-400">
-            <p>1 Task</p>
+            <p>{{ count($taskUncompleted) }} Task</p>
         </div>
     </div>
     <div class="flex-1 p-5 mr-7 max-w-sm h-44 bg-mainclr bg-opacity-80 rounded-lg border border-gray-200 shadow-md">
@@ -36,7 +36,7 @@
             <h5 class="text-2xl font-extrabold text-white dark:text-grey">In Progress</h5>
         </div>
         <div class="font-bold text-5xl p-4 mt-10 text-white dark:text-gray-400">
-            <p>2 Task</p>
+            <p>{{ count($taskInProgress) }} Task</p>
         </div>
     </div>
 </div>

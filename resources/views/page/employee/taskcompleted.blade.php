@@ -50,10 +50,11 @@
 						<th data-priority="1">Judul Tugas</th>
 						{{-- <th data-priority="2">Deadline</th> --}}
 						<th data-priority="2">Terselesaikan</th>
+                        <th data-priority="3">Sumber Tugas</th>
 						{{-- <th data-priority="4">No. Tugas</th> --}}
-						<th data-priority="3">Status</th>
-						{{-- <th data-priority="6">Sumber Tugas</th> --}}
-                        <th data-priority="4">Action</th>
+						<th data-priority="4">Status</th>
+						
+                        <th data-priority="5">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,6 +65,7 @@
 						{{-- <td class="text-red-600">{{ $date = date('d M Y, H.i A',strtotime($data->t_due_date)) }}</td> --}}
 						<td class="text-mainclr">{{ $date = date('d M Y, H.i A',strtotime($data->updated_at)) }}</td>
 						{{-- <td>{{ $data->t_id }}</td> --}}
+                        <td>{{ $data->sender_name }}</td>
                         <td>
                             <div class="bg-mainclr mx-auto py-1 rounded-2xl text-white">
                                 <div class="text-center">
@@ -76,7 +78,7 @@
                                 </div>
                             </div> --}}
 						</td>
-						{{-- <td>PIC - {{ $data->sender_name }}</td> --}}
+						
                         <td class="py-4 px-6">
                             <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button" data-modal-toggle="modalTaskComplt-{{ $data->t_id }}">
                                 Detail
