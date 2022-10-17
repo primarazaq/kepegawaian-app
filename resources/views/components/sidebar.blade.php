@@ -1,3 +1,10 @@
+<style>
+   .active{
+      background-color: aqua;
+   }
+
+</style>
+
 @if (auth()->user()->level=="admin")
 <aside class="w-56 rounded" aria-label="Sidebar">
    <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
@@ -8,14 +15,14 @@
       <div class="border-b-4 mb-4"></div>
       <ul class="space-y-2">
          <li>
-            <a href="/admin/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+            <a href="/admin/home/dashboard" class="{{ Request::is('admin/home/dashboard') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:text-white hover:opacity-40 dark:hover:bg-black">
                <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></g></svg>
                {{-- <img src="imgs/Vector.png" alt="" class="w-5"> --}}
                <span class="flex-1 ml-3 whitespace-nowrap text-white">Dashboard</span>
             </a>
          </li>
          <li>
-            <a href="/admin/home/employees" class="{{ Request::is('/home/employees') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+            <a href="/admin/home/employees" class="{{ Request::is('admin/home/employees') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
                <svg version="1.1" id="Layer_1" class="w-6 fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 335.436 335.436" style="enable-background:new 0 0 335.436 335.436;" xml:space="preserve">
                <g>
@@ -29,7 +36,7 @@
             </a>
          </li>
          <li>
-            <a href="/admin/home/profile" class="{{ Request::is('/home/profile') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+            <a href="/admin/home/profile" class="{{ Request::is('admin/home/profile') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
                <svg version="1.1" id="Layer_1" class="w-6 fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 459 459" style="enable-background:new 0 0 459 459;" xml:space="preserve">
             <g>
