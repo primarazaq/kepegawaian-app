@@ -99,14 +99,14 @@
                             </td>
                             <td class="py-4 px-6 text-left" style="width:22%">
                                 {{-- menampilkan multi user assigned --}}
-                                <?php $arrayID = $data->task_id - 1; ?>
-                                @foreach ($assigned[$arrayID] as $item)
-                                    <?php 
-                                        $items = explode(",", $item);
-                                        foreach ($items as $name){
-                                            echo ("-".$name); ?> <br> <?php 
-                                        }
+                                <?php 
+                                    $arrayName = $data->name; 
+                                    $multiname = explode(",", $arrayName);
                                     ?>
+                                @foreach ($multiname as $name)
+                                <?php 
+                                     echo ("-".$name); ?> <br> <?php 
+                                ?>
                                 @endforeach
                             </td>
                             <td class="py-4 px-6">

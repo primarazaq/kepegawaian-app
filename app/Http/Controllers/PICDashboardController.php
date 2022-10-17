@@ -19,7 +19,7 @@ class PICDashboardController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date','a.nip', 'a.name', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'))
+                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
                     ->where('c.user_sender_id',auth()->user()->id)
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
@@ -28,12 +28,12 @@ class PICDashboardController extends Controller
                     ->orderBy('b.id' , 'asc')
                     ->get();
 
-                    $assigned = DB::table('users as a')
-                    ->select(DB::raw('group_concat(a.name) as name'))
-                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-                    ->groupBy('c.task_id')
-                    ->orderBy('c.task_id' , 'asc')
-                    ->get(); 
+                    // $assigned = DB::table('users as a')
+                    // ->select(DB::raw('group_concat(a.name) as name'))
+                    // ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+                    // ->groupBy('c.task_id')
+                    // ->orderBy('c.task_id' , 'asc')
+                    // ->get(); 
        
         $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $taskCompleted = Task::where('t_status', 'completed')->get();
@@ -43,7 +43,7 @@ class PICDashboardController extends Controller
 
         return view('page.pic.dashboard', [
             'taskList' => $task, 
-            'assigned' => $assigned,
+            // 'assigned' => $assigned,
             'userList' => $users,
             'taskCompleted' => $taskCompleted,
             'taskInProgress' => $taskInProgress,

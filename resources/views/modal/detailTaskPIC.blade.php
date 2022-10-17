@@ -47,9 +47,7 @@
                                 :
                             </td>
                             <td class="py-4 px-6">
-                                @foreach ($assigned[$arrayID] as $item)
-                                    {{ $item }}
-                                @endforeach
+                                {{ $data->name }}
                             </td>
                         </tr>
                         <tr class="bg-white dark:bg-gray-800">
@@ -60,7 +58,7 @@
                                 :
                             </td>
                             <td class="py-4 px-6">
-                                {{ $arrayNip }}
+                                {{ $data->multinip }}
                             </td>
                         </tr>
                         <tr class="bg-white dark:bg-gray-800">
