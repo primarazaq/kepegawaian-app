@@ -88,7 +88,7 @@ class MyTaskEmpController extends Controller
         //     'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
         //     'response_body' => 'required'
         // ]);
-
+        dd($request);
         $rules =[
             'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
             'response_body' => 'required'
@@ -98,7 +98,7 @@ class MyTaskEmpController extends Controller
 
         $validatedData['response_file'] = $request->file('response_file')->store('task-file');
 
-        // dd($validatedData);
+        
         $sender_id = $request['user_sender_id'];
         $receiver_id = auth()->user()->id;
         // $task = UserTask::where('task_id',$task_id)->get();
@@ -110,7 +110,7 @@ class MyTaskEmpController extends Controller
         Task::where('id', $task_id)
             ->update(['t_status' => 'completed']);
 
-        // dd($task);
+        // dd($validatedData);
         return redirect('/employee/home/mytask')->with('success','Task Berhasil dikirimkan!');
 
 

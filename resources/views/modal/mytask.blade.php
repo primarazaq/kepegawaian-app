@@ -103,7 +103,10 @@
                             </div>
                             <div class="mb-4 -mt-6">
                                 <label for="response_body" class="ml-4 text-lg font-semibold text-gray-900 dark:text-gray-300"></label>
-                                <input id="response_body" class="w-5/6" type="hidden" name="response_body">
+                                <input id="response_body" class="w-5/6" type="hidden" name="response_body" required>
+                                @error('response_body')
+                                    <p>{{ $message }}</p>
+                                @enderror
                                 <trix-editor input="response_body" style="overflow-y:auto"></trix-editor>
                             </div>
                         </div>
@@ -118,6 +121,16 @@
           </div>
       </div>
   </div>
+  <script>
+    //nonaktif add file trix
+    document.addEventListener('trix-file-accept', function(e){
+        e.preventDefault();
+    });
+    document.addEventListener("trix-initialize", function(event) {
+  var stored = "<strong>Stored HTML</strong>";
+  event.target.editor.loadHTML(stored);
+});
+</script>
   {{-- <script>
     Trix.config.blockAttributes.heading1.tagName = "h3";
         addEventListener("trix-initialize", inspectHTML);
