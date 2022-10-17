@@ -88,7 +88,7 @@ class MyTaskEmpController extends Controller
         //     'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
         //     'response_body' => 'required'
         // ]);
-        dd($request);
+        // dd($request);
         $rules =[
             'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
             'response_body' => 'required'

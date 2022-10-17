@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Response;
     Route::middleware('auth', 'verified')->group(function() {
 
         Route::middleware('checklevel:admin')->prefix('admin')->group(function() {
-            Route::get('/home', [AdminController::class, 'index']);
+            // Route::get('/home', [AdminController::class, 'index']);
             // Route::get('/home/dashboard', [DashboardController::class, 'index']);
             // Route::get('/home/task', [AdminController::class, 'task']);
             // Route::get('/home/employees', [AdminController::class, 'employees']);
@@ -57,7 +57,7 @@ use Illuminate\Support\Facades\Response;
         });
 
         Route::middleware('checklevel:pic')->prefix('pic')->group(function() {
-            Route::get('/home', [PICController::class, 'index']);
+            // Route::get('/home', [PICController::class, 'index']);
             // Route::get('/home/dashboard', [PICController::class, 'index']);
             // Route::get('/home/task', [PICController::class, 'task']);
             Route::get('/home/profile', [PICController::class, 'profile']);
@@ -84,7 +84,7 @@ use Illuminate\Support\Facades\Response;
         });
         
         Route::middleware('checklevel:employee')->prefix('employee')->group(function() {
-            Route::get('/home', [EmployeeController::class, 'index']);
+            // Route::get('/home', [EmployeeController::class, 'index']);
             Route::get('/home/dashboard', [EmployeeController::class, 'dashboard']);
             
             Route::get('/home/profile', [EmployeeController::class, 'profile']);

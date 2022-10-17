@@ -91,25 +91,25 @@
                                 </p>  
                             </div>
                             <div class="mb-4 w-4/6">
-                                <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="t_file_help" id="response_file" name="response_file" type="file">
+                                <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="t_file_help" id="response_file-{{ $data->t_id }}" name="response_file" type="file">
                                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-300" id="t_file_help">*jpeg , jpg, png, docx, doc, pptx, ppt, xlsx, xls, pdf, zip, rar (MAX FILE 10MB).</p>
                             </div>
                         </div>
-                        <div class="flex pr-32">
+                        {{-- <div class="flex pr-32"> --}}
                             <div class="basis-1/5">
                                 <p class="leading-relaxed text-gray-500 dark:text-gray-400">
                                     Your Response
                                 </p>  
                             </div>
                             <div class="mb-4 -mt-6">
-                                <label for="response_body" class="ml-4 text-lg font-semibold text-gray-900 dark:text-gray-300"></label>
-                                <input id="response_body" class="w-5/6" type="hidden" name="response_body" required>
+                                <label for="response_body-{{ $data->t_id }}" class="ml-4 text-lg font-semibold text-gray-900 dark:text-gray-300"></label>
+                                <input id="response_body-{{ $data->t_id }}" class="inline-block w-5/6" type="hidden" name="response_body" required>
                                 @error('response_body')
                                     <p>{{ $message }}</p>
                                 @enderror
-                                <trix-editor input="response_body" style="overflow-y:auto"></trix-editor>
+                                <trix-editor input="response_body-{{ $data->t_id }}" style="overflow-y:auto"></trix-editor>
                             </div>
-                        </div>
+                        {{-- </div> --}}
                         
                     </div>
                 </div>
@@ -126,10 +126,10 @@
     document.addEventListener('trix-file-accept', function(e){
         e.preventDefault();
     });
-    document.addEventListener("trix-initialize", function(event) {
-  var stored = "<strong>Stored HTML</strong>";
-  event.target.editor.loadHTML(stored);
-});
+//     document.addEventListener("trix-initialize", function(event) {
+//   var stored = "<strong>Stored HTML</strong>";
+//   event.target.editor.loadHTML(stored);
+// });
 </script>
   {{-- <script>
     Trix.config.blockAttributes.heading1.tagName = "h3";
