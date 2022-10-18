@@ -5,6 +5,7 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\UserTask;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,12 +29,30 @@ class PICDashboardController extends Controller
                     ->orderBy('b.id' , 'asc')
                     ->get();
 
-                    // $assigned = DB::table('users as a')
-                    // ->select(DB::raw('group_concat(a.name) as name'))
-                    // ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-                    // ->groupBy('c.task_id')
-                    // ->orderBy('c.task_id' , 'asc')
-                    // ->get(); 
+                    $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
+                    
+                    //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
+
+                    foreach ($deadline as $item) {
+                        $now = Carbon::now();
+                        $nowDay = $now->day;
+                        $nowHour = $now->hour;
+                        $nowMnt = $now->minute;
+
+                        $endDay = Carbon::parse($item->t_due_date)->diffInDays();
+                        $endHour = Carbon::parse($item->t_due_date)->diffInHours();
+                        $endMnt = Carbon::parse($item->t_due_date)->diffInMinutes();
+
+                        $selisihDay = $endDay - $nowDay;
+                        $selisihHour = $endHour - $nowHour;
+                        $selisihMnt = $endMnt - $nowMnt;
+                        $task_id = $item->id;
+
+                        if ($selisihDay < 0 || $selisihHour < 0 || $selisihMnt < 0) {
+                            Task::where('id', $task_id)
+                                ->update(['t_status' => 'uncompleted']);
+                        }
+                    }
        
         $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $taskCompleted = Task::where('t_status', 'completed')->get();

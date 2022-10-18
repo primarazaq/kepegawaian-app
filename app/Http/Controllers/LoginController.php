@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Task;
+use App\Models\User;
+use App\Models\UserTask;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +17,32 @@ class LoginController extends Controller
 
     public function postlogin (Request $request){
         // dd($request->all());
+        $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
+                    
+                    //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
+
+                    foreach ($deadline as $item) {
+                        $now = Carbon::now();
+                        $nowDay = $now->day;
+                        $nowHour = $now->hour;
+                        $nowMnt = $now->minute;
+
+                        $endDay = Carbon::parse($item->t_due_date)->diffInDays();
+                        $endHour = Carbon::parse($item->t_due_date)->diffInHours();
+                        $endMnt = Carbon::parse($item->t_due_date)->diffInMinutes();
+
+                        $selisihDay = $endDay - $nowDay;
+                        $selisihHour = $endHour - $nowHour;
+                        $selisihMnt = $endMnt - $nowMnt;
+                        $task_id = $item->id;
+
+                        if ($selisihDay < 0 || $selisihHour < 0 || $selisihMnt < 0) {
+                            Task::where('id', $task_id)
+                                ->update(['t_status' => 'uncompleted']);
+                        }
+                    }
+
+
         if (Auth::attempt($request->only('nip','password','level'))){
 
             switch(auth()->user()->level){

@@ -32,38 +32,17 @@
                     <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
                 </div>
                 <div class="pl-5 pr-5 mx-auto space-y-5">
-                    {{-- Jika pegawai menolak tugas tampilan akan seperti ini --}}
-                    <div class="bg-[#F2F2F2] w-full h-fit rounded-lg shadow-md p-4 flex">
+                    <div id="alert-3" class="bg-[#F2F2F2] w-full h-fit rounded-lg shadow-md p-4 flex role=" alert>
                         <div  class="basis-4/5">
-                            <p class="text-base leading-relaxed font-extrabold text-black">
-                                Task 1
-                            </p>
-                            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                Memperbaiki dokumen penyalaan pada pelanggan A
-                            </p>
-                            <p class="text-xs leading-relaxed font-extrabold text-black">
-                                Deadline : 01 Oktober 2022
-                            </p>
-                            <div class="flex mt-1">
-                                <div class="w-fit h-fit mr-2 text-xs font-semibold rounded-full text-white items-center bg-red-600 px-3 py-1">
-                                    DITOLAK
-                                </div>
-                                <p class="text-gray-500 inline-flex items-center dark:text-gray-400 text-xs">
-                                    Tugas akan menghilang dalam waktu 24jam
+                            <div class="flex justify-between">
+                                <p class="text-base leading-relaxed font-extrabold text-black">
+                                    Task 2
                                 </p>
+                                <button type="button" class="ml-auto -mx-1.5 -my-5 -mr-40 bg-green-100 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex h-8 w-8 dark:bg-green-200 dark:text-green-600 dark:hover:bg-green-300" data-dismiss-target="#alert-3" aria-label="Close">
+                                    <span class="sr-only">Close</span>
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                </button>
                             </div>
-                        </div>
-                        <div class="mx-auto items-center justify-center">
-                            <img src="../../imgs/hiasan6.png" class="w-20 mt-2" alt="">
-                        </div>
-                    </div>
-                    {{-- end --}}
-
-                    <div class="bg-[#F2F2F2] w-full h-fit rounded-lg shadow-md p-4 flex">
-                        <div  class="basis-4/5">
-                            <p class="text-base leading-relaxed font-extrabold text-black">
-                                Task 2
-                            </p>
                             <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                 Memperbaiki dokumen penyalaan pada pelanggan A
                             </p>
@@ -75,22 +54,13 @@
                             @include('modal.validationtask')
                         </div>
                     </div>
-                    <div class="bg-[#F2F2F2] w-full h-fit rounded-lg shadow-md p-4 flex">
-                        <div  class="basis-4/5">
-                            <p class="text-base leading-relaxed font-extrabold text-black">
-                                Task 3
-                            </p>
-                            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                Memperbaiki dokumen penyalaan pada pelanggan A
-                            </p>
-                            <p class="text-xs leading-relaxed font-extrabold text-black">
-                                Deadline : 01 Oktober 2022
-                            </p>
-                        </div>
-                        <div class="mx-auto items-center">
-                            @include('modal.validationtask')
-                        </div>
-                    </div>
+                    <script>
+                        var alert_del = document.querySelectorAll('.alert-del');
+                          alert_del.forEach((x) =>
+                            x.addEventListener('click', function () {
+                              x.parentElement.classList.add('hidden');
+                            }));
+                    </script>
                 </div>
             </div>
             <!-- Modal footer -->

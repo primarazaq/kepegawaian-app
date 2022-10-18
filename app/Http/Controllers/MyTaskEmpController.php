@@ -26,6 +26,30 @@ class MyTaskEmpController extends Controller
                     ->orderBy('b.id' , 'asc')
                     ->get();
         
+                    $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
+                    
+                    //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
+
+                    foreach ($deadline as $item) {
+                        $now = Carbon::now();
+                        $nowDay = $now->day;
+                        $nowHour = $now->hour;
+                        $nowMnt = $now->minute;
+
+                        $endDay = Carbon::parse($item->t_due_date)->diffInDays();
+                        $endHour = Carbon::parse($item->t_due_date)->diffInHours();
+                        $endMnt = Carbon::parse($item->t_due_date)->diffInMinutes();
+
+                        $selisihDay = $endDay - $nowDay;
+                        $selisihHour = $endHour - $nowHour;
+                        $selisihMnt = $endMnt - $nowMnt;
+                        $task_id = $item->id;
+
+                        if ($selisihDay < 0 || $selisihHour < 0 || $selisihMnt < 0) {
+                            Task::where('id', $task_id)
+                                ->update(['t_status' => 'uncompleted']);
+                        }
+                    }
         return view('page.employee.mytask', [
             'taskList' => $task
         ]);
@@ -89,6 +113,7 @@ class MyTaskEmpController extends Controller
         //     'response_body' => 'required'
         // ]);
         // dd($request);
+        
         $rules =[
             'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
             'response_body' => 'required'
@@ -109,6 +134,8 @@ class MyTaskEmpController extends Controller
                 
         Task::where('id', $task_id)
             ->update(['t_status' => 'completed']);
+
+        
 
         // dd($validatedData);
         return redirect('/employee/home/mytask')->with('success','Task Berhasil dikirimkan!');
