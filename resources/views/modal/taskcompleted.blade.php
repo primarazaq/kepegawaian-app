@@ -109,18 +109,33 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="py-4">
-                    <img src="../../imgs/done.png" class="w-16 mx-auto" alt="">
-                    <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
-                    Your Task is Complete
-                    </h3>
-                </div>
-            {{--<div class="py-4">
-                    <img src="../../imgs/undone.png" class="w-16 mx-auto" alt="">
-                    <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
-                        Tasks are not completed on time
-                    </h3>
-                </div> --}}
+                @switch($data->t_status)
+                    @case('completed')
+                    <div class="py-4">
+                        <img src="../../imgs/done.png" class="w-16 mx-auto" alt="">
+                        <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
+                            Task is Completed
+                        </h3>
+                    </div>
+                        @break
+                    @case('in progress')
+                    <div class="py-4">
+                        <img src="../../imgs/progress.png" class="w-16 mx-auto" alt="">
+                        <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
+                            Task in progress
+                        </h3>
+                    </div>
+                        @break
+                    @case('uncompleted')
+                    <div class="py-4">
+                        <img src="../../imgs/undone.png" class="w-16 mx-auto" alt="">
+                        <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
+                            Task Incompleted
+                        </h3>
+                    </div>
+                    @break
+                        
+                @endswitch
             </div>
             {{-- <div class="p-6">
                 <div class="flex">

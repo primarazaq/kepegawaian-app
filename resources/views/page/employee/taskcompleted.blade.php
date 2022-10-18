@@ -67,16 +67,34 @@
 						{{-- <td>{{ $data->t_id }}</td> --}}
                         <td>{{ $data->sender_name }}</td>
                         <td>
-                            <div class="bg-mainclr mx-auto py-1 rounded-2xl text-white">
-                                <div class="text-center">
-                                    <p>Completed</p>
-                                </div>
-                            </div>
-                            {{-- <div class="bg-red-600 mx-auto py-1 rounded-2xl text-white">
-                                <div class="text-center">
-                                    <p>Uncompleted</p>
-                                </div>
-                            </div> --}}
+                            <?php 
+                                    switch ($data->t_status) {
+                                        case 'completed':
+                                        ?>
+                                            <div class="bg-mainclr py-1 mx-auto rounded-2xl text-white">
+                                                <div class="text-center">
+                                                    <p>Completed</p>
+                                                </div>
+                                            </div> <?php
+                                            break;
+                                        case 'in progress':
+                                            ?>
+                                            <div class="bg-yellow-400 py-1 mx-auto rounded-2xl text-white">
+                                            <div class="text-center">
+                                                <p>In Progress</p>
+                                            </div>
+                                        </div> <?php
+                                        break;
+                                        case 'uncompleted':
+                                            ?>
+                                        <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
+                                            <div class="text-center">
+                                                <p>Uncompleted</p>
+                                            </div>
+                                        </div> <?php
+                                        break;
+                                    }
+                                ?>
 						</td>
 						
                         <td class="py-4 px-6">
