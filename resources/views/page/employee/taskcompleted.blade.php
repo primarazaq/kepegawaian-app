@@ -63,7 +63,16 @@
 						<td>{{ $loop->iteration }}</td>
 						<td>{{ $data->t_title }}</td>
 						{{-- <td class="text-red-600">{{ $date = date('d M Y, H.i A',strtotime($data->t_due_date)) }}</td> --}}
-						<td class="text-mainclr">{{ $date = date('d M Y, H.i A',strtotime($data->updated_at)) }}</td>
+						
+                            @if ($data->t_status == "uncompleted")
+                            <td class="text-red-600">
+                            {{ $date = date('d M Y, H.i A',strtotime($data->t_due_date)) }}
+                            @else
+                            <td class="text-mainclr">
+                            {{ $date = date('d M Y, H.i A',strtotime($data->updated_at)) }}
+                            @endif
+                        
+                        </td>
 						{{-- <td>{{ $data->t_id }}</td> --}}
                         <td>{{ $data->sender_name }}</td>
                         <td>

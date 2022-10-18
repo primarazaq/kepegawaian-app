@@ -31,6 +31,7 @@
                     </p>
                     <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
                 </div>
+                {{-- {{ $notif[0]->t_title }} --}}
                 <div class="pl-5 pr-5 mx-auto space-y-5">
                     <div id="alert-3" class="bg-[#F2F2F2] w-full h-fit rounded-lg shadow-md p-4 flex role=" alert>
                         <div  class="basis-4/5">
@@ -51,17 +52,17 @@
                             </p>
                         </div>
                         <div class="mx-auto items-center">
-                            @include('modal.validationtask')
+                            {{-- @include('modal.validationtask') --}}
                         </div>
                     </div>
-                    <script>
-                        var alert_del = document.querySelectorAll('.alert-del');
-                          alert_del.forEach((x) =>
-                            x.addEventListener('click', function () {
-                              x.parentElement.classList.add('hidden');
-                            }));
-                    </script>
                 </div>
+    <script>
+        var alert_del = document.querySelectorAll('.alert-del');
+          alert_del.forEach((x) =>
+            x.addEventListener('click', function () {
+              x.parentElement.classList.add('hidden');
+            }));
+    </script>
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 justify-center rounded-b border-gray-200 dark:border-gray-600">
