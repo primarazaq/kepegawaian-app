@@ -43,6 +43,7 @@ class EmployeeController extends Controller
     }
 
     public function profile(){
-        return view('page.employee.profile');
+        $user = User::find(auth()->user()->id);
+        return view('page.employee.profile', ['employee' => $user]);
     }
 }

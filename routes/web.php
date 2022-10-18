@@ -42,13 +42,26 @@ use Illuminate\Support\Facades\Response;
     Route::post('/postlogin', 'App\Http\Controllers\LoginController@postlogin')->name('postlogin');
     Route::get('/logout', 'App\Http\Controllers\LoginController@logout')->name('logout');
 
+    Route::get('storage/{$data->t_file}', function ($filename){
+        $path = storage_path('public/' . $filename);
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
+    });
+
     Route::middleware('auth', 'verified')->group(function() {
 
         Route::middleware('checklevel:admin')->prefix('admin')->group(function() {
-            // Route::get('/home', [AdminController::class, 'index']);
-            // Route::get('/home/dashboard', [DashboardController::class, 'index']);
-            // Route::get('/home/task', [AdminController::class, 'task']);
-            // Route::get('/home/employees', [AdminController::class, 'employees']);
+            Route::get('/home', [AdminController::class, 'index']);
             Route::get('/home/profile', [AdminController::class, 'profile']);
 
             //Resource
@@ -57,34 +70,16 @@ use Illuminate\Support\Facades\Response;
         });
 
         Route::middleware('checklevel:pic')->prefix('pic')->group(function() {
-            // Route::get('/home', [PICController::class, 'index']);
-            // Route::get('/home/dashboard', [PICController::class, 'index']);
-            // Route::get('/home/task', [PICController::class, 'task']);
+            Route::get('/home', [PICController::class, 'index']);
             Route::get('/home/profile', [PICController::class, 'profile']);
 
             //Resource
             Route::resource('/home/dashboard', PICDashboardController::class);
             Route::resource('/home/task', PICPostController::class);
-
-            Route::get('storage/{$data->t_file}', function ($filename){
-                        $path = storage_path('public/' . $filename);
-
-                        if (!File::exists($path)) {
-                            abort(404);
-                        }
-
-                        $file = File::get($path);
-                        $type = File::mimeType($path);
-
-                        $response = Response::make($file, 200);
-                        $response->header("Content-Type", $type);
-
-                        return $response;
-                    });
         });
         
         Route::middleware('checklevel:employee')->prefix('employee')->group(function() {
-            // Route::get('/home', [EmployeeController::class, 'index']);
+            Route::get('/home', [EmployeeController::class, 'index']);
             Route::get('/home/dashboard', [EmployeeController::class, 'dashboard']);
             
             Route::get('/home/profile', [EmployeeController::class, 'profile']);
