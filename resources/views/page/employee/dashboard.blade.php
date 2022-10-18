@@ -50,15 +50,15 @@
             $seconds %= 60;
         ?>
         <div class="flex font-bold text-xl mt-4 text-white dark:text-gray-400">
-            <p>No. Task {{ $item->id }}:</p>
-            <div class="inline-flex font-bold text-xl text-red-600 ml-2">
+            <p>Task {{ $item->id }}:</p>
+            <div class="inline-flex font-bold text-lg text-red-600 ml-2">
                 <?php
                     if ($days <=0) {
-                        ?> <p><?php echo "$hours hours and $minutes minutes left" ?></p> <?php
+                        ?> <p><?php echo "$hours hours $minutes minutes left" ?></p> <?php
                     } elseif ($hours <= 0) {
                         ?> <p><?php echo "$minutes minutes left" ?></p> <?php
                     } else {
-                        ?> <p><?php echo "$days days $hours hours and $minutes minutes left" ?></p> <?php
+                        ?> <p><?php echo "$days days left" ?></p> <?php
                     }
                 ?>
             </div>
