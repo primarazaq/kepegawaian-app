@@ -32,7 +32,7 @@
     </div>
     <img src="../../imgs/hiasan3.png" class="w-80" alt="">
 </div>
-<div class="mx-auto w-11/12 border-2 shadow-md border-t-mainclr rounded-2xl">
+<div class="mx-auto w-11/12 border-4 shadow-md border-t-mainclr">
     {{-- flex 1 --}}
     @foreach ($taskList as $data)
     <?php 

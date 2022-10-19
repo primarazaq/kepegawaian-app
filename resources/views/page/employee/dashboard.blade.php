@@ -105,7 +105,7 @@
                         {{ count($deadline) }}
                     </p>
                     <p class="text-lg text-gray-400 font-semibold">
-                        Task total(month)
+                        Task total
                     </p>
                 </div>
             </div>
