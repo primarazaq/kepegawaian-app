@@ -49,13 +49,13 @@
             $minutes = floor($seconds / 60);
             $seconds %= 60;
         ?>
-        <div class="flex font-bold text-xl mt-4 text-white dark:text-gray-400">
+        <div class="flex font-bold text-xl mt-4 -mb-4 text-white dark:text-gray-400">
             <p>Task {{ $item->id }}:</p>
             <div class="inline-flex font-bold text-lg text-red-600 ml-2">
                 <?php
-                    if ($days <=0) {
+                    if ($days <0) {
                         ?> <p><?php echo "$hours hours $minutes minutes left" ?></p> <?php
-                    } elseif ($hours <= 0) {
+                    } elseif ($hours < 0) {
                         ?> <p><?php echo "$minutes minutes left" ?></p> <?php
                     } else {
                         ?> <p><?php echo "$days days left" ?></p> <?php

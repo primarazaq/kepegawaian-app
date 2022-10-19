@@ -65,7 +65,7 @@
 				<thead>
 					<tr>
 						<th data-priority="1">NO</th>
-						{{-- <th data-priority="2">DEADLINE</th> --}}
+						<th data-priority="2">DEADLINE</th>
 						<th data-priority="2">NIP</th>
 						<th data-priority="3">NAMA PEGAWAI</th>
 						<th data-priority="4">JUDUL TUGAS</th>
@@ -82,9 +82,9 @@
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $loop->iteration }}
                             </th>
-                            {{-- <td class="py-4 px-6 text-red-600  font-semibold">
-                                <?php echo date('H:i',strtotime($data->t_due_date)) ?> WIB  <?php echo date('- d F Y',strtotime($data->t_due_date)) ?>
-                            </td> --}}
+                            <td class="py-4 px-6 text-red-600  font-semibold">
+                            {{ $date = date('D, d M Y, H.i A',strtotime($data->t_due_date)) }}
+                            </td>
                             <td class="py-4 px-6">
                                 {{-- menampilkan multinip --}}
                                 <?php 
@@ -115,7 +115,7 @@
                             {{-- <td class="py-4 px-6">
                                 {{ $date = date('D, d M Y, H.i A',strtotime($data->created_at)) }}
                             </td> --}}
-                            <td class="py-4 px-6">
+                            <td class="py-4 px-6" style="width:12%">
                                 <?php 
                                     switch ($data->t_status) {
                                         case 'completed':

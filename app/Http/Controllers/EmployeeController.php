@@ -15,15 +15,21 @@ class EmployeeController extends Controller
 
     public function dashboard(){
         // $totalTask = Task::all()->select('t_due_date')->latest();
-        $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get();
+        $deadline = DB::table('tasks as b')->select('b.id','b.t_due_date')->where('c.user_receiver_id' , auth()->user()->id)->join('user_tasks as c', 'b.id', '=', 'c.task_id')->where('b.t_status', 'in progress')->groupBy('c.task_id')->orderBy('b.t_due_date', 'asc')->get();
         // $case1 = Carbon::parse($deadline[0]->t_due_date)->diffForHumans();
         $due_date = collect([$deadline[0],$deadline[1],$deadline[2]]);
+        
+        // $taskCompleted = Task::where('t_status', 'completed')->get();
+        $taskCompleted = DB::table('tasks as b')->select('b.id','b.t_status')->where('c.user_receiver_id' , auth()->user()->id)->where('t_status', 'completed')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->get();
+        // $taskInProgress = Task::where('t_status', 'in progress')->get();
+        $taskInProgress = DB::table('tasks as b')->select('b.id','b.t_status')->where('c.user_receiver_id' , auth()->user()->id)->where('t_status', 'in progress')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->get();
+        // $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
+        $taskUncompleted = DB::table('tasks as b')->select('b.id','b.t_status')->where('c.user_receiver_id' , auth()->user()->id)->where('t_status', 'uncompleted')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->get();
 
-        $taskCompleted = Task::where('t_status', 'completed')->get();
-        $taskInProgress = Task::where('t_status', 'in progress')->get();
-        $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
+        
         // $deadline = Task::
         // dd($due_date);
+        // return view('components.navbar',['notif' => $notif]);
         
         return view('page.employee.dashboard',[
             'deadline' => $deadline,
