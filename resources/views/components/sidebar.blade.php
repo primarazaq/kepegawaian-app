@@ -1,8 +1,8 @@
 <style>
    .active{
-      background-color: aqua;
+      background-color: black;
+      opacity: 40%;
    }
-
 </style>
 
 @if (auth()->user()->level=="admin")
@@ -86,14 +86,14 @@
       <div class="border-b-4 mb-4"></div>
       <ul class="space-y-2">
 <li>
-   <a href="/pic/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/pic/home/dashboard" class="{{ Request::is('pic/home/dashboard') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></g></svg>
       {{-- <img src="imgs/Vector.png" alt="" class="w-5"> --}}
       <span class="flex-1 ml-3 whitespace-nowrap text-white">Dashboard</span>
    </a>
 </li>
 <li>
-   <a href="/pic/home/task" class="{{ Request::is('/home/task') ? 'active':'' }}flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/pic/home/task" class="{{ Request::is('pic/home/task') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg version="1.1" class="w-6 fill-white" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 48.625 48.625" style="enable-background:new 0 0 48.625 48.625;"
 	 xml:space="preserve">
@@ -110,11 +110,11 @@
 			S24.792,4.5,24.147,4.5S22.98,3.978,22.98,3.333S23.502,2.166,24.147,2.166z"/>
 	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
       {{-- <img src="imgs/Brief.png" alt="" class="w-6"> --}}
-      <span class="flex-1 ml-2 whitespace-nowrap text-white">Task</span>
+      <span class="flex-1 inline-flex ml-2 whitespace-nowrap text-white">Task</span>
    </a>
 </li>
 <li>
-   <a href="/pic/home/profile" class="{{ Request::is('/home/profile') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/pic/home/profile" class="{{ Request::is('pic/home/profile') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg version="1.1" id="Layer_1" class="w-6 fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 459 459" style="enable-background:new 0 0 459 459;" xml:space="preserve">
             <g>
@@ -164,15 +164,15 @@
       <div class="border-b-4 mb-4"></div>
       <ul class="space-y-2">
 <li>
-   <a href="/employee/home/dashboard" class="{{ Request::is('/home/dashboard') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/employee/home/dashboard" class="{{ Request::is('employee/home/dashboard') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></g></svg> 
       {{-- <img src="imgs/Vector.png" alt="" class="w-5"> --}}
        <span class="flex-1 ml-3 whitespace-nowrap text-white">Dashboard</span>
    </a>
 </li>
-<li>
-  <a href="/employee/home/mytask" class="{{ Request::is('/home/mytask') ? 'active':'' }}flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
-   <svg version="1.1" class="w-6 fill-white" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<li> 
+  <a href="/employee/home/mytask" class="{{ Request::is('employee/home/mytask') ? 'active' : '' }}flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <svg version="1.1" class="w-5 fill-white" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    width="31.273px" height="31.273px" viewBox="0 0 31.273 31.273" style="enable-background:new 0 0 31.273 31.273;"
    xml:space="preserve">
 <g>
@@ -184,11 +184,11 @@
      l-0.912-2.421h5.641c0.723,0,1.307-0.6,1.307-1.322c0-0.721-0.584-1.32-1.307-1.32h-6.617l-1.174-3.084h10.914V27.42z"/>
 </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
       {{-- <img src="imgs/Brief.png" alt="" class="w-6"> --}}
-     <span class="flex-1 ml-3 whitespace-nowrap text-white">My Task</span>
+     <span class="flex-1 ml-3 inline-flex whitespace-nowrap text-white">My Task</span>
   </a>
 </li>
 <li>
-   <a href="/employee/home/taskcompleted" class="{{ Request::is('/home/taskcompleted') ? 'active':'' }}flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/employee/home/taskcompleted" class="{{ Request::is('employee/home/taskcompleted') ? 'active' : '' }}flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg version="1.1" class="w-6 fill-white" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 491.5 491.5" style="enable-background:new 0 0 491.5 491.5;" xml:space="preserve">
 <g>
@@ -209,11 +209,11 @@
 			c11.3,0,20.5,9.2,20.5,20.5C348.1,175.1,338.9,184.3,327.6,184.3z"/>
 	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
       {{-- <img src="imgs/Task Completed.png" alt="" class="w-6"> --}}
-      <span class="flex-1 ml-2 whitespace-nowrap text-white">Task Completed</span>
+      <span class="flex-1 ml-2 inline-flex whitespace-nowrap text-white">Task Completed</span>
    </a>
  </li>
 <li>
-   <a href="/employee/home/profile" class="{{ Request::is('/home/profile') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/employee/home/profile" class="{{ Request::is('employee/home/profile') ? 'active':'' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg version="1.1" id="Layer_1" class="w-6 fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 459 459" style="enable-background:new 0 0 459 459;" xml:space="preserve">
             <g>
@@ -224,7 +224,7 @@
                      c0-46.392,32.012-84,71.5-84c39.488,0,71.5,37.608,71.5,84c0,32.812-16.023,61.209-39.369,75.035
                      c44.751,14.319,79.909,57.848,91.213,113.038C354.023,354.828,352.019,360.798,347.601,364.67z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg> 
       {{-- <img src="imgs/Male User.png" alt="" class="w-6"> --}}
-      <span class="flex-1 ml-3 whitespace-nowrap text-white">Profile</span>
+      <span class="flex-1 ml-3 inline-flex whitespace-nowrap text-white">Profile</span>
    </a>
 </li>
 <li>
