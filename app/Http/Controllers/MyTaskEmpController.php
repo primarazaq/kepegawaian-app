@@ -44,11 +44,11 @@ class MyTaskEmpController extends Controller
                         $selisihHour = $endHour - $nowHour;
                         $selisihMnt = $endMnt - $nowMnt;
                         $task_id = $item->id;
-
-                        if ($selisihDay < 0 || $selisihHour < 0 || $selisihMnt < 0) {
-                            Task::where('id', $task_id)
-                                ->update(['t_status' => 'uncompleted']);
-                        }
+                        
+                        // if ($selisihDay < 0 || $selisihHour < 0 || $selisihMnt < 0) {
+                        //     Task::where('id', $task_id)
+                        //         ->update(['t_status' => 'in progress']);
+                        // }
                     }
         return view('page.employee.mytask', [
             'taskList' => $task
