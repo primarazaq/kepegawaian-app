@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             {
                 $notif = DB::table('tasks as b')
                 ->select('b.id','b.t_due_date', 'b.t_title','c.user_receiver_id')
+                ->where('b.t_status', 'in progress')
                 // ->where('c.user_receiver_id', Auth::user()->id)
                 ->join('user_tasks as c', 'c.task_id', '=', 'b.id')
                 // ->groupBy('c.task_id')
