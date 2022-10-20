@@ -15,14 +15,21 @@ class EmployeeController extends Controller
 
     public function dashboard(){
         // $totalTask = Task::all()->select('t_due_date')->latest();
-        $deadline = DB::table('tasks as b')->select('b.id','b.t_due_date')->where('c.user_receiver_id' , auth()->user()->id)->join('user_tasks as c', 'b.id', '=', 'c.task_id')->where('b.t_status', 'in progress')->groupBy('c.task_id')->orderBy('b.t_due_date', 'asc')->get();
+        $deadline = DB::table('tasks as b')->select('b.id','b.t_due_date')->where('c.user_receiver_id' , auth()->user()->id)->where('b.t_status', 'in progress')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->orderBy('b.t_due_date', 'asc')->get();
         // $case1 = Carbon::parse($deadline[0]->t_due_date)->diffForHumans();
         // dd($deadline);
-        if ($deadline->has('id')) {
+        if ($deadline->has(2)) {
             $due_date = collect([$deadline[0],$deadline[1],$deadline[2]]);
-        } else {
-            $due_date = null;
+        } elseif ($deadline->has(1)) {
+            $due_date = collect([$deadline[0],$deadline[1]]);
         }
+         elseif ($deadline->has(0)) {
+            $due_date = collect([$deadline[0]]);
+        }
+         else {
+            $due_date = collect();
+        }
+
         // $taskCompleted = Task::where('t_status', 'completed')->get();
         $taskCompleted = DB::table('tasks as b')->select('b.id','b.t_status')->where('c.user_receiver_id' , auth()->user()->id)->where('t_status', 'completed')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->get();
         // $taskInProgress = Task::where('t_status', 'in progress')->get();
