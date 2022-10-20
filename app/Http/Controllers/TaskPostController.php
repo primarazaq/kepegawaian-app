@@ -17,7 +17,7 @@ class TaskPostController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'), DB::raw('group_concat(c.response_file) as response_file'), DB::raw('group_concat(c.response_body) as response_body'))
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
