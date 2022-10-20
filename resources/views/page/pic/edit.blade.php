@@ -138,11 +138,29 @@
             <div class="user_receiver_id-dropdown">
 				<select data-placeholder="Select People" name="user_receiver_id[]" multiple class="chosen-select form-control" style="width: 156px" multiple>
 					<option></option>
-                    @foreach ($arrID as $id)
-                        @foreach ($pegawai as $item)
-                            <option value="{{ $item['id'] }}" @if ($id == $item['id']) selected ="selected" @endif> {{ $item['name'] }}</option>
+                    @if (count($arrID) > 1)
+
+                        @foreach ($arrID as $id)
+                            @foreach ($pegawai as $item)
+                                @if ($id == $item->id)
+                                    <option value="{{ $item->id }}" selected ="selected"> {{ $item->name }}</option>
+                                @endif
+                            @endforeach
                         @endforeach
-                    @endforeach
+                        
+                        @foreach ($pegawaiNotIN as $item)
+                        <option value="{{ $item->id }}"> {{ $item->name }}</option>
+                        @endforeach
+                    @else
+                    
+                        @foreach ($arrID as $id)
+                            @foreach ($pegawai as $item)
+                                {{-- <option value="{{ $item['id'] }}" @if ($id == $item['id']) selected ="selected" @endif> {{ $item['name'] }}</option> --}}
+                                <option value="{{ $item->id }}" @if ($id == $item->id) selected ="selected" @endif> {{ $item->name }}</option>
+                            @endforeach
+                        @endforeach
+
+                    @endif
 				</select>
 			</div>
             <script>

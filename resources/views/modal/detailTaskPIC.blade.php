@@ -72,7 +72,8 @@
                                 {{ $date = date('l, d F Y, H.i A',strtotime($data->t_due_date)) }}</p>
                             </td>
                         </tr>
-                        
+                        @if ($data->t_status == "completed")
+                            
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Tanggal Mulai
@@ -84,6 +85,7 @@
                                 {{ $date = date('l, d F Y, H.i A',strtotime($data->created_at)) }}</p>
                             </td>
                         </tr>
+                        @endif
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Detail Tugas
@@ -113,6 +115,41 @@
                         @endif
                     </tbody>
                 </table>
+                <hr>
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <tbody class="">
+                        @if ($data->response_body)
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Response Tugas
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo $data->response_body; ?>
+                            </td>
+                        </tr>
+                        @endif
+
+                        @if ($data->response_file )
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Response File
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <a href="{{ asset('storage/' . $data->response_file) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
+                    
                 @switch($data->t_status)
                     @case('completed')
                     <div class="py-4">

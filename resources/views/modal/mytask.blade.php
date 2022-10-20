@@ -83,6 +83,7 @@
                             @csrf
                             <div class="hidden">
                                     <input type="hidden" name="user_sender_id" value="{{ $data->sender_id }}" hidden>
+                                    <input type="hidden" name="submit" value="1" hidden>
                             </div>
                         <div class="flex pr-32">
                             <div class="basis-1/5">

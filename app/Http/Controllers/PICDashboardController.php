@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserTask;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +21,7 @@ class PICDashboardController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'), 'c.response_file', 'c.response_body')
                     ->where('c.user_sender_id',auth()->user()->id)
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
@@ -34,21 +35,22 @@ class PICDashboardController extends Controller
                     //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
 
                     foreach ($deadline as $item) {
-                        $now = Carbon::now();
-                        $nowDay = $now->day;
-                        $nowHour = $now->hour;
-                        $nowMnt = $now->minute;
 
-                        $endDay = Carbon::parse($item->t_due_date)->diffInDays();
-                        $endHour = Carbon::parse($item->t_due_date)->diffInHours();
-                        $endMnt = Carbon::parse($item->t_due_date)->diffInMinutes();
+                        $seconds = strtotime($item->t_due_date) - time();
 
-                        $selisihDay = $endDay - $nowDay;
-                        $selisihHour = $endHour - $nowHour;
-                        $selisihMnt = $endMnt - $nowMnt;
+                        $days = floor($seconds / 86400);
+                        $seconds %= 86400;
+
+                        $hours = floor($seconds / 3600);
+                        $seconds %= 3600;
+
+                        $minutes = floor($seconds / 60);
+                        $seconds %= 60;
+
                         $task_id = $item->id;
 
-                        if ($selisihDay < 0 || $selisihHour < 0 || $selisihMnt < 0) {
+                        // dd($days);
+                        if ($days <= 0 || $hours < 0 || $minutes < 0) {
                             Task::where('id', $task_id)
                                 ->update(['t_status' => 'uncompleted']);
                         }
@@ -120,9 +122,12 @@ class PICDashboardController extends Controller
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
                     ->groupBy('c.task_id')
                     ->orderBy('b.id' , 'asc')->first();
-        $employee = User::where('level', 'employee')->get();
+        $employee = DB::table('users')->select('id', 'name')->where('level', 'employee')->get();
+        $employeeNotIN = DB::table('users')->select('id', 'name')->where('level', 'employee')->whereNotIn('id', DB::table('user_tasks')->select('user_receiver_id')->where('task_id', $id))->get();
+        // dd($employeeNotIN);
         return view('page.pic.edit',[
             'pegawai' => $employee,
+            'pegawaiNotIN' => $employeeNotIN,
             'id' => $id,
             'data' => $task
         ]);
@@ -166,41 +171,42 @@ class PICDashboardController extends Controller
             $data['task_id'] = $id;
 
             $taskID = DB::table('user_tasks')->select('id', 'task_id')->where('task_id',$id)->get();
-            // dd($taskID);
+            // dd(count($data['user_receiver_id']));
 
             
             //jika data yg penerima hanya 1, maka
-            if ($data['user_receiver_id']== 1 ){
+            if (count($data['user_receiver_id']) == 1 ){
                 //hitung dulu tasknya, jika memang task_id cuma 1 maka
+                // ini kasus dari banyak assigne mau jadi 1 assigne aja
+                $penerimaTask = implode(" ",$data['user_receiver_id']);
                 if (count($taskID) == 1) {
                     $DataUserTask = [
                         'user_sender_id' => $data['user_sender_id'],
                         'task_id' => $data['task_id'],
-                        'user_receiver_id' => $data['user_receiver_id']
+                        'user_receiver_id' => $penerimaTask
                     ];
                     UserTask::where('task_id',$id)
                             ->update($DataUserTask);
                 }else{ //jika ternyata task_id ini punya beberapa row, maka
+
                     //masukin dulu data pertama ke row yg sudah ada
-                    $penerimaTask = $data['user_receiver_id'];
-                    array_pop(array_reverse($penerimaTask));
-                    $final = array_values($penerimaTask);
-                    // dd($penerimaTask);
-                    // $DataUserTask = [
-                    //     'user_sender_id' => $data['user_sender_id'],
-                    //     'task_id' => $data['task_id'],
-                    //     'user_receiver_id' => $penerimaTask[0]
-                    // ];
-                    // UserTask::where('task_id',$id)->where('id',)
-                    //         ->update($DataUserTask);
-                    // unset($penerimaTask[0]); //hapus data pertama dari array
-                    // $lastdata = array_values($penerimaTask);
-                    // //utk data array yg lainnya, maka lakukan tiap datanya..
-                    // foreach ($taskID as $key) {
-                    //     $ini = DB::table('user_tasks')
-                    //             ->select('id')->whereNot('id',$key['id'])->get();  
+                    $x = DB::table('user_tasks')->select('id')->where('task_id',$id)->first();
+                    $penerimaTask = implode(" ",$data['user_receiver_id']);
+                    $first = $taskID->whereIn('id', $x);
+                    
+                    foreach ($first as $item) {
                         
-                    // }
+                        UserTask::where('id', $item->id)->update(['user_receiver_id' => $penerimaTask]);
+                    }
+
+                    
+                    //hapus row lainnya
+                    $final = $taskID->whereNotIn('id',$x);
+                    // dd($final);
+                    foreach ($final as $item) {
+                        // dd($item);
+                        UserTask::where('id', $item->id)->delete();
+                    }
                     
                 }
                 
@@ -212,24 +218,35 @@ class PICDashboardController extends Controller
                     'task_id' => $data['task_id'],
                     'user_receiver_id' => $penerimaTask[0]
                 ];
-                UserTask::where('task_id',$id)
+                // dd($DataUserTask);
+                $double = UserTask::where('task_id',$id)->get();
+                    if ($double[0]->id != $penerimaTask[0]) {
+                        UserTask::where('task_id',$id)
                         ->update($DataUserTask);
+                    } 
+
+                
+                // dd($double[0]->id);        
+
+                
                         
                 unset($penerimaTask[0]);
                 $final = array_values($penerimaTask);
-                foreach ($final as $item){
-                    $lastData = [
-                                'user_sender_id' => $data['user_sender_id'],
-                                'task_id' => $data['task_id'],
-                                'user_receiver_id' => $item
-                            ];
-        
-                            UserTask::create($lastData);
+                // if ($final[0] != $penerimaTask[0]) {
+                    foreach ($final as $item){
+                        $lastData = [
+                                    'user_sender_id' => $data['user_sender_id'],
+                                    'task_id' => $data['task_id'],
+                                    'user_receiver_id' => $item
+                                ];
+                        
+                                UserTask::create($lastData);
+                    }
                 }
-            }
-        return redirect('/pic/home/dashboard')->with('success','Data berhasil diubah!');
-    
-}
+                
+                return redirect('/pic/home/dashboard')->with('success','Data berhasil diubah!');
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -239,10 +256,10 @@ class PICDashboardController extends Controller
      */
     public function destroy($id)
     {
-        // $task = Task::find($id);
-        // if ($task->t_file) {
-        //     Storage::delete($task->t_file);
-        // }
+        $task = Task::find($id);
+        if ($task->t_file) {
+            Storage::delete($task->t_file);
+        }
             // dd($id);
         Task::destroy($id);
         // UserTask::where('task_id',$id)->delete();
