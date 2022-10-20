@@ -91,7 +91,7 @@
                                 :
                             </td>
                             <td class="py-4 px-6">
-                                {{ $data->t_body }}
+                                <?php echo $data->t_body; ?>
                             </td>
                         </tr>
                         @if ($data->t_file)
@@ -109,6 +109,37 @@
                             </td>
                         </tr>
                         @endif
+                    </tbody>
+                </table>
+                <hr>
+                    {{-- menampilkan multi response --}}
+                    <?php 
+                    $multiName = explode(",", $data->name);
+                    $multiRfile = explode(",", $data->response_file);
+                    $multiRBody = explode(",", $data->response_body);
+                    $array = ['name' => $multiName, 'response_file' => $multiRfile, 'response_body' => $multiRBody]; 
+                
+                    $object = json_decode(json_encode($array));
+                    var_dump($object);
+                    ?>
+                
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <tbody class="">
+                        {{-- @foreach ($arrayName as $items) --}}
+                            
+                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Response 
+                            </th>
+                            <td class="py-4 px-6 w-1">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                
+                            </td>
+                        </tr>
+                            
+                        {{-- @endforeach --}}
                     </tbody>
                 </table>
                 @switch($data->t_status)
