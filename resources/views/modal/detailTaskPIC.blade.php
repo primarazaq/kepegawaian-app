@@ -14,9 +14,9 @@
                 </h3>
             </div>
             <!-- Modal body -->
-            <div class="overflow-x-auto relative pl-3">
+            <div class="overflow-x-auto relative px-3">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <tbody class="">
+                    <tbody>
                         <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 No. Task
@@ -99,7 +99,7 @@
                         </tr>
                         @if ($data->t_file)
                         
-                        <tr class="bg-white dark:bg-gray-800">
+                        <tr class="bg-white dark:bg-gray-800 border-b-2">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Bukti File
                             </th>
@@ -107,9 +107,8 @@
                                 :
                             </td>
                             <td class="py-4 px-6">
-                                <div class="flex">
+                            
                                     <a href="{{ asset('storage/' . $data->t_file) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
-                                </div>
                             </td>
                         </tr>
                         @endif
