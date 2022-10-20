@@ -70,7 +70,7 @@
                 </div>
               <!-- Modal footer -->
               <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200  dark:border-gray-600">
-                <button type="submit" class="text-white mx-auto bg-mainclr font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800">Edit</button>
+                <button type="submit" class="text-white mx-auto bg-mainclr font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-teal-500">Edit</button>
               </div>
               </form>
           </div>

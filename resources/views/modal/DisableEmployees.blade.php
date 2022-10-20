@@ -12,7 +12,7 @@
                     <form action="/admin/home/employees/{{ $user->id }}" method="post">
                         @method('delete')
                         @csrf
-                        <button data-modal-toggle="popup-modal-disableEMP-{{ $user->id }}" type="submit" class="inline-flex border-0 text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-3xl text-sm items-center px-5 py-2.5 text-center mr-2">
+                        <button data-modal-toggle="popup-modal-disableEMP-{{ $user->id }}" type="submit" class="inline-flex border-0 text-white bg-red-600 hover:bg-red-800 font-medium rounded-3xl text-sm items-center px-5 py-2.5 text-center mr-2">
                           Yes, I'm sure
                         </button>
                     </form>
