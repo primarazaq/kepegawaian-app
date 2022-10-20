@@ -16,27 +16,27 @@ class LoginController extends Controller
     }
 
     public function postlogin (Request $request){
-        // dd($request->all());
-        $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
+                    $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
                     
                     //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
 
                     foreach ($deadline as $item) {
-                        $now = Carbon::now();
-                        $nowDay = $now->day;
-                        $nowHour = $now->hour;
-                        $nowMnt = $now->minute;
 
-                        $endDay = Carbon::parse($item->t_due_date)->diffInDays();
-                        $endHour = Carbon::parse($item->t_due_date)->diffInHours();
-                        $endMnt = Carbon::parse($item->t_due_date)->diffInMinutes();
+                        $seconds = strtotime($item->t_due_date) - time();
 
-                        $selisihDay = $endDay - $nowDay;
-                        $selisihHour = $endHour - $nowHour;
-                        $selisihMnt = $endMnt - $nowMnt;
+                        $days = floor($seconds / 86400);
+                        $seconds %= 86400;
+
+                        $hours = floor($seconds / 3600);
+                        $seconds %= 3600;
+
+                        $minutes = floor($seconds / 60);
+                        $seconds %= 60;
+
                         $task_id = $item->id;
 
-                        if ($selisihDay < 0 || $selisihHour < 0 || $selisihMnt < 0) {
+                        // dd($days);
+                        if ($days <= 0 || $hours < 0 || $minutes < 0) {
                             Task::where('id', $task_id)
                                 ->update(['t_status' => 'uncompleted']);
                         }

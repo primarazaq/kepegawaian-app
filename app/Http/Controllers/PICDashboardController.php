@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserTask;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +21,7 @@ class PICDashboardController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'), 'c.response_file', 'c.response_body')
                     ->where('c.user_sender_id',auth()->user()->id)
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
@@ -122,9 +123,11 @@ class PICDashboardController extends Controller
                     ->groupBy('c.task_id')
                     ->orderBy('b.id' , 'asc')->first();
         $employee = DB::table('users')->select('id', 'name')->where('level', 'employee')->get();
-        // dd($employee);
+        $employeeNotIN = DB::table('users')->select('id', 'name')->where('level', 'employee')->whereNotIn('id', DB::table('user_tasks')->select('user_receiver_id')->where('task_id', $id))->get();
+        // dd($employeeNotIN);
         return view('page.pic.edit',[
             'pegawai' => $employee,
+            'pegawaiNotIN' => $employeeNotIN,
             'id' => $id,
             'data' => $task
         ]);
@@ -175,29 +178,34 @@ class PICDashboardController extends Controller
             if (count($data['user_receiver_id']) == 1 ){
                 //hitung dulu tasknya, jika memang task_id cuma 1 maka
                 // ini kasus dari banyak assigne mau jadi 1 assigne aja
+                $penerimaTask = implode(" ",$data['user_receiver_id']);
                 if (count($taskID) == 1) {
                     $DataUserTask = [
                         'user_sender_id' => $data['user_sender_id'],
                         'task_id' => $data['task_id'],
-                        'user_receiver_id' => $data['user_receiver_id']
+                        'user_receiver_id' => $penerimaTask
                     ];
                     UserTask::where('task_id',$id)
                             ->update($DataUserTask);
                 }else{ //jika ternyata task_id ini punya beberapa row, maka
 
                     //masukin dulu data pertama ke row yg sudah ada
-                    $first = $taskID->whereIn('id', $data['user_receiver_id']);
+                    $x = DB::table('user_tasks')->select('id')->where('task_id',$id)->first();
+                    $penerimaTask = implode(" ",$data['user_receiver_id']);
+                    $first = $taskID->whereIn('id', $x);
+                    
                     foreach ($first as $item) {
-                        // dd($item->id);
-                        UserTask::where('id', $item)->update('user_receiver_id', $data['user_receiver_id']);
+                        
+                        UserTask::where('id', $item->id)->update(['user_receiver_id' => $penerimaTask]);
                     }
 
                     
                     //hapus row lainnya
-                    $final = $taskID->whereNotIn('id',$data['user_receiver_id']);
+                    $final = $taskID->whereNotIn('id',$x);
+                    // dd($final);
                     foreach ($final as $item) {
-                        // dd($item->id);
-                        UserTask::where('id', $item)->destroy();
+                        // dd($item);
+                        UserTask::where('id', $item->id)->delete();
                     }
                     
                 }
@@ -210,6 +218,7 @@ class PICDashboardController extends Controller
                     'task_id' => $data['task_id'],
                     'user_receiver_id' => $penerimaTask[0]
                 ];
+                // dd($DataUserTask);
                 $double = UserTask::where('task_id',$id)->get();
                     if ($double[0]->id != $penerimaTask[0]) {
                         UserTask::where('task_id',$id)
@@ -233,12 +242,11 @@ class PICDashboardController extends Controller
                         
                                 UserTask::create($lastData);
                     }
-                // }
+                }
                 
-            }
-        return redirect('/pic/home/dashboard')->with('success','Data berhasil diubah!');
-    
-}
+                return redirect('/pic/home/dashboard')->with('success','Data berhasil diubah!');
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -248,10 +256,10 @@ class PICDashboardController extends Controller
      */
     public function destroy($id)
     {
-        // $task = Task::find($id);
-        // if ($task->t_file) {
-        //     Storage::delete($task->t_file);
-        // }
+        $task = Task::find($id);
+        if ($task->t_file) {
+            Storage::delete($task->t_file);
+        }
             // dd($id);
         Task::destroy($id);
         // UserTask::where('task_id',$id)->delete();

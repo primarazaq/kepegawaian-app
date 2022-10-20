@@ -15,6 +15,7 @@ class UserTask extends Model
         'user_receiver_id',
         'response_file',
         'response_body',
+        'submit',
     ];
     use HasFactory;
 
