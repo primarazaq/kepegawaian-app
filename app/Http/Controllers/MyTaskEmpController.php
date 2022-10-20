@@ -112,12 +112,6 @@ class MyTaskEmpController extends Controller
      */
     public function update(Request $request, $task_id)
     {
-        // $data = $request->validate([
-        //     'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
-        //     'response_body' => 'required'
-        // ]);
-        // dd($request);
-        
         $rules =[
             'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
             'response_body' => 'required',
@@ -174,8 +168,8 @@ class MyTaskEmpController extends Controller
         } else {
 
             UserTask::where('task_id',$task_id)
-                    ->where('user_sender_id',$sender_id)
-                    ->where('user_receiver_id',$receiver_id)
+                    ->where('user_sender_id',$request['user_sender_id'])
+                    ->where('user_receiver_id',auth()->user()->id)
                     ->update($validatedData);
                     
             Task::where('id', $task_id)
