@@ -80,45 +80,11 @@
 					<option value="high">High</option>
 				</select>
 			</div>
-
-            {{-- <button id="dropdownPriority" data-dropdown-toggle="dropdown" class="text-grey hover:bg-gray-400 hover:text-white font-medium rounded-lg text-sm px-4 text-center inline-flex items-center border-2" type="button">Select priority <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-            <!-- Dropdown menu -->
-            <div id="dropdown" class="hidden z-10 w-32 rounded-lg bg-white divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownPriority">
-                    <li>
-                        <button class="inline-flex py-2 px-7 w-full items-center hover:bg-red-500 bg-red-300 hover:text-white text-black rounded-t-lg">
-                            <img src="../../imgs/high.png" class="mr-2 w-6" alt="">
-                            High
-                        </button>
-                    </li>
-                    <li>
-                        <button class="inline-flex py-2 px-4 w-full items-center hover:bg-yellow-300 bg-yellow-200 hover:text-white text-black">
-                            <img src="../../imgs/medium.png" class="mr-1 w-8" alt="">
-                            Medium
-                        </button>
-                    </li>
-                    <li>
-                        <button class="inline-flex py-2 px-6 w-full items-center hover:bg-green-400 bg-green-300 hover:text-white text-black rounded-b-lg">
-                            <img src="../../imgs/low.png" class="mr-1 w-8" alt="">
-                            Low
-                        </button>
-                    </li>
-                </ul>
-            </div> --}}
         </div>
         <div class="flex mb-4">
             <div class="mr-6 font-extrabold text-lg ml-5 text-gray-500">
                 Assignee
             </div>
-            
-            {{-- <div class="user_receiver_id-dropdown">
-				<select name="user_receiver_id">
-					<option value="">Select People</option>
-					<option value="2">ikhsan</option>
-					<option value="3">hilman</option>
-					<option value="4">dedeng</option>
-				</select>
-			</div> --}}
 
             <div class="user_receiver_id-dropdown">
 				<select data-placeholder="Select People" name="user_receiver_id[]" multiple class="chosen-select form-control" style="width: 156px" multiple>
@@ -130,7 +96,7 @@
 			</div>
             <script>
                 $(document).ready(function() {
-                    $(".chosen-select").chosen();
+                    $(".chosen-select").chosen({ max_selected_options: 4 });
                 });
             </script>
         </div>
@@ -175,7 +141,9 @@
                             })
                           );</script>
         <div class="flex items-center justify-center mt-28">
-            <button type="reset" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 mr-4 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancel</button>
+            <a href="/pic/home/dashboard">
+                <button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 mr-4 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancel</button>
+            </a>
             <button type="submit" class="text-white bg-mainclr hover:bg-teal-800 font-medium rounded-lg text-sm px-5 py-2 mr-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700">+ Create</button>
         </div>
     </form>

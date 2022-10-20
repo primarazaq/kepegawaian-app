@@ -40,11 +40,12 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
                 
                 $notifPIC = DB::table('tasks as b')
-                ->select('b.id','b.t_due_date', 'b.t_title','c.user_receiver_id','c.user_sender_id','b.updated_at')
+                ->select('b.id',DB::raw('group_concat(a.name) as name'),'b.t_due_date', 'b.t_title','c.user_receiver_id','c.user_sender_id','b.updated_at')
                 ->where('b.t_status', 'completed')
                 ->join('user_tasks as c', 'c.task_id', '=', 'b.id')
+                ->join('users as a', 'c.user_receiver_id', '=', 'a.id')
                 ->groupBy('c.task_id')
-                ->orderBy('b.id' , 'asc')
+                ->orderBy('b.t_due_date' , 'desc')
                 ->get();
                 
                 // dd($notifPIC);

@@ -58,7 +58,7 @@
                                 :
                             </td>
                             <td class="py-4 px-6">
-                                {{ $data->nip }}
+                                {{ $data->multinip }}
                             </td>
                         </tr>
                         <tr class="bg-white dark:bg-gray-800">
@@ -72,6 +72,19 @@
                                 {{ $date = date('l, d F Y, H.i A',strtotime($data->t_due_date)) }}</p>
                             </td>
                         </tr>
+                        @if ($data->t_status == "completed")
+                        <tr class="bg-white dark:bg-gray-800">
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Submitted
+                            </th>
+                            <td class="py-4 px-6">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                {{ $date = date('l, d F Y, H.i A',strtotime($data->updated_at)) }}</p>
+                            </td>
+                        </tr>
+                        @else
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Tanggal Mulai
@@ -83,6 +96,7 @@
                                 {{ $date = date('l, d F Y, H.i A',strtotime($data->created_at)) }}</p>
                             </td>
                         </tr>
+                        @endif
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Detail Tugas
@@ -109,9 +123,8 @@
                             </td>
                         </tr>
                         @endif
-                    </tbody>
-                </table>
-                <hr>
+                    
+                @if ($data->t_status == "completed")
                     {{-- menampilkan multi response --}}
                     <?php 
                     $multiName = explode(",", $data->name);
@@ -120,26 +133,167 @@
                     $array = ['name' => $multiName, 'response_file' => $multiRfile, 'response_body' => $multiRBody]; 
                 
                     $object = json_decode(json_encode($array));
-                    var_dump($object);
+                    // var_dump(count($object->name));
                     ?>
-                
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <tbody class="">
-                        {{-- @foreach ($arrayName as $items) --}}
+                    @if (count($multiName) > 1)
+                        @if (count($object->name) == 2)
+                            @for ($i = 0; $i < 2; $i++)
                             
-                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 text-xs">
+                                <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Respon <?php print_r($object->name[$i]) ?> <hr>
+                                </th>
+                                <td class="py-4 px-6 w-1">
+                                
+                                </td>
+                                <td class="py-4 px-6">
+                                    
+                                </td>
+                            </tr>
+                            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Deskripsi
+                                </th>
+                                <td class="py-4 px-6 w-1">
+                                    :
+                                </td>
+                                <td class="py-4 px-6">
+                                    <?php print_r($object->response_body[$i]) ?>
+                                </td>
+                            </tr>
+                            @if($data->response_file)
+                                <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Lampiran File
+                                    </th>
+                                    <td class="py-4 px-6 w-1">
+                                        :
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <a href="{{ asset('storage/' . print_r($object->response_file[$i])) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
+                                    </td>
+                                </tr>    
+                            @endif
+                            @endfor
+                        @elseif (count($object->name) == 3)
+                            @for ($i = 0; $i < 3; $i++)
+                                
+                                <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 text-xs">
+                                    <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Respon <?php print_r($object->name[$i]) ?> <hr>
+                                    </th>
+                                    <td class="py-4 px-6 w-1">
+                                    
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        
+                                    </td>
+                                </tr>
+                                <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Deskripsi
+                                    </th>
+                                    <td class="py-4 px-6 w-1">
+                                        :
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <?php print_r($object->response_body[$i]) ?>
+                                    </td>
+                                </tr>
+                                @if($data->response_file)
+                                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Lampiran File
+                                        </th>
+                                        <td class="py-4 px-6 w-1">
+                                            :
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <a href="{{ asset('storage/' . print_r($object->response_file[$i])) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
+                                        </td>
+                                    </tr>    
+                                @endif
+                                @endfor
+                        @elseif (count($object->name) == 4)
+                                @for ($i = 0; $i < 4; $i++)   
+                                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 text-xs">
+                                        <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Respon <?php print_r($object->name[$i]) ?> <hr>
+                                        </th>
+                                        <td class="py-4 px-6 w-1">
+                                        
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Deskripsi
+                                        </th>
+                                        <td class="py-4 px-6 w-1">
+                                            :
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <?php print_r($object->response_body[$i]) ?>
+                                        </td>
+                                    </tr>
+                                    @if($data->response_file)
+                                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                                            <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Lampiran File
+                                            </th>
+                                            <td class="py-4 px-6 w-1">
+                                                :
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                <a href="{{ asset('storage/' . print_r($object->response_file[$i])) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
+                                            </td>
+                                        </tr>    
+                                    @endif
+                                @endfor
+                        @endif
+                    @else
+                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 text-xs">
                             <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Response 
+                                Respon {{ $data->name }} <hr>
                             </th>
                             <td class="py-4 px-6 w-1">
-                                :
+                            
                             </td>
                             <td class="py-4 px-6">
                                 
                             </td>
                         </tr>
+                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Deskripsi
+                            </th>
+                            <td class="py-4 px-6 w-1">
+                                :
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo $data->response_body ?>
+                            </td>
+                        </tr>
+                        @if($data->response_file)
+                            <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row" class="py-4 px-6 w-1/4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Lampiran File
+                                </th>
+                                <td class="py-4 px-6 w-1">
+                                    :
+                                </td>
+                                <td class="py-4 px-6">
+                                    <a href="{{ asset('storage/' . $data->response_file) }}" class="text-mainclr hover:text-teal-600 underline">lihat file</a>
+                                </td>
+                            </tr>  
+                        @endif
+                    @endif
+                @endif
+                   
                             
-                        {{-- @endforeach --}}
+                       
                     </tbody>
                 </table>
                 @switch($data->t_status)
@@ -169,11 +323,6 @@
                     @break
                         
                 @endswitch
-                
-            {{-- <img src="../../imgs/undone.png" class="w-16 mx-auto" alt="">
-                <h3 class="text-2xl mx-auto font-bold text-gray-900 dark:text-white">
-                    Tasks are not completed on time
-                </h3> --}}
             </div>
             <!-- Modal footer -->
             <div class="flex items-center pt-1 pb-1 space-x-2 rounded-b border-gray-200 dark:border-gray-600">

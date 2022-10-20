@@ -31,59 +31,29 @@ class MyTaskEmpController extends Controller
                     $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
                     
                     //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
+                    if ($deadline->has('id')){
+                        foreach ($deadline as $item) {
 
-                    foreach ($deadline as $item) {
+                            $seconds = strtotime($item->t_due_date) - time();
 
-                        $seconds = strtotime($item->t_due_date) - time();
+                            $days = floor($seconds / 86400);
+                            $seconds %= 86400;
 
-                        $days = floor($seconds / 86400);
-                        $seconds %= 86400;
+                            $hours = floor($seconds / 3600);
+                            $seconds %= 3600;
 
-                        $hours = floor($seconds / 3600);
-                        $seconds %= 3600;
+                            $minutes = floor($seconds / 60);
+                            $seconds %= 60;
 
-                        $minutes = floor($seconds / 60);
-                        $seconds %= 60;
+                            $task_id = $item->id;
 
-                        $task_id = $item->id;
-
-                        // dd($days);
-                        if ($days <= 0 || $hours < 0 || $minutes < 0) {
-                            Task::where('id', $task_id)
-                                ->update(['t_status' => 'uncompleted']);
+                            // dd($days);
+                            if ($days <= 0 || $hours < 0 || $minutes < 0) {
+                                Task::where('id', $task_id)
+                                    ->update(['t_status' => 'uncompleted']);
+                            }
                         }
-                    }
-
-                    $receiver_id = auth()->user()->id;
-                    $task2 = DB::table('user_tasks')->select('submit')->where('task_id', $task_id)->get();
-                    $checkData = new Collection();
-
-                    foreach ($task2 as $items) {
-                     foreach ($items as $item) {
-                         $checkData->push($item);
-                     }
-                    }
-                    
-                 if (count($checkData) == 2 ) {
-                     if ($checkData[0] == 1 && $checkData[1] == 1) {
-                         Task::where('id', $task_id)
-                             ->update(['t_status' => 'completed']);
-                             UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
-                     }
-                 } elseif (count($checkData) == 3) {
-                     if ($checkData[0] == 1 && $checkData[1] == 1 && $checkData[2] == 1) {
-                         Task::where('id', $task_id)
-                             ->update(['t_status' => 'completed']);
-                             UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
-                     }
-                 } elseif (count($checkData) == 4) {
-                     if ($checkData[0] == 1 && $checkData[1] == 1 && $checkData[2] == 1 && $checkData[3] == 1) {
-                         Task::where('id', $task_id)
-                             ->update(['t_status' => 'completed']);
-                             UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
-                     }
-                 } 
-
+                }
         return view('page.employee.mytask', [
             'taskList' => $task
         ]);
@@ -142,12 +112,6 @@ class MyTaskEmpController extends Controller
      */
     public function update(Request $request, $task_id)
     {
-        // $data = $request->validate([
-        //     'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
-        //     'response_body' => 'required'
-        // ]);
-        // dd($request);
-        
         $rules =[
             'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
             'response_body' => 'required',
@@ -164,20 +128,48 @@ class MyTaskEmpController extends Controller
             $validatedData['response_file'] = $request->file('response_file')->store('task-file');
         }
         
-        $sender_id = $request['user_sender_id'];
-        $receiver_id = auth()->user()->id;
         $task = DB::table('user_tasks')->select('submit')->where('task_id', $task_id)->get();
         // dd($task);
         if (count($task)>1) {
             UserTask::where('task_id',$task_id)
-                    ->where('user_sender_id',$sender_id)
-                    ->where('user_receiver_id',$receiver_id)
+                    ->where('user_sender_id',$request['user_sender_id'])
+                    ->where('user_receiver_id',auth()->user()->id)
                     ->update($validatedData);
+
+                    $receiver_id = auth()->user()->id;
+                    $task2 = DB::table('user_tasks')->select('submit')->where('task_id', $task_id)->get();
+                    $checkData = new Collection();
+
+                    foreach ($task2 as $items) {
+                        foreach ($items as $item) {
+                            $checkData->push($item);
+                        }
+                    }
+                    // dd($checkData);
+                        if (count($checkData) == 2 ) {
+                            if ($checkData[0] == 1 && $checkData[1] == 1) {
+                                Task::where('id', $task_id)
+                                    ->update(['t_status' => 'completed']);
+                                    UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
+                            }
+                        } elseif (count($checkData) == 3) {
+                            if ($checkData[0] == 1 && $checkData[1] == 1 && $checkData[2] == 1) {
+                                Task::where('id', $task_id)
+                                    ->update(['t_status' => 'completed']);
+                                    UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
+                            }
+                        } elseif (count($checkData) == 4) {
+                            if ($checkData[0] == 1 && $checkData[1] == 1 && $checkData[2] == 1 && $checkData[3] == 1) {
+                                Task::where('id', $task_id)
+                                    ->update(['t_status' => 'completed']);
+                                    UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
+                            }
+                        } 
         } else {
 
             UserTask::where('task_id',$task_id)
-                    ->where('user_sender_id',$sender_id)
-                    ->where('user_receiver_id',$receiver_id)
+                    ->where('user_sender_id',$request['user_sender_id'])
+                    ->where('user_receiver_id',auth()->user()->id)
                     ->update($validatedData);
                     
             Task::where('id', $task_id)
