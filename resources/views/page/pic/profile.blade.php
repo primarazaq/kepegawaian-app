@@ -24,11 +24,11 @@
             alt="">
     </div>
     <div class="relative p-4 space-y-4">
-            <div class="text-center">
-                <h1 class="font-extrabold text-5xl ml-20">
+            <div class="w-fit mx-56">
+                <h1 class="font-extrabold text-4xl">
                     {{ $pic->name }}
                 </h1>
-                <h3 class="mr-40 font-semibold text-xl text-gray-600">
+                <h3 class="font-semibold text-xl text-gray-600">
                     Person In Charge
                 </h3>
             </div>        

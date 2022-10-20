@@ -24,14 +24,14 @@
             alt="">
     </div>
     <div class="relative p-4 space-y-4">
-            <div class="text-center">
-                <h1 class="font-extrabold text-4xl ml-28">
+            <div class="w-fit mx-56">
+                <h1 class="font-extrabold text-4xl">
                     {{ $employee->name }}
                 </h1>
-                <h3 class="mr-40 font-semibold text-xl text-gray-600">
+                <h3 class="font-semibold text-xl text-gray-600">
                     Employee
                 </h3>
-            </div>        
+            </div>     
             <div class="flex ">
                 <div class="w-full text-2xl">
                     <h5 class="font-extrabold">NIP</h5>

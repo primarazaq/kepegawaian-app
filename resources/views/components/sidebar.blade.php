@@ -9,7 +9,7 @@
 <aside class="w-56 rounded" aria-label="Sidebar">
    <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
       <div href="/home" class="items-center justify-center mb-6 mt-2 flex">
-         <img src="../../imgs/logopln.png" class="w-8" alt="logo">
+         <img src="../../imgs/logopln.png" class="w-8" alt="logoADM">
          <h2 class="text-xl font-extrabold whitespace-nowrap dark:text-white ml-3">ETM System</h2>
       </div>
       <div class="border-b-4 mb-4"></div>
@@ -80,7 +80,7 @@
 <aside class="w-56 rounded" aria-label="Sidebar">
    <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
       <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
-         <img src="../../imgs/logopln.png" class="w-8" alt="logo">
+         <img src="/../../../imgs/logopln.png" class="w-8" alt="logoPIC">
          <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
       </div>
       <div class="border-b-4 mb-4"></div>
@@ -158,7 +158,7 @@
 <aside class="w-56 rounded" aria-label="Sidebar">
    <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
       <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
-         <img src="../../imgs/logopln.png" class="w-8" alt="logo">
+         <img src="../../imgs/logopln.png" class="w-8" alt="logoEMP">
          <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
       </div>
       <div class="border-b-4 mb-4"></div>
