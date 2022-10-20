@@ -12,6 +12,7 @@ return new class extends Migration
      *
      * @return void
      */
+    
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->text('t_body');
             $table->string('t_status');
             $table->string('t_priority');
-            $table->timestamp('t_due_date');
+            $table->dateTime('t_due_date');
             $table->timestamps();
             
         });

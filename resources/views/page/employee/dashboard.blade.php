@@ -35,64 +35,49 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 mr-3 fill-white" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg>
             <h5 class="text-2xl font-extrabold text-white dark:text-grey">Deadline</h5>
         </div>
-        @foreach ($due_date as $item)
-            <?php 
-        //calculate time left
-            $seconds = strtotime($item->t_due_date) - time();
+        @if ($due_date != null)
+            @foreach ($due_date as $item)
+                <?php 
+                //calculate time left
+                $seconds = strtotime($item->t_due_date) - time();
 
-            $days = floor($seconds / 86400);
-            $seconds %= 86400;
+                $days = floor($seconds / 86400);
+                $seconds %= 86400;
 
-            $hours = floor($seconds / 3600);
-            $seconds %= 3600;
+                $hours = floor($seconds / 3600);
+                $seconds %= 3600;
 
-            $minutes = floor($seconds / 60);
-            $seconds %= 60;
-        ?>
-        <div class="flex font-bold text-xl mt-4 -mb-4 text-white dark:text-gray-400">
-            <p>Task {{ $item->id }}:</p>
-            <div class="inline-flex font-bold text-lg text-red-600 ml-2">
-                <?php
-                    if ($days <0) {
-                        ?> <p><?php echo "$hours hours $minutes minutes left" ?></p> <?php
-                    } elseif ($hours < 0) {
-                        ?> <p><?php echo "$minutes minutes left" ?></p> <?php
-                    } else {
-                        ?> <p><?php echo "$days days left" ?></p> <?php
-                    }
+                $minutes = floor($seconds / 60);
+                $seconds %= 60;
                 ?>
+            <div class="flex font-bold text-xl mt-4 -mb-4 text-white dark:text-gray-400">
+                <p>Task {{ $item->id }}:</p>
+                <div class="inline-flex font-bold text-lg text-red-600 ml-2">
+                    <?php
+                        if ($days <0) {
+                            ?> <p><?php echo "$hours hours $minutes minutes left" ?></p> <?php
+                        } elseif ($hours < 0) {
+                            ?> <p><?php echo "$minutes minutes left" ?></p> <?php
+                        } else {
+                            ?> <p><?php echo "$days days left" ?></p> <?php
+                        }
+                    ?>
+                </div>
             </div>
-        </div>
-        @endforeach
+            @endforeach
+        @else
+            <div class="font-extrabold text-xl mt-9 p-4 text-center text-white dark:text-gray-400">
+                <p>*You dont have any task</p>
+            </div>
+        @endif
 
-
-        {{-- <div class="flex font-bold text-xl text-white dark:text-gray-400">
-            <p>Case 2:</p>
-            <div class="inline-flex font-bold text-xl text-red-600 ml-2">
-                10 min left
-            </div>
-        </div>
-        <div class="flex font-bold text-xl text-white dark:text-gray-400">
-            <p>Case 3:</p>
-            <div class="inline-flex font-bold text-xl text-red-600 ml-2">
-                1 hour left
-            </div>
-        </div> --}}
     </div>
 </div>
 <div class="flex">
     <div class="w-fit ml-12 h-fit border-2 rounded-xl shadow-md border-t-mainclr">
         <div class="flex"> 
             <div class="flex font-extrabold text-black text-left pt-14 pb-14">
-                <div class="pl-16 pr-24 border-r-4 border-black">
-                    <p class="text-5xl">
-                        3
-                    </p>
-                    <p class="text-lg text-gray-400 font-semibold">
-                        Active task
-                    </p>
-                </div>
-                <div class="pl-16 pr-24 border-r-4 border-black text-center">
+                <div class="pl-16 pr-24 border-r-4 border-black text-center" style="width: 400px">
                     <p class="text-5xl">
                         {{ count($taskInProgress) }}
                     </p>
@@ -100,7 +85,7 @@
                         Progress
                     </p>
                 </div>
-                <div class="pl-16 pr-24">
+                <div class="pl-16 pr-24 text-center" style="width: 400px">
                     <p class="text-5xl">
                         {{ count($deadline) }}
                     </p>
