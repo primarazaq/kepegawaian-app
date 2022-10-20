@@ -113,15 +113,10 @@
                             </td>
                         </tr>
                         @endif
-                    </tbody>
-                </table>
-                <hr>
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <tbody class="">
                         @if ($data->response_body)
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Response Tugas
+                                Respon Tugas
                             </th>
                             <td class="py-4 px-6">
                                 :
@@ -135,7 +130,7 @@
                         @if ($data->response_file )
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Response File
+                                Respon File
                             </th>
                             <td class="py-4 px-6">
                                 :
