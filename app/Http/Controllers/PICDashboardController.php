@@ -256,10 +256,19 @@ class PICDashboardController extends Controller
      */
     public function destroy($id)
     {
+        $usertask = UserTask::where('task_id', $id)->first();
+        // dd($usertask->id);
+        if ($usertask->response_file){
+            Storage::delete($usertask->response_file);
+        }
+
         $task = Task::find($id);
+        // dd($task);
         if ($task->t_file) {
             Storage::delete($task->t_file);
         }
+        
+
             // dd($id);
         Task::destroy($id);
         // UserTask::where('task_id',$id)->delete();
