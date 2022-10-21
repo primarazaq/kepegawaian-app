@@ -37,7 +37,7 @@ class LoginController extends Controller
 
                         // dd($days);
                         if ($days <= 0 || $hours < 0 || $minutes < 0) {
-                            Task::where('id', $task_id)
+                            Task::where('id', $task_id)->where('t_status', 'in progress')
                                 ->update(['t_status' => 'uncompleted']);
                         }
                     }
