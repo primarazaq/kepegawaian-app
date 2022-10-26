@@ -103,7 +103,9 @@ class PICDashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        // $task = Task::find(1)->replies;
+
+        // dd($task);
     }
 
     /**
