@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('task_id')->references('id')->on('tasks');
-            $table->text('Response');
+            $table->foreignId('user_receiver_id')->references('id')->on('users');
+            $table->string('response_file')->nullable();
+            $table->text('response_body')->nullable();
+            $table->timestamps();
         });
     }
 
