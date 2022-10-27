@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\UserTask;
+use App\Models\Reply;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -78,7 +80,21 @@ class MyTaskEmpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reply = $request->validate([
+            // 'user_receiver_id' => 'required',
+            'task_id' => 'required',
+            'response_body' => 'required'
+        ]);
+        if($request->file('response_file')){
+            $reply['response_file'] = $request->file('response_file')->getClientOriginalName();
+            $request->file('response_file')->storeAs('task-file', $reply['response_file']);
+        }
+        $reply['user_receiver_id'] = auth()->user()->id;
+
+        Reply::create($reply);
+
+        return redirect('/employee/home/mytask')->with('success','Respon mu berhasil disimpan!');
+
     }
 
     /**
@@ -89,7 +105,20 @@ class MyTaskEmpController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = DB::table('users as a')
+                    ->select('b.t_due_date', 'b.t_title','b.created_at','b.updated_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+                    ->where('c.task_id',$id)
+                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+                    ->join('tasks as b', 'b.id', '=', 'c.task_id')
+                    ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->groupBy('c.task_id')
+                    ->orderBy('b.id' , 'asc')
+                    ->get();
+        $reply = Task::find($id)->replies;
+        return view('dev', [
+            'task' => $task,
+            'reply' => $reply
+        ]);
     }
 
     /**
