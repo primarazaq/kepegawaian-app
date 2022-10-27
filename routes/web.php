@@ -90,4 +90,4 @@ use Illuminate\Support\Facades\Response;
         });
     });
 
-    Route::view('/dev', 'dev');
+    Route::get('/dev', [HomeController::class, 'index']);

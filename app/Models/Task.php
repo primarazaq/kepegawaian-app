@@ -15,4 +15,9 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class)->withPivot('user_tasks', 'user_sender_id', 'task_id', 'user_receiver_id');
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }
