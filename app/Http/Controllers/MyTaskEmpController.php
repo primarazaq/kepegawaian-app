@@ -91,9 +91,9 @@ class MyTaskEmpController extends Controller
         }
         $reply['user_receiver_id'] = auth()->user()->id;
 
-        Reply::create($reply);
+        $id = Reply::create($reply);
 
-        return redirect('/employee/home/mytask')->with('success','Respon mu berhasil disimpan!');
+        return redirect('/employee/home/mytask/'. $id->task_id)->with('success','Respon mu berhasil disimpan!');
 
     }
 
@@ -113,10 +113,13 @@ class MyTaskEmpController extends Controller
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
                     ->groupBy('c.task_id')
                     ->orderBy('b.id' , 'asc')
-                    ->get();
+                    ->first();
         $reply = Task::find($id)->replies;
-        return view('dev', [
+        $users = User::all();
+        // dd($task);
+        return view('page.employee.ProgMyTask', [
             'task' => $task,
+            'user' => $users,
             'reply' => $reply
         ]);
     }
