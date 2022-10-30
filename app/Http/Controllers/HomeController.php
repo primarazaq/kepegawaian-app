@@ -22,7 +22,7 @@ class HomeController extends Controller
 
         $reply = Task::find(1)->replies;
         dd($reply);
-                    return view('dev', [
+                    return view('page.employee.ProgMyTask', [
                         // 'data' => $task,
                         'reply' => $reply
                     ]);

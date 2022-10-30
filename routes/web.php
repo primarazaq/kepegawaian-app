@@ -42,7 +42,7 @@ use Illuminate\Support\Facades\Response;
     Route::post('/postlogin', 'App\Http\Controllers\LoginController@postlogin')->name('postlogin');
     Route::get('/logout', 'App\Http\Controllers\LoginController@logout')->name('logout');
 
-    Route::get('storage/{$data->t_file}', function ($filename){
+    Route::get('storage/task-file/{$data->t_file}', function ($filename){
         $path = storage_path('public/' . $filename);
 
         if (!File::exists($path)) {
@@ -92,3 +92,4 @@ use Illuminate\Support\Facades\Response;
 
     Route::get('/dev', [HomeController::class, 'index']);
     Route::view('/dev2', 'dev2');
+    Route::get('/employee/home/ProgMyTask', [HomeController::class, 'index']);
