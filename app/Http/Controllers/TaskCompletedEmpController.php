@@ -17,7 +17,7 @@ class TaskCompletedEmpController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date', 'a.id as receiver_id', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name', 'c.updated_at','c.response_file',DB::raw('group_concat(c.response_body) as response_body'),'c.submit', DB::raw('group_concat(a.name) as name'))
+                    ->select('b.t_due_date', 'a.id as receiver_id', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name', 'c.updated_at', DB::raw('group_concat(a.name) as name'))
                     ->where('c.user_receiver_id',auth()->user()->id)->where('b.t_status', 'completed')->orWhere('b.t_status', 'uncompleted')
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')

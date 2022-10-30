@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_sender_id');
             $table->unsignedBigInteger('task_id');
             $table->unsignedBigInteger('user_receiver_id');
-            $table->boolean('submit');
             $table->foreign('user_sender_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_receiver_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
