@@ -51,7 +51,7 @@
                 @error('t_body')
                     <p>{{ $message }}</p>
                 @enderror
-                <trix-editor input="t_body" style="overflow-y:auto"></trix-editor>
+                <trix-editor input="t_body" placeholder="Tuliskan deksripsi tugas disini..." style="overflow-y:auto"></trix-editor>
             </div>
         
     </div>
