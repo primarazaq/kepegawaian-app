@@ -24,8 +24,8 @@
             font-family: 'Nunito', sans-serif;
         }
         trix-editor {
-            height: 200px !important;
-            max-height: 200px !important;
+            height: 150px !important;
+            max-height: 150px !important;
             overflow-y: auto !important;
         }
     </style>
