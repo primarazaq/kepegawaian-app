@@ -6,7 +6,7 @@
      <p class="text-black font-medium pt-4">
         Home /
     </p>
-    <a href="/pic/home/dashboard" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 hover:text-teal-600">
+    <a href="/employee/home/mytask" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 hover:text-teal-600">
         My Task
     </a>
     <p class="-ml-3 text-black font-medium pt-4 ">
@@ -196,28 +196,74 @@
             @foreach ($user as $item)
                 @if ($item->id === $data->user_receiver_id)
                 <h2 class="text-xl font-extrabold pt-3">{{ $item->name }}</h2>
-                <div class="inline-flex mr-3">
-                    <button id="dropdownProgEMP" data-dropdown-toggle="dropdownProg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-mainclr hover:fill-teal-600" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M384 480c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0zM224 352c-6.7 0-13-2.8-17.6-7.7l-104-112c-6.5-7-8.2-17.2-4.4-25.9s12.5-14.4 22-14.4l208 0c9.5 0 18.2 5.7 22 14.4s2.1 18.9-4.4 25.9l-104 112c-4.5 4.9-10.9 7.7-17.6 7.7z"/></svg>
-                    </button>
-                    @include('components.dropdownProgEMP')
-                </div>
-            </div>
+                    @if ($data->user_receiver_id === auth()->user()->id)
+                        <div class="inline-flex mr-3">
+                            <button id="dropdownProgEMP" data-dropdown-toggle="dropdownProg-{{ $data->id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-mainclr hover:fill-teal-600" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M384 480c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0zM224 352c-6.7 0-13-2.8-17.6-7.7l-104-112c-6.5-7-8.2-17.2-4.4-25.9s12.5-14.4 22-14.4l208 0c9.5 0 18.2 5.7 22 14.4s2.1 18.9-4.4 25.9l-104 112c-4.5 4.9-10.9 7.7-17.6 7.7z"/></svg>
+                            </button>
+                            @include('components.dropdownProgEMP')
+                        </div>
+                    @endif
                 @endif
             @endforeach
-            <div class="ml-9">
+            </div>
+            <div id="old-{{ $data->id }}" class="ml-9">
                 <p class="w-full ml-9 text-base mr-2 font-medium"><?php echo $data->response_body ?></p>
                 @if ($data->response_file)
-                    {{-- <p class="text-base ml-9 mr-2 font-medium">Lampiran File :</p><br> --}}
+                <div class="flex ">
+                    <p class="text-base mr-2 font-medium">Lampiran File :</p><br>
                      <a href="{{ asset('storage/task-file/'.$data->response_file) }}" class="text-base font-medium text-mainclr dark:text-teal-500 hover:underline">lihat file</a>
-                @endif
+                    </div>
+                     @endif
             </div>
-            <div class="pb-3">
+            <?php 
+            // calculate time ago
+            $seconds =  time() - strtotime($data->updated_at);
+
+            $days = floor($seconds / 86400);
+            $seconds %= 86400;
+
+            $hours = floor($seconds / 3600);
+            $seconds %= 3600;
+
+            $minutes = floor($seconds / 60);
+            $seconds %= 60;
+            ?>
+            <div class="pb-2">
                 <span class="text-mainclr ml-4 text-base font-medium inline-flex items-center rounded">
                     <svg aria-hidden="true" class="mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
-                    2 menit yang lalu
+                    <?php
+                    if ($days > 0 && $days <= 7) {
+                            echo "$days days ago" ;
+                    } elseif ($days > 7) {
+                        echo $date = date('d M Y, H.i A',strtotime($data->updated_at));
+                    } elseif ($hours > 0) {
+                       echo "$hours hours ago" ;
+                    } else {
+                        echo "$minutes minutes ago";
+                    }
+                ?>
                 </span>
-
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+    var x = document.querySelectorAll("[id='old-{{ $data->id }}']");
+    // var x2 = document.getElementById("old2-{{ $data->id }}");
+    // var trix = document.getElementById("new-{{ $data->id }}");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        // x2.style.display = "block";
+        // trix.style.display = "none";
+    } else {
+        x.style.display = "none";
+        // x2.style.display = "none";
+        // trix.style.display = "block";
+    }
+    }
+</script>
             {{-- ini utk edit komen
                 <div id="old-{{ $data->id }}">
                     <p class="text-base ml-9 mr-2 font-medium"><?php //echo $data->response_body ?></p> <br>
@@ -293,36 +339,9 @@
                 }
             </script>
             
-            <?php 
-            //calculate time ago
-            //$seconds =  time() - strtotime($data->updated_at);
-
-            //$days = floor($seconds / 86400);
-            //$seconds %= 86400;
-
-            //$hours = floor($seconds / 3600);
-            //$seconds %= 3600;
-
-            //$minutes = floor($seconds / 60);
-            //$seconds %= 60;
-            ?>
-            <div class="flex pb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 fill-grey ml-6" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></svg>
-                <p class="text-base ml-3 font-medium opacity-50 inline-flex mt-1">
-                    <?php
-                    //if ($days > 0 && $days <= 7) {
-                            //echo "$days days ago" ;
-                    //} elseif ($days > 7) {
-                        //echo $date = date('d M Y, H.i A',strtotime($data->updated_at));
-                    //} elseif ($hours > 0) {
-                       //echo "$hours hours ago" ;
-                    //} else {
-                        //echo "$minutes minutes ago";
-                    //}
-                ?>
-                </p> --}}
-            </div>
-        </div>
+            
+            
+         
         {{-- @if ($data->user_receiver_id == auth()->user()->id)
         <div class=" border-l-2 w-48 text-center">
             <div class="border-b-2">
@@ -334,11 +353,7 @@
             </div>
         </div>
         @endif --}}
-    </div>
-    {{-- --- --}}
 
-    
-</div>
 @endforeach
 {{-- @else
     <div class="text-center mb-24 mt-4 pt-9">

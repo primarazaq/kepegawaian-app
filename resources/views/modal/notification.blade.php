@@ -55,7 +55,7 @@
                                             @method('put')
                                             @csrf --}}
                                         <div class="mx-auto items-center">
-                                            <a href="/employee/home/mytask">
+                                            <a href="/employee/home/mytask/{{ $item->id }}">
                                             <button type="button" class="text-white text-xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-10 py-1 mr-2 mt-5" type="button">Lihat</button>
                                             </a>
                                         </div>
