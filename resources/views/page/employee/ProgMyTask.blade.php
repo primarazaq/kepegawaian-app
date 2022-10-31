@@ -166,9 +166,9 @@
                                 </div>
                                 <div id="filefield-{{ $data->id }}"></div>
                                 <script>
-                                    let btn = document.getElementById('ubah-<?php echo $data->id; ?>');
-                                    let grup = document.getElementById('ubahfile-<?php echo $data->id; ?>');
-                                    var element = document.getElementById('filefield-<?php echo $data->id; ?>');
+                                    let btn = document.getElementById('ubah-{{ $data->id }}');
+                                    let grup = document.getElementById('ubahfile-{{ $data->id }}');
+                                    var element = document.getElementById('filefield-{{ $data->id }}');
                                     btn.onclick = function(){
                                         grup.classList.add('hidden');
                                         element.innerHTML ='<input class="block w-full text-sm mt-3 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="response_file_help" id="response_file_edit" name="response_file_edit" type="file" value="{{ old('response_file', $data->response_file) }}"><p class="mt-1 mb-3 text-sm text-gray-500 dark:text-gray-300" id="response_file_help">*jpeg , jpg, png, docx, doc, pptx, ppt, xlsx, xls, pdf, zip, rar (MAX FILE 10MB).</p>';
