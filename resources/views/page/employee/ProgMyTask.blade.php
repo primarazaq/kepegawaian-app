@@ -59,7 +59,7 @@
                         <td class="w-10 text-center">
                             :
                         </td>
-                        <td class="py-2">
+                        <td class="py-2 text-red-600">
                             &nbsp;{{ $date=date('l, d F Y, H.i A',strtotime($task->t_due_date)) }}
                         </td>
                     </tr>
@@ -73,18 +73,49 @@
                         <td class="py-2">
                             &nbsp;PIC - {{ $task->pembuat_task }}
                         </td>
-                        {{-- <form method="post" action="/employee/home/mytask/{{ $data->t_id }}" enctype="multipart/form-data">
-                            @method('put')
-                            @csrf
-                            <div class="hidden">
-                                    <input type="hidden" name="user_sender_id" value="{{ $data->sender_id }}" hidden>
-                                    <input type="hidden" name="submit" value="1" hidden>
-                            </div>
-                        </form> --}}
+                    </tr>
+                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class=" w-36 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Status
+                        </th>
+                        <td class="w-10 text-center">
+                            :
+                        </td>
+                        <td class="py-2">
+                            <?php 
+                                    switch ($task->t_status) {
+                                        case 'completed':
+                                        ?>
+                                            <div class="bg-mainclr py-1 w-28 rounded-2xl text-white">
+                                                <div class="text-center">
+                                                    <p>Completed</p>
+                                                </div>
+                                            </div> <?php
+                                            break;
+                                        case 'in progress':
+                                            ?>
+                                            <div class="bg-yellow-400 py-1 rounded-2xl text-white w-28">
+                                            <div class="text-center">
+                                                <p>In Progress</p>
+                                            </div>
+                                        </div> <?php
+                                        break;
+                                        case 'uncompleted':
+                                            ?>
+                                        <div class="bg-red-600 py-1 w-28 rounded-2xl text-white">
+                                            <div class="text-center">
+                                                <p>Uncompleted</p>
+                                            </div>
+                                        </div> <?php
+                                        break;
+                                    }
+                                ?>
+                        </td>
                     </tr>
             </tbody>
         </table>
 </div>
+@if (count($reply) > 0 )
 @foreach ($reply as $data)
     
 
@@ -104,9 +135,34 @@
                  <a href="{{ asset('storage/task-file/'.$data->response_file) }}" class="text-base ml-3 mr-20 font-medium text-mainclr dark:text-teal-500 hover:underline">lihat file</a>
             </div>
             @endif
+            <?php 
+            //calculate time ago
+            $seconds =  time() - strtotime($data->updated_at);
+
+            $days = floor($seconds / 86400);
+            $seconds %= 86400;
+
+            $hours = floor($seconds / 3600);
+            $seconds %= 3600;
+
+            $minutes = floor($seconds / 60);
+            $seconds %= 60;
+            ?>
             <div class="flex pb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 fill-grey ml-6" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></svg>
-                <p class="text-base ml-3 font-medium opacity-50 inline-flex mt-1">2 jam yang lalu</p>
+                <p class="text-base ml-3 font-medium opacity-50 inline-flex mt-1">
+                    <?php
+                    if ($days > 0 && $days <= 7) {
+                            echo "$days days ago" ;
+                    } elseif ($days > 7) {
+                        echo $date = date('d M Y, H.i A',strtotime($data->updated_at));
+                    } elseif ($hours > 0) {
+                        echo "$hours hours ago" ;
+                    } else {
+                        echo "$minutes minutes ago";
+                    }
+                ?>
+                </p>
             </div>
         </div>
         @if ($data->user_receiver_id == auth()->user()->id)
@@ -126,6 +182,12 @@
     
 </div>
 @endforeach
+@else
+    <div class="text-center mb-24 mt-4 pt-9">
+        <h5>Belum ada response...</h5>
+    </div>
+@endif
+
 
 <div class="w-full h-fit pl-4 rounded-lg shadow-md bg-white border-t-mainclr border-t-2">
     <div class="flex">
