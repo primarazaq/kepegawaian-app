@@ -90,4 +90,6 @@ use Illuminate\Support\Facades\Response;
         });
     });
 
+    Route::get('/dev', [HomeController::class, 'index']);
+    Route::view('/dev2', 'dev2');
     Route::get('/employee/home/ProgMyTask', [HomeController::class, 'index']);
