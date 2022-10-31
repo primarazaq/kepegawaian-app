@@ -96,7 +96,7 @@
 			</div>
             <script>
                 $(document).ready(function() {
-                    $(".chosen-select").chosen({ max_selected_options: 4 });
+                    $(".chosen-select").chosen();
                 });
             </script>
         </div>

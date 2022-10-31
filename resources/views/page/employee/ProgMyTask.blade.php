@@ -128,13 +128,82 @@
                 <h2 class="text-xl font-extrabold pt-3">{{ $item->name }}</h2>
                 @endif
             @endforeach
-            <p class="text-base ml-9 mr-2 font-medium"><?php echo $data->response_body ?></p> <br>
-            @if ($data->response_file)
-            <div class="flex">
-                <p class="text-base ml-9 mr-2 font-medium">Lampiran File :</p><br>
-                 <a href="{{ asset('storage/task-file/'.$data->response_file) }}" class="text-base ml-3 mr-20 font-medium text-mainclr dark:text-teal-500 hover:underline">lihat file</a>
-            </div>
+
+            {{-- ini utk edit komen --}}
+                <div id="old-{{ $data->id }}">
+                    <p class="text-base ml-9 mr-2 font-medium"><?php echo $data->response_body ?></p> <br>
+                </div>
+                <div id="new-{{ $data->id }}" hidden>
+                    <input id="response_body-{{ $data->id }}" class="inline-block w-5/6" type="hidden" name="response_body" value="{{ old('response_body', $data->response_body) }}" required>
+                    @error('response_body')
+                        <p>{{ $message }}</p>
+                    @enderror
+                    <trix-editor input="response_body-{{ $data->id }}"  style="height:10px !important;overflow-y:auto"></trix-editor>
+                        @if ($data->response_file)
+                                <div id="ubahfile-{{ $data->id }}" class="flex pt-6 pb-3">
+                                <input type="hidden" name="old_file" value="{{ $data->response_file }}">
+                                            <button id="ubah-{{ $data->id }}" type="button" class="ml-5 -mt-3 flex items-center">
+                                                <svg version="1.1" id="Capa_1" x="0px" y="0px"
+                                                    width="15px" height="15px" viewBox="0 0 494.936 494.936" style="enable-background:new 0 0 494.936 494.936;"
+                                                    xml:space="preserve">
+                                                <g>
+                                                    <g>
+                                                        <path d="M389.844,182.85c-6.743,0-12.21,5.467-12.21,12.21v222.968c0,23.562-19.174,42.735-42.736,42.735H67.157
+                                                            c-23.562,0-42.736-19.174-42.736-42.735V150.285c0-23.562,19.174-42.735,42.736-42.735h267.741c6.743,0,12.21-5.467,12.21-12.21
+                                                            s-5.467-12.21-12.21-12.21H67.157C30.126,83.13,0,113.255,0,150.285v267.743c0,37.029,30.126,67.155,67.157,67.155h267.741
+                                                            c37.03,0,67.156-30.126,67.156-67.155V195.061C402.054,188.318,396.587,182.85,389.844,182.85z"/>
+                                                        <path d="M483.876,20.791c-14.72-14.72-38.669-14.714-53.377,0L221.352,229.944c-0.28,0.28-3.434,3.559-4.251,5.396l-28.963,65.069
+                                                            c-2.057,4.619-1.056,10.027,2.521,13.6c2.337,2.336,5.461,3.576,8.639,3.576c1.675,0,3.362-0.346,4.96-1.057l65.07-28.963
+                                                            c1.83-0.815,5.114-3.97,5.396-4.25L483.876,74.169c7.131-7.131,11.06-16.61,11.06-26.692
+                                                            C494.936,37.396,491.007,27.915,483.876,20.791z M466.61,56.897L257.457,266.05c-0.035,0.036-0.055,0.078-0.089,0.107
+                                                            l-33.989,15.131L238.51,247.3c0.03-0.036,0.071-0.055,0.107-0.09L447.765,38.058c5.038-5.039,13.819-5.033,18.846,0.005
+                                                            c2.518,2.51,3.905,5.855,3.905,9.414C470.516,51.036,469.127,54.38,466.61,56.897z"/>
+                                                    </g>
+                                                </g>
+                                                </svg>
+                                            <p class="text-xs inline-flex ml-1">ubah file</p>
+                                            </button>
+                                </div>
+                                <div id="filefield-{{ $data->id }}"></div>
+                                <script>
+                                    let btn = document.getElementById('ubah-<?php echo $data->id; ?>');
+                                    let grup = document.getElementById('ubahfile-<?php echo $data->id; ?>');
+                                    var element = document.getElementById('filefield-<?php echo $data->id; ?>');
+                                    btn.onclick = function(){
+                                        grup.classList.add('hidden');
+                                        element.innerHTML ='<input class="block w-full text-sm mt-3 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="response_file_help" id="response_file_edit" name="response_file_edit" type="file" value="{{ old('response_file', $data->response_file) }}"><p class="mt-1 mb-3 text-sm text-gray-500 dark:text-gray-300" id="response_file_help">*jpeg , jpg, png, docx, doc, pptx, ppt, xlsx, xls, pdf, zip, rar (MAX FILE 10MB).</p>';
+                                        console.log(element.innerHTML);
+                                    }
+                                </script>
+                        @endif
+                        <div class="flex items-right justify-end">
+                            <button onclick="myFunction()" type="button" class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2 mr-4 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600">Cancel</button>
+                            <button type="submit" class="text-white bg-mainclr hover:bg-teal-800 font-medium rounded-lg text-sm px-5 py-2 mr-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700">Edit</button>
+                        </div>
+                </div>
+                @if ($data->response_file)
+                <div id="old2-{{ $data->id }}" class="flex">
+                    <p class="text-base ml-9 mr-2 font-medium">Lampiran File :</p><br>
+                    <a href="{{ asset('storage/task-file/'.$data->response_file) }}" class="text-base ml-3 mr-20 font-medium text-mainclr dark:text-teal-500 hover:underline">lihat file</a>
+                </div>
             @endif
+            <script>
+                function myFunction() {
+                var x = document.getElementById("old-{{ $data->id }}");
+                var x2 = document.getElementById("old2-{{ $data->id }}");
+                var trix = document.getElementById("new-{{ $data->id }}");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                    x2.style.display = "block";
+                    trix.style.display = "none";
+                } else {
+                    x.style.display = "none";
+                    x2.style.display = "none";
+                    trix.style.display = "block";
+                }
+                }
+            </script>
+            
             <?php 
             //calculate time ago
             $seconds =  time() - strtotime($data->updated_at);
@@ -168,7 +237,7 @@
         @if ($data->user_receiver_id == auth()->user()->id)
         <div class=" border-l-2 w-48 text-center">
             <div class="border-b-2">
-                <button class="my-5 mx-3 hover:text-mainclr">Ubah Respon</button>
+                <button onclick="myFunction()" class="my-5 mx-3 hover:text-mainclr">Ubah Respon</button>
             </div>
             {{-- <div class="border-4 items-end"></div> --}}
             <div class="border-t-2">
@@ -201,9 +270,9 @@
             <div class="mb-4 mt-3">
                 <div class="flex pr-32">
                     <div class="mb-4 w-4/6 mt-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="t_file">Upload file</label>
-                        <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="t_file_help" id="response_file-{{-- $data->t_id --}}" name="response_file" type="file">
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300" id="t_file_help">*jpeg , jpg, png, docx, doc, pptx, ppt, xlsx, xls, pdf, zip, rar (MAX FILE 10MB).</p>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="response_file">Upload file</label>
+                        <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="response_file_help" id="response_file" name="response_file" type="file">
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300" id="response_file_help">*jpeg , jpg, png, docx, doc, pptx, ppt, xlsx, xls, pdf, zip, rar (MAX FILE 10MB).</p>
                     </div>
                 </div>
                 <label for="response_body" class="ml-4 text-lg font-semibold text-gray-900 dark:text-gray-300"></label>
@@ -226,5 +295,7 @@
     document.addEventListener('trix-file-accept', function(e){
         e.preventDefault();
     });
+
+    
 </script>
 @endsection
