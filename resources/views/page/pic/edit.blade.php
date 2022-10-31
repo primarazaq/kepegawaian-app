@@ -45,10 +45,10 @@
                 
                 <div class="flex">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Upload file :</label>
-                    @if ($data->t_file)
+                    @if ($data->response_file)
                         <div id="ubahfile" class="flex">
-                            <a href="{{ asset('storage/' . $data->t_file) }}" class="text-mainclr hover:text-teal-600 underline ml-5 -mt-1">lihat file sebelumnya</a>
-                            <input type="hidden" name="old_file" value="{{ $data->t_file }}">
+                            <a href="{{ asset('storage/task-file/' . $data->response_file) }}" class="text-mainclr hover:text-teal-600 underline ml-5 -mt-1">lihat file sebelumnya</a>
+                            <input type="hidden" name="old_file" value="{{ $data->response_file }}">
                                 <button id="ubah" type="button" class="ml-5 -mt-3 flex items-center">
                                     <svg version="1.1" id="Capa_1" x="0px" y="0px"
                                         width="15px" height="15px" viewBox="0 0 494.936 494.936" style="enable-background:new 0 0 494.936 494.936;"
