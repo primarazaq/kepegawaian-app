@@ -25,7 +25,7 @@
 </div>
 <div class="px-6 py-3">
     <div class="flex">
-        <div class="border-b-2">
+        <div class="border-b-2 w-full">
             <div class="items-start p-4 border-b dark:border-gray-600">
                 <h3 class="font-extrabold text-gray-900 ml-3 text-3xl dark:text-white">
                     No. Task : 4 - Ini judul Tugas
