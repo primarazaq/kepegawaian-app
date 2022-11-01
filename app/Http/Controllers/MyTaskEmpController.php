@@ -146,8 +146,7 @@ class MyTaskEmpController extends Controller
     {
         $rules =[
             'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
-            'response_body' => 'required',
-            'submit' => 'required'
+            'response_body' => 'required'
         ];
 
         $validatedData = $request->validate($rules);

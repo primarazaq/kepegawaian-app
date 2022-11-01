@@ -218,6 +218,9 @@
             </div>
 
             <div id="new{{ $data->id }}" hidden>
+                <form method="post" action="/employee/home/mytask/{{ $data->task_id }}" enctype="multipart/form-data">
+                    @method('put')
+                    @csrf
                 <input id="response_body-{{ $data->id }}" class="inline-block w-5/6" type="hidden" name="response_body" value="{{ old('response_body', $data->response_body) }}" required>
                 @error('response_body')
                     <p>{{ $message }}</p>
@@ -264,6 +267,7 @@
                         <button id="cancel{{ $data->id }}" type="button" class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2 mr-4 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600">Cancel</button>
                         <button type="submit" class="text-white bg-mainclr hover:bg-teal-800 font-medium rounded-lg text-sm px-5 py-2 mr-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700">Edit</button>
                     </div>
+                </form>
             </div>
 
             <?php 
