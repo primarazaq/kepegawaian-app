@@ -207,7 +207,7 @@
                 @endif
             @endforeach
             </div>
-            <div id="old-{{ $data->id }}" class="ml-9">
+            
                 <p class="w-full ml-9 text-base mr-2 font-medium"><?php echo $data->response_body ?></p>
                 @if ($data->response_file)
                 <div class="flex ">
@@ -215,7 +215,7 @@
                      <a href="{{ asset('storage/task-file/'.$data->response_file) }}" class="text-base font-medium text-mainclr dark:text-teal-500 hover:underline">lihat file</a>
                     </div>
                      @endif
-            </div>
+            
             <?php 
             // calculate time ago
             $seconds =  time() - strtotime($data->updated_at);
@@ -248,22 +248,7 @@
         </div>
     </div>
 </div>
-<script>
-    function myFunction() {
-    var x = document.querySelectorAll("[id='old-{{ $data->id }}']");
-    // var x2 = document.getElementById("old2-{{ $data->id }}");
-    // var trix = document.getElementById("new-{{ $data->id }}");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        // x2.style.display = "block";
-        // trix.style.display = "none";
-    } else {
-        x.style.display = "none";
-        // x2.style.display = "none";
-        // trix.style.display = "block";
-    }
-    }
-</script>
+
             {{-- ini utk edit komen
                 <div id="old-{{ $data->id }}">
                     <p class="text-base ml-9 mr-2 font-medium"><?php //echo $data->response_body ?></p> <br>
