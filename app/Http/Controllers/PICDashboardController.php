@@ -93,7 +93,20 @@ class PICDashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reply = $request->validate([
+            // 'user_receiver_id' => 'required',
+            'task_id' => 'required',
+            'response_body' => 'required'
+        ]);
+        if($request->file('response_file')){
+            $reply['response_file'] = $request->file('response_file')->getClientOriginalName();
+            $request->file('response_file')->storeAs('task-file', $reply['response_file']);
+        }
+        $reply['user_receiver_id'] = auth()->user()->id;
+
+        $id = Reply::create($reply);
+
+        return redirect('/pic/home/dashboard/'. $id->task_id)->with('success','Respon mu berhasil disimpan!');
     }
 
     /**
@@ -159,109 +172,135 @@ class PICDashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            't_title' => 'required',
-            't_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
-            't_body' => 'required',
-            't_status' => 'required',
-            't_priority' => 'required',
-            't_due_date' => 'required'
-        ];
-
-        $validatedData = $request->validate($rules);
-
-        //jika ada file upload yg baru, maka hapus yg lama simpan ygg baru
-        if($request->file('t_file')){
-            if($request->old_file){
-                Storage::delete($request->old_file);
-            }
-            $validatedData['t_file'] = $request->file('t_file')->store('task-file');
-        }
-        Task::where('id',$id)
-            ->update($validatedData); //update ke table tasks
-
-            $data = $request->validate([
-                'user_receiver_id' => 'required'
-            ]);
-
-            $data['user_sender_id'] = auth()->user()->id;
-            $data['task_id'] = $id;
-
-            $taskID = DB::table('user_tasks')->select('id', 'task_id')->where('task_id',$id)->get();
-            // dd(count($data['user_receiver_id']));
-
-            
-            //jika data yg penerima hanya 1, maka
-            if (count($data['user_receiver_id']) == 1 ){
-                //hitung dulu tasknya, jika memang task_id cuma 1 maka
-                // ini kasus dari banyak assigne mau jadi 1 assigne aja
-                $penerimaTask = implode(" ",$data['user_receiver_id']);
-                if (count($taskID) == 1) {
-                    $DataUserTask = [
-                        'user_sender_id' => $data['user_sender_id'],
-                        'task_id' => $data['task_id'],
-                        'user_receiver_id' => $penerimaTask
-                    ];
-                    UserTask::where('task_id',$id)
-                            ->update($DataUserTask);
-                }else{ //jika ternyata task_id ini punya beberapa row, maka
-
-                    //masukin dulu data pertama ke row yg sudah ada
-                    $x = DB::table('user_tasks')->select('id')->where('task_id',$id)->first();
-                    $penerimaTask = implode(" ",$data['user_receiver_id']);
-                    $first = $taskID->whereIn('id', $x);
-                    
-                    foreach ($first as $item) {
-                        
-                        UserTask::where('id', $item->id)->update(['user_receiver_id' => $penerimaTask]);
-                    }
-
-                    
-                    //hapus row lainnya
-                    $final = $taskID->whereNotIn('id',$x);
-                    // dd($final);
-                    foreach ($final as $item) {
-                        // dd($item);
-                        UserTask::where('id', $item->id)->delete();
-                    }
-                    
+        $task = Task::where('id', $id)->first();
+        if ($request->response_body) {
+            $rules =[
+                'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
+                'response_body' => 'required'
+            ];
+    
+            $validatedData = $request->validate($rules);
+    
+            if($request->file('response_file')){
+                if($request->old_file){
+                    Storage::delete('task-file/'.$request->old_file);
                 }
-                
-                
-            }else{
-                $penerimaTask = $data['user_receiver_id'];
-                $DataUserTask = [
-                    'user_sender_id' => $data['user_sender_id'],
-                    'task_id' => $data['task_id'],
-                    'user_receiver_id' => $penerimaTask[0]
-                ];
-                // dd($DataUserTask);
-                $double = UserTask::where('task_id',$id)->get();
-                    if ($double[0]->id != $penerimaTask[0]) {
-                        UserTask::where('task_id',$id)
-                        ->update($DataUserTask);
-                    } 
+                $validatedData['response_file'] = $request->file('response_file')->getClientOriginalName();
+                $request->file('response_file')->storeAs('task-file', $validatedData['response_file']);
+            }
+            
+            Reply::where('id', $id)
+                ->update($validatedData);
 
-                
-                // dd($double[0]->id);        
-
-                
+            return redirect('/pic/home/dashboard/'. $request->task_id)->with('success','Response berhasil diubah!');
+            
+        } else {
+                    $rules = [
+                        't_title' => 'required',
+                        't_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
+                        't_body' => 'required',
+                        't_status' => 'required',
+                        't_priority' => 'required',
+                        't_due_date' => 'required'
+                    ];
+            
+                    $validatedData = $request->validate($rules);
+            
+                    //jika ada file upload yg baru, maka hapus yg lama simpan ygg baru
+                    if($request->file('t_file')){
+                        if($request->old_file){
+                            Storage::delete($request->old_file);
+                        }
+                        $validatedData['t_file'] = $request->file('t_file')->store('task-file');
+                    }
+                    Task::where('id',$id)
+                        ->update($validatedData); //update ke table tasks
+            
+                        $data = $request->validate([
+                            'user_receiver_id' => 'required'
+                        ]);
+            
+                        $data['user_sender_id'] = auth()->user()->id;
+                        $data['task_id'] = $id;
+            
+                        $taskID = DB::table('user_tasks')->select('id', 'task_id')->where('task_id',$id)->get();
+                        // dd(count($data['user_receiver_id']));
+            
                         
-                unset($penerimaTask[0]);
-                $final = array_values($penerimaTask);
-                // if ($final[0] != $penerimaTask[0]) {
-                    foreach ($final as $item){
-                        $lastData = [
+                        //jika data yg penerima hanya 1, maka
+                        if (count($data['user_receiver_id']) == 1 ){
+                            //hitung dulu tasknya, jika memang task_id cuma 1 maka
+                            // ini kasus dari banyak assigne mau jadi 1 assigne aja
+                            $penerimaTask = implode(" ",$data['user_receiver_id']);
+                            if (count($taskID) == 1) {
+                                $DataUserTask = [
                                     'user_sender_id' => $data['user_sender_id'],
                                     'task_id' => $data['task_id'],
-                                    'user_receiver_id' => $item
+                                    'user_receiver_id' => $penerimaTask
                                 ];
-                        
-                                UserTask::create($lastData);
-                    }
-                }
-                
-                return redirect('/pic/home/dashboard')->with('success','Data berhasil diubah!');
+                                UserTask::where('task_id',$id)
+                                        ->update($DataUserTask);
+                            }else{ //jika ternyata task_id ini punya beberapa row, maka
+            
+                                //masukin dulu data pertama ke row yg sudah ada
+                                $x = DB::table('user_tasks')->select('id')->where('task_id',$id)->first();
+                                $penerimaTask = implode(" ",$data['user_receiver_id']);
+                                $first = $taskID->whereIn('id', $x);
+                                
+                                foreach ($first as $item) {
+                                    
+                                    UserTask::where('id', $item->id)->update(['user_receiver_id' => $penerimaTask]);
+                                }
+            
+                                
+                                //hapus row lainnya
+                                $final = $taskID->whereNotIn('id',$x);
+                                // dd($final);
+                                foreach ($final as $item) {
+                                    // dd($item);
+                                    UserTask::where('id', $item->id)->delete();
+                                }
+                                
+                            }
+                            
+                            
+                        }else{
+                            $penerimaTask = $data['user_receiver_id'];
+                            $DataUserTask = [
+                                'user_sender_id' => $data['user_sender_id'],
+                                'task_id' => $data['task_id'],
+                                'user_receiver_id' => $penerimaTask[0]
+                            ];
+                            // dd($DataUserTask);
+                            $double = UserTask::where('task_id',$id)->get();
+                                if ($double[0]->id != $penerimaTask[0]) {
+                                    UserTask::where('task_id',$id)
+                                    ->update($DataUserTask);
+                                } 
+            
+                            
+                            // dd($double[0]->id);        
+            
+                            
+                                    
+                            unset($penerimaTask[0]);
+                            $final = array_values($penerimaTask);
+                            // if ($final[0] != $penerimaTask[0]) {
+                                foreach ($final as $item){
+                                    $lastData = [
+                                                'user_sender_id' => $data['user_sender_id'],
+                                                'task_id' => $data['task_id'],
+                                                'user_receiver_id' => $item
+                                            ];
+                                    
+                                            UserTask::create($lastData);
+                                }
+                            }
+                            
+                            return redirect('/pic/home/dashboard')->with('success','Data berhasil diubah!');
+        }
+
+        
     }
 
 
