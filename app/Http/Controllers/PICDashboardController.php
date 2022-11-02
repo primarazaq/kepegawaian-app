@@ -172,7 +172,7 @@ class PICDashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Task::where('id', $id)->first();
+        
         if ($request->response_body) {
             $rules =[
                 'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
@@ -295,9 +295,11 @@ class PICDashboardController extends Controller
                                     
                                             UserTask::create($lastData);
                                 }
+
                             }
+                            $task = Task::where('id', $id)->first();
                             
-                            return redirect('/pic/home/dashboard')->with('success','Data berhasil diubah!');
+                            return redirect('/pic/home/dashboard/'.$task->id)->with('success','Data berhasil diubah!');
         }
 
         
