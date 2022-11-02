@@ -149,7 +149,7 @@
                                 <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button" data-modal-toggle="modalTaskDetail-{{ $data->task_id }}">
                                     Detail
                                     </button> 
-                                @include('modal.detailTaskPIC')
+                                {{-- @include('modal.detailTaskPIC') --}}
                                 {{-- <img src="{{ asset('storage/' . $data->t_file)  }}" alt=""> --}}
                             </td>
                             <td class="py-4 px-6">
@@ -168,7 +168,7 @@
                                                                 c-35.413,0-64.223-28.811-64.223-64.224c0-13.324,4.081-25.711,11.054-35.983L124.511,141.696z"/>
                                                                 <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
                                       </button>
-                                    @include('modal.deleteTaskPIC')
+                                    {{-- @include('modal.deleteTaskPIC') --}}
                                 </div>  
                             </td>
                         </tr>
