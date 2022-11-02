@@ -19,20 +19,15 @@
             </div>
             <div>
                 @if (count($notif) > 0)
-                <div class="flex mb-10 pl-10 pr-10">
-                    <p class="text-base leading-relaxed mr-5 text-gray-500 dark:text-gray-400">
-                        Halo user, ada tugas baru yang diberikan kepadamu mohon selalu diperhatikan ketentuan tugas nya, terimakasih. Selamat mengerjakan...
-                    </p>
-                    <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
-                </div>
-                {{-- {{ $notif[0]->t_title }} --}}
-                
-                
-                <div class="pl-5 pr-5 mx-auto space-y-5">
-                    
-
                         @foreach ($notif as $item)
                                 @if ($item->user_receiver_id === auth()->user()->id)
+                                <div class="flex mb-10 pl-10 pr-10">
+                                    <p class="text-base leading-relaxed mr-5 text-gray-500 dark:text-gray-400">
+                                        Halo user, ada tugas baru yang diberikan kepadamu mohon selalu diperhatikan ketentuan tugas nya, terimakasih. Selamat mengerjakan...
+                                    </p>
+                                    <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
+                                </div>
+                                <div class="pl-5 pr-5 mx-auto space-y-5">
                                     <div id="alert-{{ $item->id }}" class="bg-[#F2F2F2] w-full h-fit rounded-lg shadow-md p-4 flex role=" alert>
                                         <div  class="basis-4/5">
                                             <div class="flex justify-between">
@@ -61,6 +56,14 @@
                                         </div>
                                         {{-- </form> --}}
                                     </div>
+                                @else
+                                <div class="flex mb-10 pl-10 pr-10">
+                                    <p class="text-base leading-relaxed mr-5 text-gray-500 dark:text-gray-400">
+                                        Halo user, saat ini tidak ada tugas baru untuk anda, Terimakasih.
+                                    </p>
+                                    <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
+                                </div>
+                                <div class="pl-5 pr-5 mx-auto space-y-5">
                                 @endif
                         @endforeach
                     @else
