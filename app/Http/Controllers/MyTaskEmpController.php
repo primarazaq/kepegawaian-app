@@ -187,6 +187,9 @@ class MyTaskEmpController extends Controller
     public function destroy($id)
     {
         $reply = Reply::where('id',$id)->first();
+        if ($reply->response_file){
+            Storage::delete('task-file/'.$reply->response_file);
+        }
         Reply::destroy($id);
 
         return redirect('/employee/home/mytask/'. $reply->task_id)->with('destroy','Response berhasil dihapus!');
