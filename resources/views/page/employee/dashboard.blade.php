@@ -87,7 +87,7 @@
                 </div>
                 <div class="pl-16 pr-24 text-center" style="width: 400px">
                     <p class="text-5xl">
-                        {{ count($deadline) }}
+                        {{ count($taskInProgress) + count($taskCompleted) + count($taskUncompleted) }}
                     </p>
                     <p class="text-lg text-gray-400 font-semibold">
                         Task total
