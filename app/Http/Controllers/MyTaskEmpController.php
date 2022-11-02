@@ -144,6 +144,7 @@ class MyTaskEmpController extends Controller
      */
     public function update(Request $request, $id)
     {  
+        $task = Task::where('id', $id)->first();
         if ($request->response_body) {
             $rules =[
                 'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
@@ -162,16 +163,19 @@ class MyTaskEmpController extends Controller
             
             Reply::where('id', $id)
                 ->update($validatedData);
+
+            return redirect('/employee/home/mytask/'. $request->task_id)->with('success','Response berhasil diubah!');
             
         } else {
             Task::where('id', $id)
                 ->update(['t_status' => 'completed']);
+                return redirect('/employee/home/taskcompleted/'. $task->id)->with('success','Status task berhasil diubah!');
         }
         
-        $task = Task::where('id', $id)->first();
+        
 
         // dd($validatedData);
-        return redirect('/employee/home/mytask/'. $task->id)->with('success','Response berhasil diubah!');
+        
     }
 
     /**
@@ -185,6 +189,6 @@ class MyTaskEmpController extends Controller
         $reply = Reply::where('id',$id)->first();
         Reply::destroy($id);
 
-        return redirect('/employee/home/mytask/'. $reply->task_id)->with('success','Response berhasil dihapus!');
+        return redirect('/employee/home/mytask/'. $reply->task_id)->with('destroy','Response berhasil dihapus!');
     }
 }
