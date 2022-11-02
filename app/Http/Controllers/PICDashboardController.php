@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Reply;
 use App\Models\UserTask;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -103,9 +104,23 @@ class PICDashboardController extends Controller
      */
     public function show($id)
     {
-        // $task = Task::find(1)->replies;
-
+        $task = DB::table('users as a')
+                    ->select('b.t_due_date', 'b.t_title','b.created_at','b.updated_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+                    ->where('c.task_id',$id)
+                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+                    ->join('tasks as b', 'b.id', '=', 'c.task_id')
+                    ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->groupBy('c.task_id')
+                    ->orderBy('b.id' , 'asc')
+                    ->first();
+        $reply = Task::find($id)->replies;
+        $users = User::all();
         // dd($task);
+        return view('page.pic.detailTaskPIC', [
+            'task' => $task,
+            'user' => $users,
+            'reply' => $reply
+        ]);
     }
 
     /**
@@ -258,20 +273,23 @@ class PICDashboardController extends Controller
      */
     public function destroy($id)
     {
-        $usertask = UserTask::where('task_id', $id)->first();
+        $reply = Reply::where('task_id', $id)->get();
         // dd($usertask->id);
-        if ($usertask->response_file){
-            Storage::delete($usertask->response_file);
+        foreach ($reply as $item) {
+            if ($item->response_file){
+                Storage::delete('task-file/'.$item->response_file);
+            }
         }
 
         $task = Task::find($id);
-        // dd($task);
+        // dd($task->t_file);
         if ($task->t_file) {
-            Storage::delete($task->t_file);
+            Storage::delete('task-file/'.$task->t_file);
         }
         
 
             // dd($id);
+        Reply::where('task_id', $id)->delete($id);
         Task::destroy($id);
         // UserTask::where('task_id',$id)->delete();
         return redirect('/pic/home/dashboard')->with('destroy', 'Task berhasil dihapus!');
