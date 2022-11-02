@@ -74,49 +74,71 @@
                             <td class="py-2">
                                 &nbsp;PIC - {{ $task->pembuat_task }}
                             </td>
-                            {{-- <form method="post" action="/employee/home/mytask/{{ $data->t_id }}" enctype="multipart/form-data">
-                                @method('put')
-                                @csrf
-                                <div class="hidden">
-                                        <input type="hidden" name="user_sender_id" value="{{ $data->sender_id }}" hidden>
-                                        <input type="hidden" name="submit" value="1" hidden>
-                                </div>
-                            </form> --}}
+                            
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class=" w-36 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Sumber Tugas
+                            </th>
+                            <td class="w-10 text-center">
+                                :
+                            </td>
+                            <td class="py-2">
+                                <?php 
+                                    switch ($task->t_status) {
+                                        case 'completed':
+                                        ?>
+                                            <div class="bg-mainclr py-1 w-28 rounded-2xl text-white">
+                                                <div class="text-center">
+                                                    <p>Completed</p>
+                                                </div>
+                                            </div> <?php
+                                            break;
+                                        case 'in progress':
+                                            ?>
+                                            <div class="bg-yellow-400 py-1 rounded-2xl text-white w-28">
+                                            <div class="text-center">
+                                                <p>In Progress</p>
+                                            </div>
+                                        </div> <?php
+                                        break;
+                                        case 'uncompleted':
+                                            ?>
+                                        <div class="bg-red-600 py-1 w-28 rounded-2xl text-white">
+                                            <div class="text-center">
+                                                <p>Uncompleted</p>
+                                            </div>
+                                        </div> <?php
+                                        break;
+                                    }
+                                ?>
+                            </td>
+                            
                         </tr>
                 </tbody>
             </table>
-            <a href="">
-                <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tandai selesai!</button>
-            </a>
+            <form method="post" action="/employee/home/mytask/{{ $task->task_id }}">
+                @method('put')
+                @csrf
+                <button type="submit" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tandai selesai!</button>
+            </form>
         </div>
         <div class="inline-flex border-l-2 border-b-2 py-2 pr-20 pl-4">
             <div class="space-y-3">
                 <h2 class="text-xl text-left font-extrabold">Contribution</h2>
                 <div class="ml-1 space-y-1">
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
+                    <?php 
+                        $arrayName = $task->name; 
+                        $multiname = explode(",", $arrayName);
+                        ?>
+                    @foreach ($multiname as $name)
+                        <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
+                            <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
+                            <div class="inline-flex ml-1">
+                                <p class="text-base font-bold">{{ $name }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
-                        </div>
-                    </div>
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
-                        </div>
-                    </div>
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -218,9 +240,10 @@
             </div>
 
             <div id="new{{ $data->id }}" hidden>
-                <form method="post" action="/employee/home/mytask/{{ $data->task_id }}" enctype="multipart/form-data">
+                <form method="post" action="/employee/home/mytask/{{ $data->id }}" enctype="multipart/form-data">
                     @method('put')
                     @csrf
+                    <input type="hidden" value="{{ $data->task_id }}" name="task_id" hidden>
                 <input id="response_body-{{ $data->id }}" class="inline-block w-5/6" type="hidden" name="response_body" value="{{ old('response_body', $data->response_body) }}" required>
                 @error('response_body')
                     <p>{{ $message }}</p>
@@ -258,7 +281,7 @@
                                 var element = document.getElementById('filefield-{{ $data->id }}');
                                 btn.onclick = function(){
                                     grup.classList.add('hidden');
-                                    element.innerHTML ='<input class="block w-full text-sm mt-3 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="response_file_help" id="response_file_edit" name="response_file_edit" type="file" value="{{ old('response_file', $data->response_file) }}"><p class="mt-1 mb-3 text-sm text-gray-500 dark:text-gray-300" id="response_file_help">*jpeg , jpg, png, docx, doc, pptx, ppt, xlsx, xls, pdf, zip, rar (MAX FILE 10MB).</p>';
+                                    element.innerHTML ='<input class="block w-full text-sm mt-3 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="response_file_help" id="response_file_edit" name="response_file" type="file" value="{{ old('response_file', $data->response_file) }}"><p class="mt-1 mb-3 text-sm text-gray-500 dark:text-gray-300" id="response_file_help">*jpeg , jpg, png, docx, doc, pptx, ppt, xlsx, xls, pdf, zip, rar (MAX FILE 10MB).</p>';
                                     console.log(element.innerHTML);
                                 }
                             </script>
@@ -288,11 +311,13 @@
                     <svg aria-hidden="true" class="mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
                     <?php
                     if ($days > 0 && $days <= 7) {
-                            echo "$days days ago" ;
+                            echo "$days days ago - ". $date = date('H.i A',strtotime($data->updated_at));
                     } elseif ($days > 7) {
                         echo $date = date('d M Y, H.i A',strtotime($data->updated_at));
                     } elseif ($hours > 0) {
                        echo "$hours hours ago" ;
+                    } elseif ($minutes == 0) {
+                       echo "Just now" ;
                     } else {
                         echo "$minutes minutes ago";
                     }

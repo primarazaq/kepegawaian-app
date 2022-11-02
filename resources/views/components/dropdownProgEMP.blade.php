@@ -6,7 +6,11 @@
         {{-- @include('modal.editReply') --}}
       </li>
       <li>
-        <a href="#" class="block py-2 px-4 hover:bg-mainclr hover:bg-opacity-30 dark:hover:bg-gray-600 dark:hover:text-white">Hapus Respon</a>
+        <form action="/employee/home/mytask/{{ $data->id }}" method="post">
+          @method('delete')
+          @csrf
+        <button type="submit" class="block py-2 px-4 hover:bg-mainclr hover:bg-opacity-30 dark:hover:bg-gray-600 dark:hover:text-white">Hapus Respon</button>
+        </form>
       </li>
     </ul>
 </div>
