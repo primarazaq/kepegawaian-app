@@ -32,9 +32,10 @@
     </div>
     <img src="../../imgs/hiasan3.png" class="w-80" alt="">
 </div>
-<div class="mx-auto w-11/12 border-4 shadow-md border-t-mainclr">
+
     {{-- flex 1 --}}
     @if ($taskList->has(0))
+    <div class="mx-auto w-11/12 border-4 shadow-md border-t-mainclr">
         @foreach ($taskList as $data)
         <?php 
         //calculate time left
@@ -80,11 +81,12 @@
         </div> 
         {{-- @include('modal.mytask') --}}
         @endforeach  
-</div>
+    </div>
         @else
-        <div>
+        <div class="mx-auto w-11/12 border-4 shadow-md border-t-mainclr">
+        </div>  
             <h1 class="mt-5 mx-auto text-center font-bold text-lg">Saat ini belum ada tugas untuk anda...</h1>
             <img src="../../../imgs/EmptyInbox.png" class="mx-auto w-96 py-9" alt="tugas kosong">
-        </div>  
+        
         @endif
 @endsection
