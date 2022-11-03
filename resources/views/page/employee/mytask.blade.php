@@ -84,7 +84,7 @@
         @else
         <div>
             <h1 class="mt-5 mx-auto text-center font-bold text-lg">Saat ini belum ada tugas untuk anda...</h1>
-            <img src="../../../imgs/EmptyInbox.png" class="mx-auto w-96 py-9" alt="komentar kosong">
+            <img src="../../../imgs/EmptyInbox.png" class="mx-auto w-96 py-9" alt="tugas kosong">
         </div>  
         @endif
 @endsection
