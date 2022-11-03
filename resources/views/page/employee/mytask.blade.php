@@ -73,16 +73,18 @@
                     ?>
                 </div>
             </div>
-            <div class="mx-auto items-center">
-                <button type="submit" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1 mr-2 mt-11">Kerjakan</button>
+            <div class="mx-auto my-auto">
+                <button type="submit" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1">Kerjakan</button>
             </div>
         </form> 
         </div> 
         {{-- @include('modal.mytask') --}}
-        @endforeach
-    @else
-        Saat ini belum ada tugas untuk anda
-    @endif
-    
+        @endforeach  
 </div>
+        @else
+        <div>
+            <h1 class="mt-5 mx-auto text-center font-bold text-lg">Saat ini belum ada tugas untuk anda...</h1>
+            <img src="../../../imgs/EmptyInbox.png" class="mx-auto w-96 py-9" alt="komentar kosong">
+        </div>  
+        @endif
 @endsection
