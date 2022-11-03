@@ -85,9 +85,12 @@
                         </tr>
                 </tbody>
             </table>
-            <a href="">
-                <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tandai selesai!</button>
-            </a>
+            <div>
+                <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" data-modal-toggle="popup-modal-doneEMP">
+                    Tandai selesai!
+                </button>
+                @include('modal.validateDoneEMP')
+            </div>
         </div>
         <div class="inline-flex border-l-2 border-b-2 py-2 pr-20 pl-4">
             <div class="space-y-3">
