@@ -53,7 +53,8 @@ class PICPostController extends Controller
             
         ]);
         if($request->file('t_file')){
-            $DataTask['t_file'] = $request->file('t_file')->store('task-file');
+            $DataTask['t_file'] = $request->file('t_file')->getClientOriginalName();
+            $request->file('t_file')->storeAs('task-file', $DataTask['t_file']);
         }
         
         $createdTask = Task::create($DataTask);

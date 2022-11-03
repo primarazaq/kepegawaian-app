@@ -86,7 +86,7 @@
       <div class="border-b-4 mb-4"></div>
       <ul class="space-y-2">
 <li>
-   <a href="/pic/home/dashboard" class="{{ Request::is('pic/home/dashboard') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/pic/home/dashboard" class="{{ Request::is('pic/home/dashboard*') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></g></svg>
       {{-- <img src="imgs/Vector.png" alt="" class="w-5"> --}}
       <p class="flex-1 ml-3 whitespace-nowrap text-white">Dashboard</p>
@@ -171,7 +171,7 @@
    </a>
 </li>
 <li> 
-  <a href="/employee/home/mytask" class="{{ Request::is('employee/home/mytask') ? 'active' : '' }} flex items-center p-2 py-1 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+  <a href="/employee/home/mytask" class="{{ Request::is('employee/home/mytask*') ? 'active' : '' }} flex items-center p-2 py-1 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
    <svg version="1.1" class="w-5 fill-white" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    width="31.273px" height="31.273px" viewBox="0 0 31.273 31.273" style="enable-background:new 0 0 31.273 31.273;"
    xml:space="preserve">
@@ -188,7 +188,7 @@
   </a>
 </li>
 <li>
-   <a href="/employee/home/taskcompleted" class="{{ Request::is('employee/home/taskcompleted') ? 'active' : '' }} flex items-center p-2 py-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
+   <a href="/employee/home/taskcompleted" class="{{ Request::is('employee/home/taskcompleted*') ? 'active' : '' }} flex items-center p-2 py-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:opacity-40 dark:hover:bg-black">
       <svg version="1.1" class="w-6 fill-white" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 491.5 491.5" style="enable-background:new 0 0 491.5 491.5;" xml:space="preserve">
 <g>

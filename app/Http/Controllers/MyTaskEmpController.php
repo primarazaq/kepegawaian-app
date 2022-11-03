@@ -142,79 +142,39 @@ class MyTaskEmpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $task_id)
-    {
-        $rules =[
-            'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
-            'response_body' => 'required',
-            'submit' => 'required'
-        ];
-
-        $validatedData = $request->validate($rules);
-
-        
-        if($request->file('response_file')){
-            if($request->old_file){
-                Storage::delete($request->old_file);
+    public function update(Request $request, $id)
+    {  
+        $task = Task::where('id', $id)->first();
+        if ($request->response_body) {
+            $rules =[
+                'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
+                'response_body' => 'required'
+            ];
+    
+            $validatedData = $request->validate($rules);
+    
+            if($request->file('response_file')){
+                if($request->old_file){
+                    Storage::delete($request->old_file);
+                }
+                $validatedData['response_file'] = $request->file('response_file')->getClientOriginalName();
+                $request->file('response_file')->storeAs('task-file', $validatedData['response_file']);
             }
-            $validatedData['response_file'] = $request->file('response_file')->store('task-file');
+            
+            Reply::where('id', $id)
+                ->update($validatedData);
+
+            return redirect('/employee/home/mytask/'. $request->task_id)->with('success','Response berhasil diubah!');
+            
+        } else {
+            Task::where('id', $id)
+                ->update(['t_status' => 'completed']);
+                return redirect('/employee/home/taskcompleted/'. $task->id)->with('success','Status task berhasil diubah!');
         }
         
-        $task = DB::table('user_tasks')->select('submit')->where('task_id', $task_id)->get();
-        // dd($task);
-        if (count($task)>1) {
-            UserTask::where('task_id',$task_id)
-                    ->where('user_sender_id',$request['user_sender_id'])
-                    ->where('user_receiver_id',auth()->user()->id)
-                    ->update($validatedData);
-
-                    $receiver_id = auth()->user()->id;
-                    $task2 = DB::table('user_tasks')->select('submit')->where('task_id', $task_id)->get();
-                    $checkData = new Collection();
-
-                    foreach ($task2 as $items) {
-                        foreach ($items as $item) {
-                            $checkData->push($item);
-                        }
-                    }
-                    // dd($checkData);
-                        if (count($checkData) == 2 ) {
-                            if ($checkData[0] == 1 && $checkData[1] == 1) {
-                                Task::where('id', $task_id)
-                                    ->update(['t_status' => 'completed']);
-                                    UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
-                            }
-                        } elseif (count($checkData) == 3) {
-                            if ($checkData[0] == 1 && $checkData[1] == 1 && $checkData[2] == 1) {
-                                Task::where('id', $task_id)
-                                    ->update(['t_status' => 'completed']);
-                                    UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
-                            }
-                        } elseif (count($checkData) == 4) {
-                            if ($checkData[0] == 1 && $checkData[1] == 1 && $checkData[2] == 1 && $checkData[3] == 1) {
-                                Task::where('id', $task_id)
-                                    ->update(['t_status' => 'completed']);
-                                    UserTask::where('task_id', $task_id)->where('user_receiver_id',$receiver_id)->update(['submit' => true]);
-                            }
-                        } 
-        } else {
-
-            UserTask::where('task_id',$task_id)
-                    ->where('user_sender_id',$request['user_sender_id'])
-                    ->where('user_receiver_id',auth()->user()->id)
-                    ->update($validatedData);
-                    
-            Task::where('id', $task_id)
-                ->update(['t_status' => 'completed']);
-        }
-
-
         
 
         // dd($validatedData);
-        return redirect('/employee/home/mytask')->with('success','Task Berhasil dikirimkan!');
-
-
         
     }
 
@@ -226,6 +186,12 @@ class MyTaskEmpController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reply = Reply::where('id',$id)->first();
+        if ($reply->response_file){
+            Storage::delete('task-file/'.$reply->response_file);
+        }
+        Reply::destroy($id);
+
+        return redirect('/employee/home/mytask/'. $reply->task_id)->with('destroy','Response berhasil dihapus!');
     }
 }
