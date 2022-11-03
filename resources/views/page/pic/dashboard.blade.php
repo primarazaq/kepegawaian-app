@@ -146,10 +146,12 @@
                                 ?>
                             </td>
                             <td class="py-4 px-6">
-                                <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button" data-modal-toggle="modalTaskDetail-{{ $data->task_id }}">
+                                <a href="/pic/home/dashboard/{{ $data->task_id }}">
+                                <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button">
                                     Detail
                                     </button> 
-                                @include('modal.detailTaskPIC')
+                                </a>
+                                {{-- @include('modal.detailTaskPIC') --}}
                                 {{-- <img src="{{ asset('storage/' . $data->t_file)  }}" alt=""> --}}
                             </td>
                             <td class="py-4 px-6">

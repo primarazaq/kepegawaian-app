@@ -6,14 +6,14 @@
      <p class="text-black font-medium pt-4">
         Home /
     </p>
-    <a href="/employee/home/mytask" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 hover:text-teal-600">
-        My Task
+    <a href="/pic/home/dashboard" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 hover:text-teal-600">
+        Dashboard
     </a>
     <p class="-ml-3 text-black font-medium pt-4 ">
         /
     </p>
     <a href="" class="text-mainclr font-extrabold pt-4 ml-1 mr-4 underline hover:text-teal-600">
-        Progress My Task
+        Detail Task
     </a>
 </div>
 <div class="px-6 py-3 ">
@@ -54,7 +54,7 @@
                     })
                   );</script>
     </div>
-    <div class="flex justify-between"> 
+    <div class="flex justify-between">
         <div class="border-b-2 w-full">
             <div class="items-start p-4 border-b dark:border-gray-600">
                 <h3 class="font-extrabold text-gray-900 ml-3 text-3xl dark:text-white">
@@ -113,82 +113,6 @@
                             </td>
                             
                         </tr>
-                </tbody>
-            </table>
-            <div>
-                <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" data-modal-toggle="popup-modal-doneEMP">
-                    Tandai selesai!
-                </button>
-                @include('modal.validateDoneEMP')
-            </div>
-        </div>
-        <div class="inline-flex border-l-2 border-b-2 py-2 pr-20 pl-4">
-            <div class="space-y-3">
-                <h2 class="text-xl text-left font-extrabold">Contribution</h2>
-                <div class="ml-1 space-y-1">
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
-                        </div>
-                    </div>
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
-                        </div>
-                    </div>
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
-                        </div>
-                    </div>
-                    <div class="flex rounded-lg w-fit bg-teal-200 dark:bg-mainclr items-center text-center px-2 py-1">
-                        <img src="/../../../imgs/avatar.png" class="w-5 h-5" alt="profile">
-                        <div class="inline-flex ml-1">
-                            <p class="text-base font-bold">Hilman</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-                    {{-- @endif
-
-                    <tr class="bg-white dark:bg-gray-800">
-                        <th scope="row" class=" w-36 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Deadline
-                        </th>
-                        <td class="w-10 text-center">
-                            :
-                        </td>
-                        <td class="py-2 text-red-600">
-                            &nbsp;{{ $date=date('l, d F Y, H.i A',strtotime($task->t_due_date)) }}
-                        </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class=" w-36 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Sumber Tugas
-                        </th>
-                        <td class="w-10 text-center">
-                            :
-                        </td>
-                        <td class="py-2">
-                            &nbsp;PIC - {{ $task->pembuat_task }}
-                        </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class=" w-36 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Status
-                        </th>
-                        <td class="w-10 text-center">
-                            :
-                        </td>
-                        <td class="py-2">
-                            <?php 
-                                    //switch ($task->t_status) {
-                                        //case 'completed':
                         <tr class="bg-white dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class=" w-36 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Status
@@ -230,11 +154,13 @@
                         </tr>
                 </tbody>
             </table>
-            <form method="post" action="/employee/home/mytask/{{ $task->task_id }}">
-                @method('put')
-                @csrf
-                <button type="submit" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tandai selesai!</button>
-            </form>
+            <div class="flex">
+                <a href="/pic/home/dashboard/{{ $task->task_id }}/edit">
+                <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Edit Task</button>
+                 </a>
+                <button type="button" data-modal-toggle="deleteTaskPIC-{{ $task->task_id }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Delete Task</button>
+                @include('modal.deleteTaskDetailPIC')
+            </div>
         </div>
         <div class="inline-flex border-l-2 border-b-2 py-2 pr-20 pl-4">
             <div class="space-y-3">
@@ -256,7 +182,7 @@
             </div>
         </div>
     </div>
-    
+
 @if (count($reply) > 0 ) 
 @foreach ($reply as $data)
 <div class="w-full h-fit my-4 rounded-lg shadow-md bg-white border-t-mainclr border-t-2 mb-5">
@@ -267,7 +193,7 @@
             @foreach ($user as $item)
                 @if ($item->id === $data->user_receiver_id)
                 <h2 class="text-xl font-extrabold pt-3">{{ $item->name }}</h2>
-                    @if ($data->user_receiver_id === auth()->user()->id)
+                @if ($data->user_receiver_id === auth()->user()->id)
                         <div class="inline-flex mr-3">
                             <button id="dropdownProgEMP" data-dropdown-toggle="dropdownProg-{{ $data->id }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-mainclr hover:fill-teal-600" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M384 480c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0zM224 352c-6.7 0-13-2.8-17.6-7.7l-104-112c-6.5-7-8.2-17.2-4.4-25.9s12.5-14.4 22-14.4l208 0c9.5 0 18.2 5.7 22 14.4s2.1 18.9-4.4 25.9l-104 112c-4.5 4.9-10.9 7.7-17.6 7.7z"/></svg>
@@ -289,7 +215,7 @@
             </div>
 
             <div id="new{{ $data->id }}" hidden>
-                <form method="post" action="/employee/home/mytask/{{ $data->id }}" enctype="multipart/form-data">
+                <form method="post" action="/pic/home/dashboard/{{ $data->id }}" enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     <input type="hidden" value="{{ $data->task_id }}" name="task_id" hidden>
@@ -388,7 +314,6 @@
         });
     });
 </script>
-
 @endforeach
 @else
     <div class="text-center mb-24 mt-4 pt-9">
@@ -396,12 +321,11 @@
     </div>
 @endif
 
-
 <div class="w-full h-fit px-4 rounded-lg shadow-md bg-white border-t-mainclr border-t-2">
     <div class="flex">
         <div class="w-full mr-3">
             <h2 class="text-xl font-extrabold pt-3">Buat Respon Baru</h2>
-            <form method="post" action="/employee/home/mytask" enctype="multipart/form-data">
+            <form method="post" action="/pic/home/dashboard" enctype="multipart/form-data">
                 @csrf
                 <div class="hidden">
                         <input type="hidden" name="task_id" value="{{ $task->task_id }}" hidden>
@@ -429,6 +353,7 @@
 </form>
     {{-- --- --}}
 </div>
+
 <script>
     //nonaktif add file trix
     document.addEventListener('trix-file-accept', function(e){

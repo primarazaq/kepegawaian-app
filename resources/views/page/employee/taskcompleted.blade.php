@@ -105,13 +105,14 @@
                                     }
                                 ?>
 						</td>
-						
+						<form action="/employee/home/taskcompleted/{{ $data->t_id }}">
                         <td class="py-4 px-6">
-                            <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button" data-modal-toggle="modalTaskComplt-{{ $data->t_id }}">
+                            <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="submit">
                                 Detail
                                 </button> 
-                            @include('modal.taskcompleted')
+                            {{-- @include('modal.taskcompleted') --}}
                         </td>
+                        </form>
 					</tr>
                     @endforeach
 				</tbody>
