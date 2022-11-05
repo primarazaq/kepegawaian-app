@@ -23,7 +23,7 @@ class MyTaskEmpController extends Controller
     {
         $task = DB::table('users as a')
                     ->select('b.t_due_date', 'a.id as receiver_id', 'a.name as receiver_name', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name')
-                    ->where('c.user_receiver_id',auth()->user()->id)->where('b.t_status', 'in progress')
+                    ->where('b.t_status', 'in progress')->orWhere('b.t_status', 'created')->where('c.user_receiver_id',auth()->user()->id)
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')

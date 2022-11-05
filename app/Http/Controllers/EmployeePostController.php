@@ -50,8 +50,8 @@ class EmployeePostController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|regex:/^[\pL\s\-]+$/u',
             'tgl_lhr' => 'required',
-            'nip' => 'required|unique:users|digits_between:0,9',
-            'password' => 'required',
+            'nip' => 'required|unique:users|regex:/^[a-zA-Z0-9 ]+$/|max:15',
+            'password' => 'required|max:50',
             'level' => 'required'
         ]);
 
@@ -105,7 +105,7 @@ class EmployeePostController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u|max:100',
             'tgl_lhr' => 'required',
             'level' => 'required'
         ];
@@ -121,7 +121,7 @@ class EmployeePostController extends Controller
         $user = User::find($id);
 
         if($request->nip != $user->nip){
-            $rules['nip'] = 'required|unique:users|digits_between:0,9' ;
+            $rules['nip'] = 'required|unique:users|regex:/^[a-zA-Z0-9 ]+$/|max:15' ;
         }
         // if($request->nip != $id){
         //     $rules['nip'] = 'required|unique:users|digits_between:0,9' ;

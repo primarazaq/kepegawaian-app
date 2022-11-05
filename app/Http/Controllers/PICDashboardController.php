@@ -53,7 +53,7 @@ class PICDashboardController extends Controller
                         // dd($days);
                         if ($days <= 0 || $hours < 0 || $minutes < 0) {
                             Task::where('id', $task_id)
-                                ->update(['t_status' => 'uncompleted']);
+                                ->update(['t_status' => 'overdue']);
                         }
                     }
        

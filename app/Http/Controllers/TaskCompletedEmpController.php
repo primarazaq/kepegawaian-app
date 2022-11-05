@@ -18,7 +18,7 @@ class TaskCompletedEmpController extends Controller
     {
         $task = DB::table('users as a')
                     ->select('b.t_due_date', 'a.id as receiver_id', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name', 'b.updated_at', DB::raw('group_concat(a.name) as name'))
-                    ->where('c.user_receiver_id',auth()->user()->id)->where('b.t_status', 'completed')->orWhere('b.t_status', 'uncompleted')
+                    ->where('c.user_receiver_id',auth()->user()->id)->where('b.t_status', 'completed')->orWhere('b.t_status', 'overdue')
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
