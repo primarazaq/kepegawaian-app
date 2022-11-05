@@ -32,9 +32,10 @@
     </div>
     <img src="../../imgs/hiasan3.png" class="w-80" alt="">
 </div>
-<div class="mx-auto w-11/12 border-4 shadow-md border-t-mainclr">
+
     {{-- flex 1 --}}
     @if ($taskList->has(0))
+    <div class="mx-auto w-11/12 border-4 shadow-md border-t-mainclr">
         @foreach ($taskList as $data)
         <?php 
         //calculate time left
@@ -73,16 +74,19 @@
                     ?>
                 </div>
             </div>
-            <div class="mx-auto items-center">
-                <button type="submit" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1 mr-2 mt-11">Kerjakan</button>
+            <div class="mx-auto my-auto">
+                <button type="submit" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1">Kerjakan</button>
             </div>
         </form> 
         </div> 
         {{-- @include('modal.mytask') --}}
-        @endforeach
-    @else
-        Saat ini belum ada tugas untuk anda
-    @endif
-    
-</div>
+        @endforeach  
+    </div>
+        @else
+        <div class="mx-auto w-11/12 border-4 shadow-md border-t-mainclr">
+        </div>  
+            <h1 class="mt-5 mx-auto text-center font-bold text-lg">Saat ini belum ada tugas untuk anda...</h1>
+            <img src="../../../imgs/EmptyInbox.png" class="mx-auto w-96 py-9" alt="tugas kosong">
+        
+        @endif
 @endsection
