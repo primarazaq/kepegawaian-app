@@ -118,6 +118,14 @@
                             <td class="py-4 px-6" style="width:12%">
                                 <?php 
                                     switch ($data->t_status) {
+                                        case 'active':
+                                            ?>
+                                        <div class="bg-green-400 py-1 mx-auto rounded-2xl text-white">
+                                            <div class="text-center">
+                                                <p>Active</p>
+                                            </div>
+                                        </div> <?php
+                                        break;
                                         case 'completed':
                                         ?>
                                             <div class="bg-mainclr py-1 mx-auto rounded-2xl text-white">
@@ -134,14 +142,17 @@
                                             </div>
                                         </div> <?php
                                         break;
-                                        case 'uncompleted':
-                                            ?>
-                                        <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
-                                            <div class="text-center">
-                                                <p>Uncompleted</p>
+                                        case 'overdue':
+                                        ?>
+                                        <div class="flex">
+                                            <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
+                                                <div class="text-center">
+                                                    <p>Completed</p>
+                                                </div>
                                             </div>
+                                            {{-- <p class="text-red-600">*overdue</p> --}}
                                         </div> <?php
-                                        break;
+                                            break;
                                     }
                                 ?>
                             </td>
