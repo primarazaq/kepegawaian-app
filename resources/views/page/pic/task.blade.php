@@ -69,7 +69,7 @@
                 Status
             </div>
             <div class="font-extrabold text-lg ml-5">
-                <input type="text" value="in progress" name="t_status" class="block bg-white border-white" readonly>
+                <input type="text" value="active" name="t_status" class="block bg-white border-white" readonly>
             </div>
         </div>
         <div class="flex mb-4">
