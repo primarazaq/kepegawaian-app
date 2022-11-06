@@ -35,7 +35,7 @@ class EmployeeController extends Controller
         // $taskInProgress = Task::where('t_status', 'in progress')->get();
         $taskInProgress = DB::table('tasks as b')->select('b.id','b.t_status')->where('c.user_receiver_id' , auth()->user()->id)->where('t_status', 'in progress')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->get();
         // $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
-        $taskUncompleted = DB::table('tasks as b')->select('b.id','b.t_status')->where('c.user_receiver_id' , auth()->user()->id)->where('t_status', 'uncompleted')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->get();
+        $taskUncompleted = DB::table('tasks as b')->select('b.id','b.t_status')->where('c.user_receiver_id' , auth()->user()->id)->where('t_status', 'overdue')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->get();
 
         
         // $deadline = Task::

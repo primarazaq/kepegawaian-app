@@ -123,6 +123,14 @@
                             <td class="py-2">
                                 <?php 
                                     switch ($task->t_status) {
+                                        case 'created':
+                                        ?>
+                                            <div class="bg-green-400 py-1 w-28 rounded-2xl text-white">
+                                                <div class="text-center">
+                                                    <p>Created</p>
+                                                </div>
+                                            </div> <?php
+                                            break;
                                         case 'completed':
                                         ?>
                                             <div class="bg-mainclr py-1 w-28 rounded-2xl text-white">
@@ -139,11 +147,11 @@
                                             </div>
                                         </div> <?php
                                         break;
-                                        case 'uncompleted':
+                                        case 'overdue':
                                             ?>
                                         <div class="bg-red-600 py-1 w-28 rounded-2xl text-white">
                                             <div class="text-center">
-                                                <p>Uncompleted</p>
+                                                <p>Completed</p>
                                             </div>
                                         </div> <?php
                                         break;

@@ -65,7 +65,7 @@
     <div class="flex-1 p-5 mr-7 max-w-sm h-44 bg-mainclr bg-opacity-60 rounded-lg border border-gray-200 shadow-md">
         <div class="flex">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 ml-8 absolute fill-white" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/></svg>
-            <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Uncompleted Task</h5>
+            <h5 class="text-2xl font-extrabold text-white mx-auto dark:text-grey">Overdue Task</h5>
         </div>
         <div class="font-extrabold text-5xl mt-9 p-4 text-center text-red-600 dark:text-gray-400">
             <p>{{ count($taskUncompleted) }} Task</p>
@@ -155,33 +155,44 @@
                             </td> --}}
                             <td class="py-4 px-6">
                                 <?php 
-                                    switch ($data->t_status) {
-                                        case 'completed':
+                                switch ($data->t_status) {
+                                    case 'created':
                                         ?>
-                                            <div class="bg-mainclr mx-auto py-1 rounded-2xl text-white">
-                                                <div class="text-center">
-                                                    <p>Completed</p>
-                                                </div>
-                                            </div> <?php
-                                            break;
-                                        case 'in progress':
-                                            ?>
-                                            <div class="bg-yellow-400 py-1 mx-auto rounded-2xl text-white">
+                                    <div class="bg-green-400 py-1 mx-auto rounded-2xl text-white">
+                                        <div class="text-center">
+                                            <p>Created</p>
+                                        </div>
+                                    </div> <?php
+                                    break;
+                                    case 'completed':
+                                    ?>
+                                        <div class="bg-mainclr py-1 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
-                                                <p>In Progress</p>
+                                                <p>Completed</p>
                                             </div>
                                         </div> <?php
                                         break;
-                                        case 'uncompleted':
-                                            ?>
-                                            <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
+                                    case 'in progress':
+                                        ?>
+                                        <div class="bg-yellow-400 py-1 mx-auto rounded-2xl text-white">
+                                        <div class="text-center">
+                                            <p>In Progress</p>
+                                        </div>
+                                    </div> <?php
+                                    break;
+                                    case 'overdue':
+                                    ?>
+                                    <div class="flex">
+                                        <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
-                                                <p>Uncompleted</p>
+                                                <p>Completed</p>
                                             </div>
-                                        </div> <?php
+                                        </div>
+                                        {{-- <p class="text-red-600">*overdue</p> --}}
+                                    </div> <?php
                                         break;
-                                    }
-                                ?>
+                                }
+                            ?>
                             </td>
                             <td class="py-4 px-6">
                                 <a href="/admin/home/dashboard/{{ $data->task_id }}">

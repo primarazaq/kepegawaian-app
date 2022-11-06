@@ -68,8 +68,8 @@
             <div class="mr-14 font-extrabold text-lg ml-5 text-gray-500">
                 Status
             </div>
-            <div class="font-extrabold text-lg ml-5">
-                <input type="text" value="active" name="t_status" class="block bg-white border-white" readonly>
+            <div class="font-extrabold text-lg ml-5 -mt-2">
+                <input type="text" value="created" name="t_status" class="block bg-white border-white" readonly>
             </div>
         </div>
         <div class="flex mb-4">

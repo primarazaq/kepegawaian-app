@@ -47,14 +47,14 @@ class TaskPostController extends Controller
                         // dd($days);
                         if ($days <= 0 || $hours < 0 || $minutes < 0) {
                             Task::where('id', $task_id)
-                                ->update(['t_status' => 'uncompleted']);
+                                ->update(['t_status' => 'overdue']);
                         }
                     }
 
         $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $taskCompleted = Task::where('t_status', 'completed')->get();
         $taskInProgress = Task::where('t_status', 'in progress')->get();
-        $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
+        $taskUncompleted = Task::where('t_status', 'overdue')->get();
 
         return view('page.admin.dashboard', [
             'taskList' => $task, 
