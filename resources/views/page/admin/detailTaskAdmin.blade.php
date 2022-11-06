@@ -141,7 +141,7 @@
                                             break;
                                         case 'in progress':
                                             ?>
-                                            <div class="bg-yellow-400 py-1 rounded-2xl text-white w-28">
+                                            <div class="bg-yellow-400 py-1 rounded-2xl text-white w-32">
                                             <div class="text-center">
                                                 <p>In Progress</p>
                                             </div>
@@ -149,9 +149,9 @@
                                         break;
                                         case 'overdue':
                                             ?>
-                                        <div class="bg-red-600 py-1 w-28 rounded-2xl text-white">
+                                        <div class="bg-red-600 py-1 w-32 rounded-2xl text-white">
                                             <div class="text-center">
-                                                <p>Completed</p>
+                                                <p>Uncompleted</p>
                                             </div>
                                         </div> <?php
                                         break;

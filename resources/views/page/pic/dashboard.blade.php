@@ -120,7 +120,7 @@
                                     switch ($data->t_status) {
                                         case 'created':
                                             ?>
-                                        <div class="bg-green-400 py-1 mx-auto rounded-2xl text-white">
+                                        <div class="bg-green-400 py-1 px-5 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
                                                 <p>Created</p>
                                             </div>
@@ -128,7 +128,7 @@
                                         break;
                                         case 'completed':
                                         ?>
-                                            <div class="bg-mainclr py-1 mx-auto rounded-2xl text-white">
+                                            <div class="bg-mainclr py-1 px-5 mx-auto rounded-2xl text-white">
                                                 <div class="text-center">
                                                     <p>Completed</p>
                                                 </div>
@@ -136,7 +136,7 @@
                                             break;
                                         case 'in progress':
                                             ?>
-                                            <div class="bg-yellow-400 py-1 mx-auto rounded-2xl text-white">
+                                            <div class="bg-yellow-400 py-1 px-5 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
                                                 <p>In Progress</p>
                                             </div>
@@ -145,9 +145,9 @@
                                         case 'overdue':
                                         ?>
                                         <div class="flex">
-                                            <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
+                                            <div class="bg-red-600 py-1 px-5 mx-auto rounded-2xl text-white">
                                                 <div class="text-center">
-                                                    <p>Completed</p>
+                                                    <p>Uncompleted</p>
                                                 </div>
                                             </div>
                                             {{-- <p class="text-red-600">*overdue</p> --}}
