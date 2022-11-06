@@ -19,7 +19,7 @@
 <div class="px-6 py-3 ">
     <div>
         @if (session()->has('destroy'))
-                <div id="alert-3" class="flex justify-between w-11/12 mx-auto p-4 mb-4 bg-green-100 rounded-lg dark:bg-green-200" role="alert">
+                <div id="alert-3" class="flex justify-between w-full mx-auto p-4 mb-4 bg-green-100 rounded-lg dark:bg-green-200" role="alert">
                         <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-700 dark:text-green-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                         <span class="sr-only">Info</span>
                         <div class="ml-3 text-sm font-medium text-green-700 dark:text-green-800">
@@ -34,7 +34,7 @@
                               
             @elseif (session()->has('success'))
 
-                <div id="alert-3" class="flex justify-between w-11/12 mx-auto p-4 mb-4 bg-green-100 rounded-lg dark:bg-green-200" role="alert">
+                <div id="alert-3" class="flex justify-between w-full mx-auto p-4 mb-4 bg-green-100 rounded-lg dark:bg-green-200" role="alert">
                     <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-700 dark:text-green-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                     <span class="sr-only">Info</span>
                     <div class="ml-3 text-sm font-medium text-green-700 dark:text-green-800">
@@ -141,7 +141,7 @@
                                             break;
                                         case 'in progress':
                                             ?>
-                                            <div class="bg-yellow-400 py-1 rounded-2xl text-white w-28">
+                                            <div class="bg-yellow-400 py-1 rounded-2xl text-white w-32">
                                             <div class="text-center">
                                                 <p>In Progress</p>
                                             </div>
@@ -149,9 +149,9 @@
                                         break;
                                         case 'overdue':
                                             ?>
-                                        <div class="bg-red-600 py-1 w-28 rounded-2xl text-white">
+                                        <div class="bg-red-600 py-1 w-32 rounded-2xl text-white">
                                             <div class="text-center">
-                                                <p>Completed</p>
+                                                <p>Uncompleted</p>
                                             </div>
                                         </div> <?php
                                         break;
@@ -170,7 +170,7 @@
                 @include('modal.deleteTaskDetailPIC')
             </div>
         </div>
-        <div class="inline-flex border-l-2 border-b-2 py-2 pr-20 pl-4">
+        <div class="inline-flex border-l-2 border-b-2 w-80 py-2 pl-4">
             <div class="space-y-3">
                 <h2 class="text-xl text-left font-extrabold">Contribution</h2>
                 <div class="ml-1 space-y-1">
@@ -212,11 +212,22 @@
                 @endif
             @endforeach
             </div>
-            <div id="old{{ $data->id }}">
-                <p class="w-full ml-9 text-base mr-2 font-medium"><?php echo $data->response_body ?></p>
+            <div class="ml-7" id="old{{ $data->id }}">
+                <p class="w-full text-base mr-2 font-medium"><?php echo $data->response_body ?></p>
                 @if ($data->response_file)
                 <div class="flex ">
-                    <p class="text-base mr-2 font-medium">Lampiran File :</p><br>
+                    <svg version="1.1" id="Layer_1" class="w-5 h-5 fill-mainclr" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path d="M256,0c-54.013,0-97.955,43.943-97.955,97.955v338.981c0,41.39,33.674,75.064,75.064,75.064
+                                    c41.39,0,75.064-33.674,75.064-75.064V122.511c0-28.327-23.046-51.375-51.375-51.375c-28.327,0-51.374,23.047-51.374,51.375
+                                    v296.911h31.347V122.511c0-11.042,8.984-20.028,20.028-20.028s20.028,8.985,20.028,20.028v314.424
+                                    c0,24.106-19.612,43.717-43.718,43.717c-24.106,0-43.717-19.612-43.717-43.717V97.955c0-36.727,29.88-66.608,66.608-66.608
+                                    s66.608,29.881,66.608,66.608v321.467h31.347V97.955C353.955,43.943,310.013,0,256,0z"/>
+                            </g>
+                        </g>
+                    </svg>
                      <a href="{{ asset('storage/task-file/'.$data->response_file) }}" class="text-base font-medium text-mainclr dark:text-teal-500 hover:underline">lihat file</a>
                     </div>
                      @endif
@@ -324,8 +335,9 @@
 </script>
 @endforeach
 @else
-    <div class="text-center mb-24 mt-4 pt-9">
-        <h5>Belum ada response...</h5>
+    <div>
+        <h1 class="mt-5 mx-auto text-center font-bold text-lg">Belum ada respon dari pegawai...</h1>
+        <img src="../../../imgs/Conversation.png" class="mx-auto w-96 py-9" alt="komentar kosong">
     </div>
 @endif
 

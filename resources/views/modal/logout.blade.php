@@ -30,7 +30,7 @@
     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="p-6 text-center">
-                <img src="../../imgs/logoutImg.png" class="w-24 mx-auto" alt="">
+                <img src="../../../../imgs/logoutImg.png" class="w-24 mx-auto" alt="">
                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah anda yakin ingin keluar dari sistem?</h3>
                   <div class="flex justify-center">
                     <button data-modal-toggle="logoutModal" type="button" class="text-gray-50 mr-8 bg-gray-400 hover:bg-gray-100 rounded-3xl border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">

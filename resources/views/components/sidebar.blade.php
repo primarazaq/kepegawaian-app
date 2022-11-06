@@ -80,7 +80,7 @@
 <aside class="w-56 rounded" aria-label="Sidebar">
    <div class="overflow-y-auto py-4 px-3 bg-[#00A2BA] dark:bg-gray-800 h-screen">
       <div href="/home" class="flex items-center pl-2.5 mb-6 mt-2 w-10">
-         <img src="../../../imgs/logopln.png" class="w-8" alt="logoPIC">
+         <img src="../../../../imgs/logopln.png" class="w-8" alt="logoPIC">
          <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white ml-5">ETM System</span>
       </div>
       <div class="border-b-4 mb-4"></div>
@@ -243,7 +243,7 @@
           l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
           c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z"/>
           </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-          {{-- <img src="imgs/logout.png" alt="" class="w-6 absolute ml-11"> --}}
+          {{-- <img src="../../../imgs/logoutImg.png" alt="" class="w-6 absolute ml-11"> --}}
           <p class="inline-block whitespace-nowrap ml-10 text-white">Logout</p>
       </button>
   </div>
