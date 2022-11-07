@@ -144,15 +144,12 @@
                                         break;
                                         case 'overdue':
                                         ?>
-                                        <div class="flex">
                                             <div class="bg-red-600 py-1 px-5 mx-auto rounded-2xl text-white">
                                                 <div class="text-center">
-                                                    <p>Uncompleted</p>
+                                                    <p>Completed</p>
                                                 </div>
-                                            </div>
-                                            {{-- <p class="text-red-600">*overdue</p> --}}
-                                        </div> <?php
-                                            break;
+                                            </div> <?php
+                                        break;
                                     }
                                 ?>
                             </td>

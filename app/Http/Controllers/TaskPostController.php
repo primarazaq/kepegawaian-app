@@ -27,6 +27,17 @@ class TaskPostController extends Controller
 
                     $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
                     
+                    foreach ($task as $item) {
+                        $reply = Task::find($item->task_id)->replies;
+                        if (count($reply) == 1) {
+                            Task::where('id', $item->task_id)
+                                ->update(['t_status' => 'in progress']);
+                        } elseif (count($reply) == 0) {
+                            Task::where('id', $item->task_id)
+                                ->update(['t_status' => 'created']);
+                        }
+                    }
+
                     //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
 
                     foreach ($deadline as $item) {
@@ -115,6 +126,15 @@ class TaskPostController extends Controller
         ->first();
         $reply = Task::find($id)->replies;
         $users = User::all();
+
+        if (count($reply) == 1) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'in progress']);
+        } elseif (count($reply) == 0) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'created']);
+        }
+
         // dd($task);
         return view('page.admin.detailTaskAdmin', [
         'task' => $task,

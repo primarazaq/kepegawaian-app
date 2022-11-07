@@ -149,11 +149,16 @@
                                         break;
                                         case 'overdue':
                                             ?>
-                                        <div class="bg-red-600 py-1 w-32 rounded-2xl text-white">
-                                            <div class="text-center">
-                                                <p>Uncompleted</p>
-                                            </div>
-                                        </div> <?php
+                                            <div class="flex">
+                                                <div class="bg-red-600 py-1 w-32 rounded-2xl text-white">
+                                                    <div class="text-center">
+                                                        <p>Completed</p>
+                                                    </div>
+                                                </div>
+                                                <div class="text-red-600 ml-2 mt-1">
+                                                    <p>*Overdue</p>
+                                                </div>
+                                            </div> <?php
                                         break;
                                     }
                                 ?>

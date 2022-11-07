@@ -27,11 +27,23 @@ class MyTaskEmpController extends Controller
                     ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
                     ->join('tasks as b', 'b.id', '=', 'c.task_id')
                     ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+                    ->groupBy('b.id')
                     ->orderBy('b.id' , 'asc')
                     ->get();
         
                     $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
-                    
+
+                    foreach ($task as $item) {
+                        $reply = Task::find($item->t_id)->replies;
+                        if (count($reply) == 1) {
+                            Task::where('id', $item->t_id)
+                                ->update(['t_status' => 'in progress']);
+                        } elseif (count($reply) == 0) {
+                            Task::where('id', $item->t_id)
+                                ->update(['t_status' => 'created']);
+                        }
+                    }
+
                     //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
                     if ($deadline->has('id')){
                         foreach ($deadline as $item) {
@@ -52,7 +64,7 @@ class MyTaskEmpController extends Controller
                             // dd($days);
                             if ($days <= 0 || $hours < 0 || $minutes < 0) {
                                 Task::where('id', $task_id)
-                                    ->update(['t_status' => 'uncompleted']);
+                                    ->update(['t_status' => 'overdue']);
                             }
                         }
                 }
@@ -114,9 +126,17 @@ class MyTaskEmpController extends Controller
                     ->groupBy('c.task_id')
                     ->orderBy('b.id' , 'asc')
                     ->first();
-        $reply = Task::find($id)->replies;
+
         $users = User::all();
-        // dd($task);
+        $reply = Task::find($id)->replies;
+        if (count($reply) == 1) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'in progress']);
+        } elseif (count($reply) == 0) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'created']);
+        }
+
         return view('page.employee.ProgMyTask', [
             'task' => $task,
             'user' => $users,

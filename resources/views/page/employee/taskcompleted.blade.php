@@ -94,25 +94,25 @@
                                             </div>
                                         </div> <?php
                                         break;
-                                        case 'uncompleted':
+                                        case 'overdue':
                                             ?>
                                         <div class="bg-red-600 py-1 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
-                                                <p>Uncompleted</p>
+                                                <p>Completed</p>
                                             </div>
                                         </div> <?php
                                         break;
                                     }
                                 ?>
 						</td>
-						<form action="/employee/home/taskcompleted/{{ $data->t_id }}">
                             <td class="py-4 px-6">
-                                <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="submit">
+                                <a href="/employee/home/taskcompleted/{{ $data->t_id }}">
+                                <button class="block w-full md:w-auto rounded-lg text-lg mx-auto text-center font-medium text-mainclr dark:text-teal-500 hover:underline" type="button">
                                     Detail
-                                    </button> 
+                                    </button> </a>
                                 {{-- @include('modal.taskcompleted') --}}
                             </td>
-                        </form>
+                        
 					</tr>
                     @endforeach
 				</tbody>

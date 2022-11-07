@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\UserTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -145,8 +146,31 @@ class EmployeePostController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        $user = User::where('id', $id)->first();
+        // dd($user->level);
+        switch ($user->level) {
+            case 'pic':
+                $pic = UserTask::where('user_sender_id' , $id)->get();
+                if (count($pic) > 0) {
+                    return redirect('/admin/home/employees')->with('failed','Pegawai tidak dapat dinonaktifkan! Hapus tugas yang terkait dengan pegawai terlebih dahulu!');
+                } else {
+                    User::destroy($id);
+                    return redirect('/admin/home/employees')->with('destroy','Pegawai berhasil dinonaktifkan!');
+                }
+            break;
+            case 'employee':
+                $emp = UserTask::where('user_receiver_id' , $id)->get();
+                if (count($emp) > 0) {
+                    return redirect('/admin/home/employees')->with('failed','Pegawai tidak dapat dinonaktifkan! Selesaikan tugas yang terkait dengan pegawai terlebih dahulu!');
+                } else {
+                    User::destroy($id);
+                    return redirect('/admin/home/employees')->with('destroy','Pegawai berhasil dinonaktifkan!');
+                }
+            break;
+            
+        }
+        
         // dd($id);
-        return redirect('/admin/home/employees')->with('destroy','Pegawai berhasil dinonaktifkan!');
+        
     }
 }

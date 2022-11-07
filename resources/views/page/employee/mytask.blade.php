@@ -52,7 +52,7 @@
 
             $date = date(' l, d M Y, H.i A',strtotime($data->t_due_date));
         ?>
-        <form action="/employee/home/mytask/{{ $data->t_id }}">
+        {{-- <form action="/employee/home/mytask/{{ $data->t_id }}"> --}}
         <div class="flex border-b-2 border-black">
             <div class="basis-4/5">
                 <p class="font-extrabold text-2xl ml-4 mt-3">Task {{ $data->t_id }}</p>
@@ -75,9 +75,10 @@
                 </div>
             </div>
             <div class="mx-auto my-auto">
+                <a href="/employee/home/mytask/{{ $data->t_id }}">
                 <button type="submit" class="text-white text-2xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-16 py-1">Kerjakan</button>
-            </div>
-        </form> 
+            </div></a>
+        {{-- </form>  --}}
         </div> 
         {{-- @include('modal.mytask') --}}
         @endforeach  

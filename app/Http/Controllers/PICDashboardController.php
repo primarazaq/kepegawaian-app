@@ -33,6 +33,17 @@ class PICDashboardController extends Controller
 
                     $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
                     
+                    foreach ($task as $item) {
+                        $reply = Task::find($item->task_id)->replies;
+                        if (count($reply) == 1) {
+                            Task::where('id', $item->task_id)
+                                ->update(['t_status' => 'in progress']);
+                        } elseif (count($reply) == 0) {
+                            Task::where('id', $item->task_id)
+                                ->update(['t_status' => 'created']);
+                        }
+                    }
+
                     //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
 
                     foreach ($deadline as $item) {
@@ -128,6 +139,15 @@ class PICDashboardController extends Controller
                     ->first();
         $reply = Task::find($id)->replies;
         $users = User::all();
+
+        if (count($reply) == 1) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'in progress']);
+        } elseif (count($reply) == 0) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'created']);
+        }
+
         // dd($task);
         return view('page.pic.detailTaskPIC', [
             'task' => $task,
@@ -209,12 +229,13 @@ class PICDashboardController extends Controller
                     //jika ada file upload yg baru, maka hapus yg lama simpan ygg baru
                     if($request->file('t_file')){
                         if($request->old_file){
-                            Storage::delete($request->old_file);
+                            Storage::delete('task-file/'.$request->old_file);
                         }
-                        $validatedData['t_file'] = $request->file('t_file')->store('task-file');
+                        $validatedData['t_file'] = $request->file('t_file')->getClientOriginalName();
+                        $request->file('t_file')->storeAs('task-file', $validatedData['t_file']);
                     }
                     Task::where('id',$id)
-                        ->update($validatedData); //update ke table tasks
+                        ->update($validatedData); //update file ke table tasks
             
                         $data = $request->validate([
                             'user_receiver_id' => 'required'
@@ -222,9 +243,21 @@ class PICDashboardController extends Controller
             
                         $data['user_sender_id'] = auth()->user()->id;
                         $data['task_id'] = $id;
-            
+                        
                         $taskID = DB::table('user_tasks')->select('id', 'task_id')->where('task_id',$id)->get();
-                        // dd(count($data['user_receiver_id']));
+                        if (count($data['user_receiver_id']) >= 2) {
+                            $penerimaTask = $data['user_receiver_id'];
+                            $task_id = $data['task_id'];
+                            UserTask::where('task_id', $task_id)->delete();
+                                foreach ($penerimaTask as $item) {
+                                    $DataUserTask = [
+                                        'user_sender_id' => $data['user_sender_id'],
+                                        'task_id' => $data['task_id'],
+                                        'user_receiver_id' => $item
+                                    ];
+                                    UserTask::create($DataUserTask);
+                                } 
+                        }
             
                         
                         //jika data yg penerima hanya 1, maka
@@ -232,69 +265,69 @@ class PICDashboardController extends Controller
                             //hitung dulu tasknya, jika memang task_id cuma 1 maka
                             // ini kasus dari banyak assigne mau jadi 1 assigne aja
                             $penerimaTask = implode(" ",$data['user_receiver_id']);
-                            if (count($taskID) == 1) {
-                                $DataUserTask = [
-                                    'user_sender_id' => $data['user_sender_id'],
-                                    'task_id' => $data['task_id'],
-                                    'user_receiver_id' => $penerimaTask
-                                ];
-                                UserTask::where('task_id',$id)
-                                        ->update($DataUserTask);
-                            }else{ //jika ternyata task_id ini punya beberapa row, maka
-            
-                                //masukin dulu data pertama ke row yg sudah ada
-                                $x = DB::table('user_tasks')->select('id')->where('task_id',$id)->first();
-                                $penerimaTask = implode(" ",$data['user_receiver_id']);
-                                $first = $taskID->whereIn('id', $x);
-                                
-                                foreach ($first as $item) {
+                                if (count($taskID) == 1) {
+                                    $DataUserTask = [
+                                        'user_sender_id' => $data['user_sender_id'],
+                                        'task_id' => $data['task_id'],
+                                        'user_receiver_id' => $penerimaTask
+                                    ];
+                                    UserTask::where('task_id',$id)
+                                            ->update($DataUserTask);
+                                }else{ //jika ternyata task_id ini punya beberapa row, maka
+                
+                                    if (count($data['user_receiver_id']) >= 2) {
+                                            $penerimaTask = $data['user_receiver_id'];
+                                            $task_id = $data['task_id'];
+                                                foreach ($penerimaTask as $item) {
+                                                    UserTask::where('user_receiver_id', $item)->where('task_id',$task_id)->delete();
+                                                }
+                                                foreach ($penerimaTask as $item) {
+                                                    $DataUserTask = [
+                                                        'user_sender_id' => $data['user_sender_id'],
+                                                        'task_id' => $data['task_id'],
+                                                        'user_receiver_id' => $item
+                                                    ];
+                                                    UserTask::create($DataUserTask);
+                                                } 
+                                    } else {
+                                                //masukin dulu data pertama ke row yg sudah ada
+                                            $x = DB::table('user_tasks')->select('id')->where('task_id',$id)->first();
+                                            $penerimaTask = implode(" ",$data['user_receiver_id']);
+                                            $first = $taskID->whereIn('id', $x);
+                                            
+                                            foreach ($first as $item) {
+                                                
+                                                UserTask::where('id', $item->id)->update(['user_receiver_id' => $penerimaTask]);
+                                            }
+                        
+                                            
+                                            //hapus row lainnya
+                                            $final = $taskID->whereNotIn('id',$x);
+                                            // dd($final);
+                                            foreach ($final as $item) {
+                                                // dd($item);
+                                                UserTask::where('id', $item->id)->delete();
+                                            }
+                                    }
                                     
-                                    UserTask::where('id', $item->id)->update(['user_receiver_id' => $penerimaTask]);
+                                    
                                 }
-            
-                                
-                                //hapus row lainnya
-                                $final = $taskID->whereNotIn('id',$x);
-                                // dd($final);
-                                foreach ($final as $item) {
-                                    // dd($item);
-                                    UserTask::where('id', $item->id)->delete();
-                                }
-                                
-                            }
                             
                             
                         }else{
                             $penerimaTask = $data['user_receiver_id'];
-                            $DataUserTask = [
-                                'user_sender_id' => $data['user_sender_id'],
-                                'task_id' => $data['task_id'],
-                                'user_receiver_id' => $penerimaTask[0]
-                            ];
-                            // dd($DataUserTask);
-                            $double = UserTask::where('task_id',$id)->get();
-                                if ($double[0]->id != $penerimaTask[0]) {
-                                    UserTask::where('task_id',$id)
-                                    ->update($DataUserTask);
-                                } 
-            
-                            
-                            // dd($double[0]->id);        
-            
-                            
-                                    
-                            unset($penerimaTask[0]);
-                            $final = array_values($penerimaTask);
-                            // if ($final[0] != $penerimaTask[0]) {
-                                foreach ($final as $item){
-                                    $lastData = [
-                                                'user_sender_id' => $data['user_sender_id'],
-                                                'task_id' => $data['task_id'],
-                                                'user_receiver_id' => $item
-                                            ];
-                                    
-                                            UserTask::create($lastData);
+                            $task_id = $data['task_id'];
+                                foreach ($penerimaTask as $item) {
+                                    UserTask::where('user_receiver_id', $item)->where('task_id',$task_id)->delete();
                                 }
+                                foreach ($penerimaTask as $item) {
+                                    $DataUserTask = [
+                                        'user_sender_id' => $data['user_sender_id'],
+                                        'task_id' => $data['task_id'],
+                                        'user_receiver_id' => $item
+                                    ];
+                                    UserTask::create($DataUserTask);
+                                } 
 
                             }
                             $task = Task::where('id', $id)->first();

@@ -71,6 +71,15 @@ class TaskCompletedEmpController extends Controller
                     ->first();
         $reply = Task::find($id)->replies;
         $users = User::all();
+
+        if (count($reply) == 1) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'in progress']);
+        } elseif (count($reply) == 0) {
+            Task::where('id', $id)
+                ->update(['t_status' => 'created']);
+        }
+
         // dd($task);
         return view('page.employee.detailTaskComp', [
             'task' => $task,

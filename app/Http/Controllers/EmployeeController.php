@@ -15,7 +15,7 @@ class EmployeeController extends Controller
 
     public function dashboard(){
         // $totalTask = Task::all()->select('t_due_date')->latest();
-        $deadline = DB::table('tasks as b')->select('b.id','b.t_due_date')->where('c.user_receiver_id' , auth()->user()->id)->where('b.t_status', 'in progress')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->orderBy('b.t_due_date', 'asc')->get();
+        $deadline = DB::table('tasks as b')->select('b.id','b.t_due_date')->where('c.user_receiver_id' , auth()->user()->id)->where('b.t_status', 'in progress')->orWhere('b.t_status', 'created')->join('user_tasks as c', 'b.id', '=', 'c.task_id')->groupBy('c.task_id')->orderBy('b.t_due_date', 'asc')->get();
         // $case1 = Carbon::parse($deadline[0]->t_due_date)->diffForHumans();
         // dd($deadline);
         if ($deadline->has(2)) {
