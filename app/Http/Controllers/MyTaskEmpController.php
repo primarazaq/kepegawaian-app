@@ -31,43 +31,6 @@ class MyTaskEmpController extends Controller
                     ->orderBy('b.id' , 'asc')
                     ->get();
         
-                    $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
-
-                    foreach ($task as $item) {
-                        $reply = Task::find($item->t_id)->replies;
-                        if (count($reply) == 1) {
-                            Task::where('id', $item->t_id)
-                                ->update(['t_status' => 'in progress']);
-                        } elseif (count($reply) == 0) {
-                            Task::where('id', $item->t_id)
-                                ->update(['t_status' => 'created']);
-                        }
-                    }
-
-                    //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
-                    if ($deadline->has('id')){
-                        foreach ($deadline as $item) {
-
-                            $seconds = strtotime($item->t_due_date) - time();
-
-                            $days = floor($seconds / 86400);
-                            $seconds %= 86400;
-
-                            $hours = floor($seconds / 3600);
-                            $seconds %= 3600;
-
-                            $minutes = floor($seconds / 60);
-                            $seconds %= 60;
-
-                            $task_id = $item->id;
-
-                            // dd($days);
-                            if ($days <= 0 || $hours < 0 || $minutes < 0) {
-                                Task::where('id', $task_id)
-                                    ->update(['t_status' => 'overdue']);
-                            }
-                        }
-                }
         return view('page.employee.mytask', [
             'taskList' => $task
         ]);
@@ -129,13 +92,6 @@ class MyTaskEmpController extends Controller
 
         $users = User::all();
         $reply = Task::find($id)->replies;
-        if (count($reply) == 1) {
-            Task::where('id', $id)
-                ->update(['t_status' => 'in progress']);
-        } elseif (count($reply) == 0) {
-            Task::where('id', $id)
-                ->update(['t_status' => 'created']);
-        }
 
         return view('page.employee.ProgMyTask', [
             'task' => $task,
@@ -187,7 +143,8 @@ class MyTaskEmpController extends Controller
             return redirect('/employee/home/mytask/'. $request->task_id)->with('success','Response berhasil diubah!');
             
         } else {
-            Task::where('id', $id)
+            $now = Carbon::now();
+            Task::where('id', $task->id)
                 ->update(['t_status' => 'completed']);
                 return redirect('/employee/home/taskcompleted/'. $task->id)->with('success','Status task berhasil diubah!');
         }

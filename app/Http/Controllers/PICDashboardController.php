@@ -30,43 +30,6 @@ class PICDashboardController extends Controller
                     ->groupBy('c.task_id')
                     ->orderBy('b.id' , 'asc')
                     ->get();
-
-                    $deadline = DB::table('tasks')->select('id','t_due_date')->orderBy('t_due_date', 'asc')->get(); 
-                    
-                    foreach ($task as $item) {
-                        $reply = Task::find($item->task_id)->replies;
-                        if (count($reply) == 1) {
-                            Task::where('id', $item->task_id)
-                                ->update(['t_status' => 'in progress']);
-                        } elseif (count($reply) == 0) {
-                            Task::where('id', $item->task_id)
-                                ->update(['t_status' => 'created']);
-                        }
-                    }
-
-                    //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
-
-                    foreach ($deadline as $item) {
-
-                        $seconds = strtotime($item->t_due_date) - time();
-
-                        $days = floor($seconds / 86400);
-                        $seconds %= 86400;
-
-                        $hours = floor($seconds / 3600);
-                        $seconds %= 3600;
-
-                        $minutes = floor($seconds / 60);
-                        $seconds %= 60;
-
-                        $task_id = $item->id;
-
-                        // dd($days);
-                        if ($days <= 0 || $hours < 0 || $minutes < 0) {
-                            Task::where('id', $task_id)
-                                ->update(['t_status' => 'overdue']);
-                        }
-                    }
        
         $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $taskCompleted = Task::where('t_status', 'completed')->get();
@@ -139,14 +102,6 @@ class PICDashboardController extends Controller
                     ->first();
         $reply = Task::find($id)->replies;
         $users = User::all();
-
-        if (count($reply) == 1) {
-            Task::where('id', $id)
-                ->update(['t_status' => 'in progress']);
-        } elseif (count($reply) == 0) {
-            Task::where('id', $id)
-                ->update(['t_status' => 'created']);
-        }
 
         // dd($task);
         return view('page.pic.detailTaskPIC', [

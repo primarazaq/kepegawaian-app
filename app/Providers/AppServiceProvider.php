@@ -47,6 +47,42 @@ class AppServiceProvider extends ServiceProvider
                 ->groupBy('c.task_id')
                 ->orderBy('b.t_due_date' , 'desc')
                 ->get();
+
+                $deadline = DB::table('tasks')->select('id','t_due_date','t_status')->orderBy('t_due_date', 'asc')->get(); 
+                    
+                //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
+
+                foreach ($deadline as $item) {
+
+                    $seconds = strtotime($item->t_due_date) - time();
+
+                    $days = floor($seconds / 86400);
+                    $seconds %= 86400;
+
+                    $hours = floor($seconds / 3600);
+                    $seconds %= 3600;
+
+                    $minutes = floor($seconds / 60);
+                    $seconds %= 60;
+
+                    $task_id = $item->id;
+
+                    // dd($days);
+                    if ($days <= 0 || $hours < 0 || $minutes < 0) {
+                        Task::where('id', $task_id)
+                            ->update(['t_status' => 'overdue']);
+                    } elseif ($item->t_status !== 'completed') {
+                        $reply = Task::find($item->id)->replies;
+                        if (count($reply) == 1) {
+                            Task::where('id', $item->id)
+                                ->update(['t_status' => 'in progress']);
+                        } elseif (count($reply) == 0 ) {
+                            Task::where('id', $item->id)
+                                ->update(['t_status' => 'created']);
+                        }
+                    }
+
+                }
                 
                 // dd($notifPIC);
             /** message = Message::get(['title','id']); // get specific column instead of all record on the table  **/
