@@ -23,7 +23,7 @@
                     <p class="text-base leading-relaxed mr-5 text-gray-500 dark:text-gray-400">
                         Halo user, ada tugas baru yang diberikan kepadamu mohon selalu diperhatikan ketentuan tugas nya, terimakasih. Selamat mengerjakan...
                     </p>
-                    <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
+                    <img src="../../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
                 </div>
                 <div class="pl-5 pr-5 mx-auto space-y-5">
                         @foreach ($notif as $item)
@@ -49,9 +49,9 @@
                                         {{-- <form method="post" action="/employee/home/dashboard/{{ $item->id }}">
                                             @method('put')
                                             @csrf --}}
-                                        <div class="mx-auto items-center">
+                                        <div class="mx-auto my-auto items-center">
                                             <a href="/employee/home/mytask/{{ $item->id }}">
-                                            <button type="button" class="text-white text-xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-10 py-1 mr-2 mt-5" type="button">Lihat</button>
+                                            <button type="button" class="text-white text-xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-10 py-1" type="button">Lihat</button>
                                             </a>
                                         </div>
                                         {{-- </form> --}}
@@ -63,7 +63,7 @@
                         <p class="text-base leading-relaxed mr-5 text-gray-500 dark:text-gray-400">
                             Halo user, saat ini tidak ada tugas baru untuk anda, Terimakasih.
                         </p>
-                        <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
+                        <img src="../../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
                     </div>
                     <div class="pl-5 pr-5 mx-auto space-y-5">
                     @endif
@@ -108,7 +108,7 @@
         <p class="text-base leading-relaxed mr-5 text-gray-500 dark:text-gray-400">
             Halo {{ auth()->user()->name }}, ada beberapa pegawai yang sudah menyelesaikan tugas yang kamu berikan!
         </p>
-        <img src="../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
+        <img src="../../../imgs/hiasan5.png" class="w-24 inline-flex" alt="">
     </div>
     {{-- {{ $notif[0]->t_title }} --}}
     
@@ -133,7 +133,7 @@
                             <div  class="basis-4/5">
                                 <div class="flex justify-between">
                                     <div class="flex">
-                                        <img src="../../imgs/done.png" class="w-6 mx-auto mr-2" alt="">
+                                        <img src="../../../imgs/done.png" class="w-6 mx-auto mr-2" alt="">
                                     
                                         <p class="text-base leading-relaxed font-extrabold text-black">
                                             Task {{ $item->id }}
@@ -183,9 +183,9 @@
                             {{-- <form method="post" action="/employee/home/dashboard/{{ $item->id }}">
                                 @method('put')
                                 @csrf --}}
-                            <div class="mx-auto items-center">
-                                <a href="/pic/home/dashboard">
-                                <button type="button" class="text-white text-xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-10 py-1 mr-2 mt-5" type="button">Lihat</button>
+                            <div class="mx-auto my-auto items-center">
+                                <a href="/pic/home/dashboard/{{ $item->id }}">
+                                <button type="button" class="text-white text-xl bg-mainclr hover:bg-teal-700 font-medium rounded-full px-10 py-1" type="button">Lihat</button>
                                 </a>
                             </div>
                             {{-- </form> --}}
