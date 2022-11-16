@@ -51,7 +51,8 @@ class AppServiceProvider extends ServiceProvider
                 $deadline = DB::table('tasks')->select('id','t_due_date','t_status')->orderBy('t_due_date', 'asc')->get(); 
                     
                 //fungsi untuk membatasi deadline. Jika sudah melebihi due_date, maka status otomatis menjadi uncompleted
-
+                date_default_timezone_set('Asia/Jakarta');
+                
                 foreach ($deadline as $item) {
 
                     $seconds = strtotime($item->t_due_date) - time();
@@ -68,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
                     $task_id = $item->id;
 
                     // dd($days);
-                    if ($days <= 0 || $hours < 0 || $minutes < 0) {
+                    if ($days < 0 || $hours < 0 || $minutes < 0) {
                         Task::where('id', $task_id)
                             ->update(['t_status' => 'overdue']);
                     } elseif ($item->t_status !== 'completed') {
@@ -81,7 +82,7 @@ class AppServiceProvider extends ServiceProvider
                                 ->update(['t_status' => 'created']);
                         }
                     }
-
+                    // var_dump($minutes);
                 }
                 
                 // dd($notifPIC);
