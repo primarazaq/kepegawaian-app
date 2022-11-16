@@ -136,7 +136,7 @@
                                             break;
                                         case 'in progress':
                                             ?>
-                                            <div class="bg-yellow-400 py-1 px-5 mx-auto rounded-2xl text-white">
+                                            <div class="bg-yellow-400 py-1 px-5 w-36 mx-auto rounded-2xl text-white">
                                             <div class="text-center">
                                                 <p>In Progress</p>
                                             </div>
