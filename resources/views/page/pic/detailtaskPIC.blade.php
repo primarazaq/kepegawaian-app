@@ -171,7 +171,6 @@
                 <a href="/pic/home/dashboard/{{ $task->task_id }}/edit">
                 <button type="button" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Edit Task</button>
                  </a>
-                <button type="button" data-modal-toggle="deleteTaskPIC-{{ $task->task_id }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Delete Task</button>
                 @include('modal.deleteTaskDetailPIC')
             </div>
         </div>
