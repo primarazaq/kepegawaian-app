@@ -15,7 +15,7 @@
       <div class="border-b-4 mb-4"></div>
       <ul class="space-y-2">
          <li>
-            <a href="/admin/home/dashboard" class="{{ Request::is('admin/home/dashboard') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:text-white hover:opacity-40 dark:hover:bg-black">
+            <a href="/admin/home/dashboard" class="{{ Request::is('admin/home/dashboard*') ? 'active' : '' }} flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black hover:text-white hover:opacity-40 dark:hover:bg-black">
                <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></g></svg>
                {{-- <img src="imgs/Vector.png" alt="" class="w-5"> --}}
                <p class="flex-1 ml-3 inline-flex whitespace-nowrap text-white">Dashboard</p>
