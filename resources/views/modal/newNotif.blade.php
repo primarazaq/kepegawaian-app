@@ -44,7 +44,7 @@
                 x-transition:leave="transition ease-in duration-200 transform"
                 x-transition:leave-start="opacity-100" 
                 x-transition:leave-end="opacity-0"
-                class="fixed inset-0 transition-opacity bg-gray-800 bg-opacity-40" aria-hidden="true"
+                class="fixed inset-0 transition-opacity bg-gray-800 bg-opacity-20" aria-hidden="true"
             ></div>
 
             <div x-cloak x-show="notif" 
@@ -247,7 +247,7 @@
             
             <!-- Modal footer -->
             <div class="flex items-center p-6 justify-center rounded-b border-gray-200 dark:border-gray-600">
-                <button data-modal-toggle="modalNotification" type="button" class="text-white bg-mainclr hover:bg-teal-500 rounded-full text-sm font-medium px-9 py-2 focus:z-10 dark:bg-teal-700 dark:text-teal-300 dark:hover:text-white dark:hover:bg-teal-600">OK</button>
+                <button @click="notif = false" type="button" class="text-white bg-mainclr hover:bg-teal-500 rounded-full text-sm font-medium px-9 py-2 focus:z-10 dark:bg-teal-700 dark:text-teal-300 dark:hover:text-white dark:hover:bg-teal-600">OK</button>
             </div>
             </div>
             
