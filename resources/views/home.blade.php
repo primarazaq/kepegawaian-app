@@ -7,7 +7,7 @@
         </div>
         <div class="flex flex-col h-screen w-full pl-56">
             @include('components\navbar')
-            <div class="flex-grow">
+            <div class="flex-grow animate-fade">
                 <main>
                     @yield('content')
                 </main>

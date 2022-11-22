@@ -5,7 +5,7 @@
         <div class="w-full h-screen bg-no-repeat bg-cover"
             style="background-image: url(/imgs/bg.png)">
             <div class="bg-mainclr bg-opacity-30">
-                <div class="w-full h-screen bg-no-repeat bg-cover bg-transparent bg-opacity-5"
+                <div class="w-full h-screen bg-no-repeat bg-cover bg-transparent bg-opacity-5 animate-fade"
                 style="background-image: url(/imgs/hiasan.png)">
                     <div class="absolute top-6 right-7 w-36">
                         <img src="/imgs/pln.png" alt="">

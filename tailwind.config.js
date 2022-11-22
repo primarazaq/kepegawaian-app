@@ -9,14 +9,12 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'fade' : 'fade 0.5s ease'
+        'fade' : 'fade 1s ease'
       },
       keyframes: {
         fade: {
-          '0%' :{transform: 'scale(0.2,0.2)',
-                  opacity: 0, backgroundColor: 'transparent' },
-          '100%' :{transform: 'scale(1,1)',
-                  opacity: 100, backgroundColor: 'transparent'},
+          '0%' :{opacity: 0},
+          '100%' :{opacity: 100},
         }
       },
     },
