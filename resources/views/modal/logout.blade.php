@@ -4,7 +4,7 @@
      }
   </style>
 <div x-data="{ logout: false }">
-    <button @click="logout =!logout" class="block absolute bottom-4 right-14 left-14 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white" type="button">
+    <button @click="logout =!logout" class="block absolute bottom-4 right-14 left-14 text-base font-normal text-gray-900 rounded-lg dark:text-white" type="button">
       
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         class="w-6 absolute fill-white" viewBox="0 0 96.943 96.943" style="enable-background:new 0 0 96.943 96.943;"
@@ -22,7 +22,7 @@
         <p class="inline-block whitespace-nowrap ml-10 text-white">Logout</p>
     </button>
 
-    <div x-show="logout" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div x-show="logout" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex overflow-x-hidden fixed w-full md:inset-0 justify-center items-center">
             <div x-cloak @click="logout = false" x-show="logout" 
                 x-transition:enter="transition ease-out duration-300 transform"
@@ -41,10 +41,10 @@
                 x-transition:leave="transition ease-in duration-200 transform"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl"
+                class="inline-block p-8 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl"
             >
 
-                <div class="p-6 text-center">
+                <div class="text-center">
                     <img src="../../../../imgs/logoutImg.png" class="w-24 mx-auto" alt="">
                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah anda yakin ingin keluar dari sistem?</h3>
                   <div class="flex justify-center">
