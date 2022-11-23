@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nip')->unique();
-            $table->string('name'); 
+            $table->string('name');
             $table->string('level');
             $table->date('tgl_lhr');
             // $table->string('email')->unique();
@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+            $table->integer('deleted_by')->nullable();
         });
     }
 

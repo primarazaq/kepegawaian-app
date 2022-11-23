@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('response_file')->nullable();
             $table->text('response_body')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            $table->integer('deleted_by')->nullable();
         });
     }
 
