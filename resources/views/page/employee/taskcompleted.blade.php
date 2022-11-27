@@ -12,9 +12,7 @@
 <div class="flex">
     <div class="w-3/5 mt-6 h-fit mr-5 mb-2">
         <div class="ml-2 text-4xl flex font-semibold justify-center">
-            <p>Terima kasih</p>
-            <p class="inline-flex ml-2 text-4xl font-extrabold">USER</p>
-            <p>, sudah</p>
+            <p>Terima kasih sudah</p>
         </div>
         <div class="ml-2 text-4xl flex font-semibold justify-center mb-14">
             <p>menyelesaikan tugas dengan baik.</p>
@@ -46,15 +44,14 @@
 			<table id="TBtaskComplt" class="stripe hover text-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
 				<thead>
 					<tr>
-						<th data-priority="1">No.</th>
-						<th data-priority="1">Judul Tugas</th>
+						<th data-priority="1">NO.</th>
+						<th data-priority="1">JUDUL TUGAS</th>
 						{{-- <th data-priority="2">Deadline</th> --}}
-						<th data-priority="2">Terselesaikan</th>
-                        <th data-priority="3">Sumber Tugas</th>
+						<th data-priority="2">TERSELESAIKAN</th>
+                        <th data-priority="3">SUMBER TUGAS</th>
 						{{-- <th data-priority="4">No. Tugas</th> --}}
-						<th data-priority="4">Status</th>
-						
-                        <th data-priority="5">Action</th>
+						<th data-priority="4">STATUS</th>
+                        <th data-priority="5">ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
