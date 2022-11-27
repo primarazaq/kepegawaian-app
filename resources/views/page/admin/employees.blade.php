@@ -84,7 +84,7 @@
                             <thead>
                                 <tr>
                                     <th data-priority="1">NO</th>
-                                    <th data-priority="2">NAMA PEGAWAI</th>
+                                    <th data-priority="2">NAMA</th>
                                     <th data-priority="3">TANGGAL LAHIR</th>
                                     <th data-priority="4">NIP</th>
                                     <th data-priority="5">TANGGAL MULAI</th>
