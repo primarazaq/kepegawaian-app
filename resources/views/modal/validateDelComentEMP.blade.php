@@ -83,8 +83,7 @@
                                 d="M85.07,37.65c-.73,0,1.71-2.21-37.12,36.62a1,1,0,0,0,.12,1.54C65.6,88.69,91,76.3,91,54a26.72,26.72,0,0,0-5.21-15.93A1,1,0,0,0,85.07,37.65ZM64,79a24.7,24.7,0,0,1-13.75-4.13l34.6-34.6C95.7,56.59,84,79,64,79Z" />
                         </g>
                     </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Komentarmu akan terhapus
-                        secara permanen!, apakah anda yakin akan menghapus komentar anda??</h3>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Komentarmu akan terhapus, apakah anda yakin akan menghapus komentar anda??</h3>
                     <div class="flex justify-center">
                         <form action="/employee/home/mytask/{{ $data->id }}" method="post">
                             @method('delete')
