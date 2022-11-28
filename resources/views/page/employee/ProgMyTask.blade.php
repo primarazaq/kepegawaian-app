@@ -473,7 +473,7 @@
                             <input id="response_body" class="inline-block w-5/6" type="hidden" name="response_body"
                                 required>
                             @error('response_body')
-                                <p>{{ $message }}</p>
+                                <p class="text-red-600">{{ $message }}</p>
                             @enderror
                             <trix-editor input="response_body" placeholder="Tambahkan respon baru..."
                                 style="overflow-y:auto"></trix-editor>
