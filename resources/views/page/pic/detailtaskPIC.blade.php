@@ -237,7 +237,7 @@
                                         <h2 class="text-xl font-extrabold pt-3">{{ $item->name }}</h2>
                                         @if ($data->user_receiver_id === auth()->user()->id)
                                             <div class="inline-flex -my-9 h-0 -mr-10">
-                                                @include('components.dropdownProgEMP')
+                                                @include('components.dropdownProgPIC')
                                             </div>
                                         @endif
                                     @endif

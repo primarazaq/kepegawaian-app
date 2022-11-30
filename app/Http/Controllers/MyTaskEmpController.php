@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Task;
 use App\Models\User;
 use App\Models\UserTask;
@@ -22,15 +23,15 @@ class MyTaskEmpController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date', 'a.id as receiver_id', 'a.name as receiver_name', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name')
-                    ->where('b.t_status', 'in progress')->orWhere('b.t_status', 'created')->where('c.user_receiver_id',auth()->user()->id)
-                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-                    ->join('tasks as b', 'b.id', '=', 'c.task_id')
-                    ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
-                    ->groupBy('b.id')
-                    ->orderBy('b.id' , 'asc')
-                    ->get();
-        
+            ->select('b.t_due_date', 'a.id as receiver_id', 'a.name as receiver_name', 'b.id as t_id', 'b.t_title', 'b.t_file', 'b.t_body', 'b.t_status', 'b.t_priority', 'aa.id as sender_id', 'aa.name as sender_name')
+            ->where('b.deleted_at', null)->where('b.t_status', 'in progress')->orWhere('b.t_status', 'created')->where('c.user_receiver_id', auth()->user()->id)
+            ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+            ->join('tasks as b', 'b.id', '=', 'c.task_id')
+            ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+            ->groupBy('b.id')
+            ->orderBy('b.id', 'asc')
+            ->get();
+
         return view('page.employee.mytask', [
             'taskList' => $task
         ]);
@@ -60,7 +61,7 @@ class MyTaskEmpController extends Controller
             'task_id' => 'required',
             'response_body' => 'required'
         ]);
-        if($request->file('response_file')){
+        if ($request->file('response_file')) {
             $reply['response_file'] = $request->file('response_file')->getClientOriginalName();
             $request->file('response_file')->storeAs('task-file', $reply['response_file']);
         }
@@ -68,8 +69,7 @@ class MyTaskEmpController extends Controller
 
         $id = Reply::create($reply);
 
-        return redirect('/employee/home/mytask/'. $id->task_id)->with('success','Respon mu berhasil disimpan!');
-
+        return redirect('/employee/home/mytask/' . $id->task_id)->with('success', 'Respon mu berhasil disimpan!');
     }
 
     /**
@@ -81,14 +81,14 @@ class MyTaskEmpController extends Controller
     public function show($id)
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date', 'b.t_title','b.created_at','b.updated_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
-                    ->where('c.task_id',$id)
-                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-                    ->join('tasks as b', 'b.id', '=', 'c.task_id')
-                    ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
-                    ->groupBy('c.task_id')
-                    ->orderBy('b.id' , 'asc')
-                    ->first();
+            ->select('b.t_due_date', 'b.t_title', 'b.created_at', 'b.updated_at', 'b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_priority', 'b.t_file', 'c.task_id', DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+            ->where('c.task_id', $id)
+            ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+            ->join('tasks as b', 'b.id', '=', 'c.task_id')
+            ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+            ->groupBy('c.task_id')
+            ->orderBy('b.id', 'asc')
+            ->first();
 
         $users = User::all();
         $reply = Task::find($id)->replies;
@@ -119,40 +119,39 @@ class MyTaskEmpController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {  
+    {
         $task = Task::where('id', $id)->first();
         if ($request->response_body) {
-            $rules =[
+            $rules = [
                 'response_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',
                 'response_body' => 'required'
             ];
-    
+
             $validatedData = $request->validate($rules);
-    
-            if($request->file('response_file')){
-                if($request->old_file){
+
+            if ($request->file('response_file')) {
+                if ($request->old_file) {
                     Storage::delete($request->old_file);
                 }
                 $validatedData['response_file'] = $request->file('response_file')->getClientOriginalName();
                 $request->file('response_file')->storeAs('task-file', $validatedData['response_file']);
             }
-            
+
             Reply::where('id', $id)
                 ->update($validatedData);
 
-            return redirect('/employee/home/mytask/'. $request->task_id)->with('success','Response berhasil diubah!');
-            
+            return redirect('/employee/home/mytask/' . $request->task_id)->with('success', 'Response berhasil diubah!');
         } else {
             $now = Carbon::now();
             Task::where('id', $task->id)
                 ->update(['t_status' => 'completed']);
-                return redirect('/employee/home/taskcompleted/'. $task->id)->with('success','Status task berhasil diubah!');
+            return redirect('/employee/home/taskcompleted/' . $task->id)->with('success', 'Status task berhasil diubah!');
         }
-        
-        
+
+
 
         // dd($validatedData);
-        
+
     }
 
     /**
@@ -163,12 +162,12 @@ class MyTaskEmpController extends Controller
      */
     public function destroy($id)
     {
-        $reply = Reply::where('id',$id)->first();
-        if ($reply->response_file){
-            Storage::delete('task-file/'.$reply->response_file);
+        $reply = Reply::where('id', $id)->first();
+        if ($reply->response_file) {
+            Storage::delete('task-file/' . $reply->response_file);
         }
         Reply::destroy($id);
 
-        return redirect('/employee/home/mytask/'. $reply->task_id)->with('destroy','Response berhasil dihapus!');
+        return redirect('/employee/home/mytask/' . $reply->task_id)->with('destroy', 'Response berhasil dihapus!');
     }
 }

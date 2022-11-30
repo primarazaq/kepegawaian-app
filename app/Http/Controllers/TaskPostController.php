@@ -17,13 +17,14 @@ class TaskPostController extends Controller
     public function index()
     {
         $task = DB::table('users as a')
-                    ->select('b.t_due_date','a.nip', 'b.t_title','b.created_at','b.updated_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
-                    ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-                    ->join('tasks as b', 'b.id', '=', 'c.task_id')
-                    ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
-                    ->groupBy('c.task_id')
-                    ->orderBy('b.id' , 'asc')
-                    ->get();
+            ->select('b.t_due_date', 'a.nip', 'b.t_title', 'b.created_at', 'b.updated_at', 'b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_file', 'c.task_id', DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+            ->where('b.deleted_at', null)
+            ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+            ->join('tasks as b', 'b.id', '=', 'c.task_id')
+            ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+            ->groupBy('c.task_id')
+            ->orderBy('b.id', 'asc')
+            ->get();
 
         $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $taskCompleted = Task::where('t_status', 'completed')->get();
@@ -31,7 +32,7 @@ class TaskPostController extends Controller
         $taskUncompleted = Task::where('t_status', 'overdue')->get();
 
         return view('page.admin.dashboard', [
-            'taskList' => $task, 
+            'taskList' => $task,
             // 'assigned' => $assigned,
             'userList' => $users,
             'taskCompleted' => $taskCompleted,
@@ -40,12 +41,12 @@ class TaskPostController extends Controller
         ]);
 
         // return view('page.admin.dashboard', [
-            
-            // $task = Task::with('users')->get();
-            // return view('page.admin.dashboard', ['taskList' => $task]);
-            // dd($task);
-            //utk berdasarkan yg login
-            // 'tasks' => Task::where('user_id', auth()->user()->id)->get()
+
+        // $task = Task::with('users')->get();
+        // return view('page.admin.dashboard', ['taskList' => $task]);
+        // dd($task);
+        //utk berdasarkan yg login
+        // 'tasks' => Task::where('user_id', auth()->user()->id)->get()
         // ]);
     }
 
@@ -79,14 +80,14 @@ class TaskPostController extends Controller
     public function show($id)
     {
         $task = DB::table('users as a')
-        ->select('b.t_due_date', 'b.t_title','b.created_at','b.updated_at','b.t_body', 'aa.name as pembuat_task', 'b.t_status','b.t_priority', 'b.t_file','c.task_id',DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
-        ->where('c.task_id',$id)
-        ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
-        ->join('tasks as b', 'b.id', '=', 'c.task_id')
-        ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
-        ->groupBy('c.task_id')
-        ->orderBy('b.id' , 'asc')
-        ->first();
+            ->select('b.t_due_date', 'b.t_title', 'b.created_at', 'b.updated_at', 'b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_priority', 'b.t_file', 'c.task_id', DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
+            ->where('c.task_id', $id)
+            ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
+            ->join('tasks as b', 'b.id', '=', 'c.task_id')
+            ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
+            ->groupBy('c.task_id')
+            ->orderBy('b.id', 'asc')
+            ->first();
         $reply = Task::find($id)->replies;
         $users = User::all();
 
@@ -100,9 +101,9 @@ class TaskPostController extends Controller
 
         // dd($task);
         return view('page.admin.detailTaskAdmin', [
-        'task' => $task,
-        'user' => $users,
-        'reply' => $reply
+            'task' => $task,
+            'user' => $users,
+            'reply' => $reply
         ]);
     }
 
