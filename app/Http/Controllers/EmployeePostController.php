@@ -19,7 +19,7 @@ class EmployeePostController extends Controller
     {
         return view('page.admin.employees', [
 
-            'users' => User::where('level', 'employee')->orwhere('level', 'pic')->get()
+            'users' => User::where('level', 'employee')->orwhere('level', 'pic')->withTrashed()->get()
             // $task = Task::with('users')->get();
             // return view('page.admin.dashboard', ['taskList' => $task]);
             // dd($task);
@@ -105,35 +105,39 @@ class EmployeePostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'name' => 'required|regex:/^[\pL\s\-]+$/u|max:100',
-            'tgl_lhr' => 'required',
-            'level' => 'required'
-        ];
-
-        
-
-        // $validatedData = $request->validate([
-        //     'name' => 'required|regex:/^[\pL\s\-]+$/u',
-        //     'tgl_lhr' => 'required',
-        //     'level' => 'required'
-        // ]);
-
-        $user = User::find($id);
-
-        if($request->nip != $user->nip){
-            $rules['nip'] = 'required|unique:users|regex:/^[a-zA-Z0-9 ]+$/|max:15' ;
+        if ($request->restore) {
+            User::onlyTrashed()->where('id', $request->restore)->restore();
+        }else {
+            $rules = [
+                'name' => 'required|regex:/^[\pL\s\-]+$/u|max:100',
+                'tgl_lhr' => 'required',
+                'level' => 'required'
+            ];
+    
+            
+    
+            // $validatedData = $request->validate([
+            //     'name' => 'required|regex:/^[\pL\s\-]+$/u',
+            //     'tgl_lhr' => 'required',
+            //     'level' => 'required'
+            // ]);
+    
+            $user = User::find($id);
+    
+            if($request->nip != $user->nip){
+                $rules['nip'] = 'required|unique:users|regex:/^[a-zA-Z0-9 ]+$/|max:15' ;
+            }
+            // if($request->nip != $id){
+            //     $rules['nip'] = 'required|unique:users|digits_between:0,9' ;
+            // }
+    
+            $validatedData = $request->validate($rules);
+    
+            // $validatedData['id'] = auth()->user()->id;
+            // $validatedData['created_at'] = User::save(['timestamps' => FALSE]);
+            User::where('id', $user->id)
+                ->update($validatedData);
         }
-        // if($request->nip != $id){
-        //     $rules['nip'] = 'required|unique:users|digits_between:0,9' ;
-        // }
-
-        $validatedData = $request->validate($rules);
-
-        // $validatedData['id'] = auth()->user()->id;
-        // $validatedData['created_at'] = User::save(['timestamps' => FALSE]);
-        User::where('id', $user->id)
-            ->update($validatedData);
 
         return redirect('/admin/home/employees')->with('success','Data berhasil diubah!');
     }

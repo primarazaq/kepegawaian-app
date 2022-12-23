@@ -17,7 +17,7 @@ class PICPostController extends Controller
      */
     public function index()
     {
-        $employee = User::where('level', 'employee')->get();
+        $employee = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $totalTask = Task::all();
         return view('page.pic.task',[
             'pegawai' => $employee,

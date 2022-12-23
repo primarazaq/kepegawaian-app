@@ -24,7 +24,8 @@ class PICDashboardController extends Controller
     {
         $task = DB::table('users as a')
             ->select('b.t_due_date', 'a.nip', 'b.t_title', 'b.created_at', 'b.updated_at', 'b.t_body', 'aa.name as pembuat_task', 'b.t_status', 'b.t_priority', 'b.t_file', 'c.task_id', DB::raw('group_concat(a.nip) as multinip'), DB::raw('group_concat(a.name) as name'))
-            ->where('c.user_sender_id', auth()->user()->id)->where('b.deleted_at', null)
+            // ->where('c.user_sender_id', auth()->user()->id)
+            ->where('b.deleted_at', null)
             ->join('user_tasks as c', 'c.user_receiver_id', '=', 'a.id')
             ->join('tasks as b', 'b.id', '=', 'c.task_id')
             ->join('users as aa', 'aa.id', '=', 'c.user_sender_id')
@@ -34,9 +35,11 @@ class PICDashboardController extends Controller
 
         $users = User::where('level', 'employee')->orwhere('level', 'pic')->get();
         $taskCompleted = Task::where('t_status', 'completed')->get();
-        $taskInProgress = Task::where('t_status', 'in progress')->get();
+        $taskInProgress = Task::where('t_status', 'in progress')->orwhere('t_status', 'created')->get();
         $taskUncompleted = Task::where('t_status', 'uncompleted')->get();
         $employee = User::where('level', 'employee')->get();
+
+        // dd($taskInProgress);
 
         return view('page.pic.dashboard', [
             'taskList' => $task,
@@ -169,7 +172,24 @@ class PICDashboardController extends Controller
                 ->update($validatedData);
 
             return redirect('/pic/home/dashboard/' . $request->task_id)->with('success', 'Response berhasil diubah!');
-        } else {
+        } elseif ($request->selesai){
+
+            $now = Carbon::now();
+            Task::where('id', $request->selesai)
+                ->update(['t_status' => 'completed']);
+            return redirect('/pic/home/dashboard/' . $request->selesai)->with('success', 'Status task berhasil diubah!');
+
+        } elseif($request->inprogress){
+
+            Task::where('id', $id)
+            ->update(['t_status' => 'in progress']);
+
+            $task = Task::where('id', $id)->first();
+
+            // dd($validatedData);
+            return redirect('/pic/home/dashboard/' . $id)->with('success', 'Status task berhasil diubah!');
+
+        } else{
             $rules = [
                 't_title' => 'required',
                 't_file' => 'mimes:jpeg,jpg,png,docx,doc,pptx,ppt,xlsx,xls,pdf,zip,rar|file|max:10240',

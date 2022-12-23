@@ -89,7 +89,3 @@ use Illuminate\Support\Facades\Response;
             Route::resource('/home/taskcompleted', TaskCompletedEmpController::class);
         });
     });
-
-    Route::view('/dev', 'dev');
-    Route::view('/dev2', 'dev2');
-    Route::get('/employee/home/ProgMyTask', [HomeController::class, 'index']);
